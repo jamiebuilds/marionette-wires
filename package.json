@@ -1,0 +1,24 @@
+{
+  "name": "marionette-browserify-starter-kit",
+  "version": "0.0.0",
+  "description": "Starter kit for Marionette.js Applications using Browserify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thejameskyle/marionette-browserify-starter-kit.git"
+  },
+  "keywords": [
+    "marionette",
+    "browserify",
+    "backbone"
+  ],
+  "author": "James Kyle <me@thejameskyle.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thejameskyle/marionette-browserify-starter-kit/issues"
+  },
+  "homepage": "https://github.com/thejameskyle/marionette-browserify-starter-kit"
+}
