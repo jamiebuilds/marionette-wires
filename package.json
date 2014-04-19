@@ -20,5 +20,42 @@
   "bugs": {
     "url": "https://github.com/thejameskyle/marionette-browserify-starter-kit/issues"
   },
-  "homepage": "https://github.com/thejameskyle/marionette-browserify-starter-kit"
+  "homepage": "https://github.com/thejameskyle/marionette-browserify-starter-kit",
+  "devDependencies": {
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-concurrent": "^0.5.0",
+    "grunt": "^0.4.4",
+    "browserify": "^3.44.0",
+    "grunt-browserify": "^2.0.7",
+    "grunt-contrib-jshint": "^0.10.0",
+    "load-grunt-tasks": "^0.4.0",
+    "browserify-shim": "^3.4.1",
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "dependencies": {
+    "underscore": "^1.6.0",
+    "backbone": "^1.1.2",
+    "jquery": "^2.1.0",
+    "backbone.marionette": "^1.8.2"
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "underscore": "./node_modules/underscore/underscore.js",
+    "backbone": "./node_modules/backbone/backbone.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "underscore": "_",
+    "backbone": {
+      "depends": [
+        "jquery:$",
+        "underscore"
+      ],
+      "exports": "Backbone"
+    }
+  },
+  "browserify": {
+    "transform": []
+  }
 }

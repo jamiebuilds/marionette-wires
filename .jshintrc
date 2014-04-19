@@ -1,16 +1,8 @@
 {
   "globals": {
-    "define"             : true,
     "require"            : true,
     "module"             : true,
-    "exports"            : true,
-    "$"                  : true,
-    "jQuery"             : true,
-    "_"                  : true,
-    "Backbone"           : true,
-    "Marionette"         : true,
-    "slice"              : true,
-    "throwError"         : true
+    "exports"            : true
   },
 
   "bitwise"       : true,
@@ -31,7 +23,7 @@
   "quotmark"      : "single",
   "undef"         : true,
   "unused"        : true,
-  "strict"        : true,
+  "strict"        : false,
   "trailing"      : true,
   "maxparams"     : 3,
   "maxdepth"      : 3,
