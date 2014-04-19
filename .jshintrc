@@ -17,7 +17,6 @@
   "newcap"        : true,
   "noarg"         : true,
   "noempty"       : true,
-  "nonbsp"        : true,
   "nonew"         : true,
   "plusplus"      : false,
   "quotmark"      : "single",
@@ -47,7 +46,6 @@
   "loopfunc"      : false,
   "maxerr"        : 50,
   "multistr"      : false,
-  "notypeof"      : false,
   "proto"         : false,
   "scripturl"     : false,
   "smarttabs"     : false,
@@ -55,7 +53,6 @@
   "sub"           : false,
   "supernew"      : false,
   "validthis"     : false,
-  "noyield"       : false,
 
   "browser"       : false,
   "couch"         : false,
