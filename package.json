@@ -31,13 +31,15 @@
     "load-grunt-tasks": "^0.4.0",
     "browserify-shim": "^3.4.1",
     "grunt-contrib-connect": "^0.7.1",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-copy": "^0.5.0",
+    "deglobalify": "^0.2.0"
   },
   "dependencies": {
+    "jquery": "^2.1.0",
     "underscore": "^1.6.0",
     "backbone": "^1.1.2",
-    "jquery": "^2.1.0",
-    "backbone.marionette": "^1.8.2"
+    "backbone.marionette": "1.8.0"
   },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.js",
@@ -49,13 +51,15 @@
     "underscore": "_",
     "backbone": {
       "depends": [
-        "jquery:$",
         "underscore"
       ],
       "exports": "Backbone"
     }
   },
   "browserify": {
-    "transform": []
+    "transform": [
+      "browserify-shim",
+      "deglobalify"
+    ]
   }
 }
