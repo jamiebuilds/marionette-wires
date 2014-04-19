@@ -59,6 +59,20 @@ module.exports = function (grunt) {
       }
     },
 
+    less: {
+      dist: {
+        src: 'src/main.less',
+        dest: 'dist/bundle.css'
+      }
+    },
+
+    autoprefixer: {
+      dist: {
+        src: 'dist/bundle.css',
+        dest: 'dist/bundle.css'
+      }
+    },
+
     concurrent: {
       options: {
         logConcurrentOutput: true
@@ -79,6 +93,16 @@ module.exports = function (grunt) {
       javascripts: {
         files: 'src/**/*.js',
         tasks: ['jshint']
+      },
+
+      views: {
+        files: 'src/**/*.html',
+        tasks: ['copy:html']
+      },
+
+      stylesheets: {
+        files: 'src/**/*.less',
+        tasks: ['less', 'autoprefixer']
       }
     }
   });
@@ -87,6 +111,8 @@ module.exports = function (grunt) {
     'test',
     'clean:dist',
     'copy:views',
+    'less',
+    'autoprefixer',
     'browserify:dist'
   ]);
 
