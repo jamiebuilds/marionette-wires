@@ -49,6 +49,16 @@ module.exports = function (grunt) {
       dist: ['dist']
     },
 
+    copy: {
+      views: {
+        expand: true,
+        cwd: 'src/',
+        src: '**/*.html',
+        dest: 'dist/',
+        filter: 'isFile'
+      }
+    },
+
     concurrent: {
       options: {
         logConcurrentOutput: true
@@ -76,6 +86,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'test',
     'clean:dist',
+    'copy:views',
     'browserify:dist'
   ]);
 
