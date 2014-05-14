@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     jshint: {
       javascripts: {
-        src: ['src/**/*.js']
+        src: ['src/**/*.js', '!src/lib/**/**']
       }
     },
 
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
 
       views: {
         files: 'src/**/*.html',
-        tasks: ['copy:html']
+        tasks: ['copy:views']
       },
 
       stylesheets: {

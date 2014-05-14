@@ -1,10 +1,14 @@
 var $ = require('jquery');
-var _ = require('underscore');
 var Backbone = require('backbone');
-var Marionette = require('backbone.marionette');
+require('jquery.bootstrap');
+require('backbone.syphon');
 
-var Application = new Marionette.Application();
+var Application = require('./application/application');
 
-$(function () {
+Application.on('start', function() {
+  Backbone.history.start();
+});
+
+$(function() {
   Application.start();
 });

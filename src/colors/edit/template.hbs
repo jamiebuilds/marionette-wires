@@ -1,0 +1,36 @@
+<div class="page-title">
+  <span class="btn btn-primary pull-right" disabled>Edit</span>
+  <h1>Colors: Edit</h1>
+</div>
+
+<form class="colors__form form-horizontal well" role="form">
+  {{#if errors}}
+    <div class="alert alert-warning">
+      <ul>
+        {{#each errors}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  <div class="form-group">
+    <label class="col-sm-1 control-label" for="name">Name</label>
+    <div class="col-sm-11">
+      <input class="form-control" name="name" type="text" placeholder="blue">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-1 control-label" for="hex">Hex</label>
+    <div class="col-sm-11">
+      <input class="form-control" name="hex" type="text" placeholder="#00f">
+    </div>
+  </div>
+
+  <div class="form-group">
+     <div class="col-sm-offset-1 col-sm-11">
+       <button type="submit" class="btn btn-default">Submit</button>
+     </div>
+   </div>
+</form>
