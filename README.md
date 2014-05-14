@@ -1,4 +1,4 @@
-marionette-browserify-starter-kit
-=================================
+marionette-starter-kit
+======================
 
-Starter kit for Marionette.js Applications using Browserify
+My starter kit for Marionette.js Applications
