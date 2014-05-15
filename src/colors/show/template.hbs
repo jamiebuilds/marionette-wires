@@ -1,4 +1,36 @@
 <div class="page-title">
-  <a href="#colors/{{id}}/edit" class="btn btn-primary pull-right">Edit</a>
+  <div class="btn-toolbar pull-right">
+    <div class="btn-group">
+      <button class="colors__toggle btn btn-default">{{#unless active}}Activate{{else}}Deactivate{{/unless}}</button>
+      <a href="#colors/{{id}}/edit" class="btn btn-default">Edit</a>
+    </div>
+  </div>
   <h1>Colors: Show</h1>
 </div>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <div class="colors__thumbnail" style="background-color: {{hex}}"></div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="list-group">
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">Name</h4>
+        <p class="list-group-item-text">{{name}}</p>
+      </div>
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">Hex</h4>
+        <p class="list-group-item-text">{{hex}}</p>
+      </div>
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">State</h4>
+        <p class="list-group-item-text">{{#if active}}Active{{else}}Inactive{{/if}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

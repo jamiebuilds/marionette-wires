@@ -1,6 +1,5 @@
-var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
-var _ = require('underscore');
+var ModalView = require('../modal/view');
 var template = require('./template.hbs');
 
 module.exports = Marionette.ItemView.extend({
@@ -10,5 +9,15 @@ module.exports = Marionette.ItemView.extend({
   initialize: function (options) {
     this.model = options.model;
     this.listenTo(this.model, 'change', this.render);
+  },
+
+  events: {
+    'click .colors__toggle' : 'confirmToggle'
+  },
+
+  confirmToggle: function () {
+    var modalView = new ModalView({
+      model: this.model
+    });
   }
 });
