@@ -62,7 +62,7 @@ module.exports = Marionette.Controller.extend({
   },
 
   _getCollection: function() {
-    return new Colors(COLORS_DATA)
+    return new Colors(COLORS_DATA);
   },
 
   _getModel: function(id) {
