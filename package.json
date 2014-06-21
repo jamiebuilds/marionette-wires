@@ -49,8 +49,8 @@
     "jquery": "./node_modules/jquery/dist/jquery.js",
     "underscore": "./node_modules/underscore/underscore.js",
     "backbone": "./node_modules/backbone/backbone.js",
-    "jquery.bootstrap": "./src/lib/bootstrap-3.1.1/js/bootstrap.js",
-    "backbone.syphon": "./src/lib/backbone.syphon-0.4.1/backbone.syphon.js"
+    "jquery.bootstrap": "./lib/bootstrap-3.1.1/js/bootstrap.js",
+    "backbone.syphon": "./lib/backbone.syphon-0.4.1/backbone.syphon.js"
   },
   "browserify-shim": {
     "jquery": "$",

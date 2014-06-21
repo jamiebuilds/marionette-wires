@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     jshint: {
       javascripts: {
-        src: ['src/**/*.js', '!src/lib/**/**']
+        src: ['src/**/*.js']
       }
     },
 
