@@ -10,6 +10,4 @@ Application.on('start', function() {
   Backbone.history.start();
 });
 
-$(function() {
-  Application.start();
-});
+Application.start();
