@@ -12,8 +12,8 @@ module.exports = Marionette.CompositeView.extend({
     role: 'navigation'
   },
 
-  itemView: ItemView,
-  itemViewContainer: 'ul.navbar-nav',
+  childView: ItemView,
+  childViewContainer: 'ul.navbar-nav',
 
   initialize: function () {
     this.listenTo(this.collection, 'all', this.render);

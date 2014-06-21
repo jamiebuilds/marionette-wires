@@ -12,11 +12,11 @@ module.exports = Marionette.Behavior.extend({
       callback: callback
     });
 
-    this.listenToOnce(this.view, 'modal:close', this.closeModal);
+    this.listenToOnce(this.view, 'modal:destroy', this.destroyModal);
   },
 
-  closeModal: function (callback) {
-    channel.commands.execute('close', {
+  destroyModal: function (callback) {
+    channel.commands.execute('destroy', {
       callback: callback
     });
   }

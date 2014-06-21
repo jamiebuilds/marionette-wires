@@ -3,7 +3,7 @@ var template = require('./template.hbs');
 
 var HeaderController = require('../header/controller');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   el: '.application',
   template: template,
 

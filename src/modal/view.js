@@ -1,7 +1,7 @@
 var Marionette = require('backbone.marionette');
 var template = require('./template.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: template,
   className: 'modal fade',
 
@@ -32,7 +32,7 @@ module.exports = Marionette.Layout.extend({
     this.$el.modal('show');
   },
 
-  closeModal: function (options) {
+  destroyModal: function (options) {
     options = options || {};
     this.once('after:hide:modal', options.callback);
     this.once('after:hide:modal', this.teardownModal);
@@ -48,7 +48,7 @@ module.exports = Marionette.Layout.extend({
 
   teardownModal: function () {
     if (!this.isShown) return;
-    this.content.close();
+    this.content.empty();
     this.isShown = false;
   }
 });

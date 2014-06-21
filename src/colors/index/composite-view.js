@@ -6,8 +6,8 @@ module.exports = Marionette.CompositeView.extend({
   template: template,
   className: 'colors container',
 
-  itemView: ItemView,
-  itemViewContainer: 'div.list-group',
+  childView: ItemView,
+  childViewContainer: 'div.list-group',
 
   initialize: function (options) {
     this.collection = options.collection;

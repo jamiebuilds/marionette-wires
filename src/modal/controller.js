@@ -10,20 +10,20 @@ module.exports = Marionette.Controller.extend({
     this.modalView = new ModalView();
     this.container.show(this.modalView);
 
-    _.bindAll(this, 'openModal', 'closeModal');
+    _.bindAll(this, 'openModal', 'destroyModal');
     channel.commands.setHandler('open', this.openModal);
-    channel.commands.setHandler('close', this.closeModal);
+    channel.commands.setHandler('destroy', this.destroyModal);
   },
 
   openModal: function (options) {
     this.modalView.openModal(options);
 
     this.listenToOnce(applicationChannel.vent, 'route', function () {
-      this.closeModal();
+      this.destroyModal();
     });
   },
 
-  closeModal: function (options) {
-    this.modalView.closeModal(options);
+  destroyModal: function (options) {
+    this.modalView.destroyModal(options);
   }
 });

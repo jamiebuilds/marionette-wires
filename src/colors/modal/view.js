@@ -14,7 +14,7 @@ module.exports = Marionette.ItemView.extend({
   events: {
     'click .btn-primary' : 'confirm',
     'click .btn-default' : 'cancel',
-    'click .close' : 'cancel'
+    'click .destroy' : 'cancel'
   },
 
   initialize: function (options) {
@@ -24,10 +24,10 @@ module.exports = Marionette.ItemView.extend({
 
   confirm: function () {
     this.model.set('active', !this.model.get('active'));
-    this.trigger('modal:close');
+    this.trigger('modal:destroy');
   },
 
   cancel: function () {
-    this.trigger('modal:close');
+    this.trigger('modal:destroy');
   }
 });

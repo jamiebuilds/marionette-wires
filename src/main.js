@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
+Backbone.$ = $;
 require('jquery.bootstrap');
 require('backbone.syphon');
 
