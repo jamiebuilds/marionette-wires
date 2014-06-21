@@ -19,45 +19,57 @@ module.exports = Marionette.Controller.extend({
     this.container = options.container;
   },
 
-  index: function (data) {
-    var colors = new Colors(data || COLORS_DATA);
+  index: function () {
+    var collection = this._getCollection();
 
     var indexView = new IndexView({
-      collection: colors
+      collection: collection
     });
 
     this.container.show(indexView);
   },
 
-  create: function (data) {
-    var colors = new Colors(data || COLORS_DATA);
-    var color = new Color();
+  create: function () {
+    var collection = this._getCollection();
+    var model = this._getModel();
 
     var createView = new CreateView({
-      collection: colors,
-      model: color
+      collection: collection,
+      model: model
     });
 
     this.container.show(createView);
   },
 
-  show: function (id, data) {
-    var color = new Color(data || COLORS_DATA[ id ]);
+  show: function (id) {
+    var model = this._getModel(id);
 
     var showView = new ShowView({
-      model: color
+      model: model
     });
 
     this.container.show(showView);
   },
 
-  edit: function (id, data) {
-    var color = new Color(data || COLORS_DATA[ id ]);
+  edit: function (id) {
+    var model = this._getModel(id);
 
     var editView = new EditView({
-      model: color
+      model: model
     });
 
     this.container.show(editView);
+  },
+
+  _getCollection: function() {
+    return new Colors(COLORS_DATA)
+  },
+
+  _getModel: function(id) {
+    if (id) {
+      return new Color(COLORS_DATA[ id ]);
+    } else {
+      return new Colors();
+    }
   }
 });
