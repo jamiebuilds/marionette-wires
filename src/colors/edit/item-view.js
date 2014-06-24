@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 var Syphon = require('backbone.syphon');
 var Marionette = require('backbone.marionette');
-var template = require('./template.hbs');
+var template = require('./item-template.hbs');
 
 module.exports = Marionette.ItemView.extend({
   template: template,
@@ -25,7 +25,6 @@ module.exports = Marionette.ItemView.extend({
 
   initialize: function (options) {
     _.bindAll(this, 'handleSaveSuccess');
-    this.collection = options.collection;
     this.model = options.model;
     this.model.cleanup();
   },
@@ -50,7 +49,6 @@ module.exports = Marionette.ItemView.extend({
   },
 
   handleSaveSuccess: function() {
-    this.collection.add(this.model);
-    Backbone.history.navigate('colors', { trigger: true });
+    Backbone.history.navigate('colors/' + this.model.id, { trigger: true });
   }
 });

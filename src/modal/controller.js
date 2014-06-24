@@ -1,22 +1,25 @@
 var Marionette = require('backbone.marionette');
-var applicationChannel = require('../application/channel');
+var Backbone = require('backbone');
 var _ = require('underscore');
-var channel = require('./channel');
-var ModalView = require('./view');
+var LayoutView = require('./layout-view');
+
+var modalChannel = Backbone.Wreqr.radio.channel('modal');
+var applicationChannel = Backbone.Wreqr.radio.channel('application');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {
-    this.container = options.container;
-    this.modalView = new ModalView();
-    this.container.show(this.modalView);
-
     _.bindAll(this, 'openModal', 'destroyModal');
-    channel.commands.setHandler('open', this.openModal);
-    channel.commands.setHandler('destroy', this.destroyModal);
+
+    this.container = options.container;
+    this.layout = new LayoutView();
+    this.container.show(this.layout);
+
+    modalChannel.commands.setHandler('open', this.openModal);
+    modalChannel.commands.setHandler('destroy', this.destroyModal);
   },
 
   openModal: function (options) {
-    this.modalView.openModal(options);
+    this.layout.openModal(options);
 
     this.listenToOnce(applicationChannel.vent, 'route', function () {
       this.destroyModal();
@@ -24,6 +27,6 @@ module.exports = Marionette.Controller.extend({
   },
 
   destroyModal: function (options) {
-    this.modalView.destroyModal(options);
+    this.layout.destroyModal(options);
   }
 });

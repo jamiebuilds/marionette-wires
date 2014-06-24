@@ -1,20 +1,21 @@
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var _ = require('underscore');
-
 var Router = require('./router');
-var Layout = require('./layout');
+var LayoutView = require('./layout-view');
 var ModalController = require('../modal/controller');
+
+var applicationChannel = Backbone.Wreqr.radio.channel('application');
 
 var modules = [
   require('../index/router'),
   require('../colors/router')
 ];
 
-var Application = Marionette.Controller.extend({
+module.exports = Marionette.Controller.extend({
   initialize: function() {
     this.router = new Router();
-    this.layout = new Layout();
+    this.layout = new LayoutView();
     this.layout.render();
 
     this.modal = new ModalController({
@@ -28,5 +29,3 @@ var Application = Marionette.Controller.extend({
     Backbone.history.start();
   }
 });
-
-module.exports = Application;

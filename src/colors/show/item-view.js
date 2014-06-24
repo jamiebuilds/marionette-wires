@@ -1,8 +1,8 @@
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var ModalView = require('../modal/view');
-var template = require('./template.hbs');
+var ModalView = require('../modal/item-view');
+var template = require('./item-template.hbs');
 
 module.exports = Marionette.ItemView.extend({
   template: template,

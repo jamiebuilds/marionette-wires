@@ -1,18 +1,18 @@
 var Marionette = require('backbone.marionette');
-var _ = require('underscore');
-
-var Color = require('./model');
-var Colors = require('./collection');
-
+var Backbone = require('backbone');
+var Model = require('./model');
+var Collection = require('./collection');
 var IndexView = require('./index/composite-view');
-var CreateView = require('./create/view');
-var ShowView = require('./show/view');
-var EditView = require('./edit/view');
+var CreateView = require('./create/item-view');
+var ShowView = require('./show/item-view');
+var EditView = require('./edit/item-view');
+
+var colorsChannel = Backbone.Wreqr.radio.channel('colors');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {
     this.container = options.container;
-    this.collection = new Colors();
+    this.collection = new Collection();
     this.collection.fetch();
   },
 
@@ -25,7 +25,7 @@ module.exports = Marionette.Controller.extend({
   },
 
   create: function () {
-    var model = new Color();
+    var model = new Model();
 
     var createView = new CreateView({
       collection: this.collection,
@@ -59,7 +59,7 @@ module.exports = Marionette.Controller.extend({
     var model = this.collection.get(id);
 
     if (!model) {
-      model = new Color({ id: id });
+      model = new Model({ id: id });
       model.fetch();
       this.collection.add(model, { merge: true, silent: true });
     }

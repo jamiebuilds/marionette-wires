@@ -1,8 +1,9 @@
 var Marionette = require('backbone.marionette');
-var applicationChannel = require('../application/channel');
-
+var Backbone = require('backbone');
 var HeaderCollection = require('./collection');
 var HeaderView = require('./composite-view');
+
+var applicationChannel = Backbone.Wreqr.radio.channel('application');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {

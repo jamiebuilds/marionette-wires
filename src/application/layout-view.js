@@ -1,5 +1,5 @@
 var Marionette = require('backbone.marionette');
-var template = require('./template.hbs');
+var template = require('./layout-template.hbs');
 
 var HeaderController = require('../header/controller');
 

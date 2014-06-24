@@ -1,6 +1,8 @@
 var Marionette = require('backbone.marionette');
+var Backbone = require('backbone');
+var IndexView = require('./item-view');
 
-var IndexView = require('./view');
+var indexChannel = Backbone.Wreqr.radio.channel('colors');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {

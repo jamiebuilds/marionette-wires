@@ -1,5 +1,7 @@
 var Marionette = require('backbone.marionette');
-var channel = require('./channel');
+var Backbone = require('backbone');
+
+var channel = Backbone.Wreqr.radio.channel('modal');
 
 module.exports = Marionette.Behavior.extend({
   initialize: function () {
