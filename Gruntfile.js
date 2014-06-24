@@ -1,3 +1,6 @@
+var logger = require('morgan');
+var mockApi = require('./mock-api');
+
 module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
@@ -40,7 +43,12 @@ module.exports = function (grunt) {
         options: {
           port: 9000,
           keepalive: true,
-          base: 'dist'
+          base: 'dist',
+          middleware: function (connect, options, middlewares) {
+            middlewares.unshift(logger('dev'));
+            middlewares.push(mockApi);
+            return middlewares;
+          }
         }
       }
     },

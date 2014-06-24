@@ -23,7 +23,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   confirm: function () {
-    this.model.set('active', !this.model.get('active'));
+    this.model.destroy();
     this.trigger('modal:destroy');
   },
 

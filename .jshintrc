@@ -54,7 +54,7 @@
   "supernew"      : false,
   "validthis"     : false,
 
-  "browser"       : false,
+  "browser"       : true,
   "couch"         : false,
   "devel"         : false,
   "dojo"          : false,
