@@ -11,6 +11,7 @@ module.exports = Marionette.ItemView.extend({
   initialize: function (options) {
     _.bindAll(this, 'handleToggleFailure', 'handleDestroySuccess');
     this.model = options.model;
+    this.model.cleanup();
   },
 
   templateHelpers: function() {

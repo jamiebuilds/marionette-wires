@@ -32,5 +32,10 @@ module.exports = Backbone.Model.extend({
 
   handleError: function() {
     this.serverError = true;
+  },
+
+  cleanup: function() {
+    delete this.serverError;
+    delete this.validationError;
   }
 });

@@ -26,6 +26,7 @@ module.exports = Marionette.ItemView.extend({
   initialize: function (options) {
     _.bindAll(this, 'handleSaveSuccess');
     this.model = options.model;
+    this.model.cleanup();
   },
 
   onDomRefresh: function () {
