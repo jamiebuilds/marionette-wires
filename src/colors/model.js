@@ -7,7 +7,12 @@ module.exports = Backbone.Model.extend({
     active: false
   },
 
-  validate: function (attrs, options) {
+  initialize: function() {
+    this.on('request', this.handleRequest);
+    this.on('error', this.handleError);
+  },
+
+  validate: function (attrs) {
     var errors = [];
 
     if (attrs.name === '') {
@@ -19,5 +24,13 @@ module.exports = Backbone.Model.extend({
     }
 
     return errors.length > 0 ? errors : undefined;
+  },
+
+  handleRequest: function() {
+    this.serverError = false;
+  },
+
+  handleError: function() {
+    this.serverError = true;
   }
 });

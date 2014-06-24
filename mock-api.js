@@ -28,19 +28,21 @@ app.route('/api/v1/colors/:id')
     res.json(color);
   })
   .put(function(req, res) {
+    var resColor;
     COLORS = _.map(COLORS, function(color) {
       if (color.id === req.params.id) {
-        _.extend(color, req.body);
+        resColor = _.extend(color, req.body);
       }
       return color;
     });
-    res.send(200);
+    res.json(resColor);
   })
   .delete(function(req, res) {
+    var resColor;
     COLORS = _.reject(COLORS, function(color) {
-      return color.id === req.params.id;
+      return color.id === req.params.id && (resColor = color);
     });
-    res.send(200);
+    res.json(resColor);
   });
 
 module.exports = app;

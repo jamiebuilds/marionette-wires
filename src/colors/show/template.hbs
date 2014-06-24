@@ -11,6 +11,16 @@
   <h1>Colors: Show</h1>
 </div>
 
+{{#if serverError}}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger">
+        <p>Server Error</p>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
 <div class="row">
   <div class="col-md-3">
     <div class="thumbnail">

@@ -19,23 +19,23 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   triggers: {
-    'show.bs.modal'   : { preventDefault: false, event: 'show:modal' },
-    'shown.bs.modal'  : { preventDefault: false, event: 'after:show:modal' },
-    'hide.bs.modal'   : { preventDefault: false, event: 'hide:modal' },
-    'hidden.bs.modal' : { preventDefault: false, event: 'after:hide:modal' }
+    'show.bs.modal'   : { preventDefault: false, event: 'before:show' },
+    'shown.bs.modal'  : { preventDefault: false, event: 'show' },
+    'hide.bs.modal'   : { preventDefault: false, event: 'before:hide' },
+    'hidden.bs.modal' : { preventDefault: false, event: 'hide' }
   },
 
   openModal: function (options) {
     options = options || {};
-    this.once('after:show:modal', options.callback);
+    this.once('after:show', options.callback);
     this.setupModal(options);
     this.$el.modal('show');
   },
 
   destroyModal: function (options) {
     options = options || {};
-    this.once('after:hide:modal', options.callback);
-    this.once('after:hide:modal', this.teardownModal);
+    this.once('hide', options.callback);
+    this.once('hide', this.teardownModal);
     this.$el.modal('hide');
   },
 

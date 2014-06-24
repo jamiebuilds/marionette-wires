@@ -1,4 +1,5 @@
 var Marionette = require('backbone.marionette');
+var _ = require('underscore');
 var Backbone = require('backbone');
 var ModalView = require('../modal/view');
 var template = require('./template.hbs');
@@ -8,28 +9,56 @@ module.exports = Marionette.ItemView.extend({
   className: 'colors container',
 
   initialize: function (options) {
+    _.bindAll(this, 'handleToggleFailure', 'handleDestroySuccess');
     this.model = options.model;
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'destroy', this.handleDestroy);
+  },
+
+  templateHelpers: function() {
+    return {
+      errors: this.model.validationError,
+      serverError: this.model.serverError
+    };
   },
 
   events: {
     'click .colors__toggle' : 'handleToggle',
-    'click .colors__destroy' : 'confirmDestroy'
+    'click .colors__destroy' : 'handleDestroy'
+  },
+
+  modelEvents: {
+    'all': 'render'
   },
 
   handleToggle: function() {
     this.model.set('active', !this.model.get('active'));
-    this.model.save();
+    this.model.save().fail(this.handleToggleFailure);
   },
 
-  confirmDestroy: function () {
-    var modalView = new ModalView({
+  handleToggleFailure: function() {
+    this.model.set('active', this.model.previous('active'));
+  },
+
+  handleDestroy: function () {
+    this.modalView = new ModalView({
       model: this.model
     });
+
+    this.listenToOnce(this.modalView, 'confirm', this.handleConfirmDestroy);
+    this.listenToOnce(this.modalView, 'cancel', this.handleCancelDestroy);
   },
 
-  handleDestroy: function() {
+  handleConfirmDestroy: function() {
+    this.stopListening(this.modalView);
+    delete this.modalView;
+    this.model.destroy({ wait: true }).done(this.handleDestroySuccess);
+  },
+
+  handleCancelDestroy: function() {
+    this.stopListening(this.modalView);
+    delete this.modalView;
+  },
+
+  handleDestroySuccess: function() {
     Backbone.history.navigate('colors', { trigger: true });
   }
 });

@@ -19,15 +19,16 @@ module.exports = Marionette.ItemView.extend({
 
   initialize: function (options) {
     this.model = options.model;
-    this.trigger('modal:open');
+    this.trigger('open');
   },
 
   confirm: function () {
-    this.model.destroy();
-    this.trigger('modal:destroy');
+    this.trigger('confirm');
+    this.trigger('destroy');
   },
 
   cancel: function () {
-    this.trigger('modal:destroy');
+    this.trigger('cancel');
+    this.trigger('destroy');
   }
 });

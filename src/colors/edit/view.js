@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
 var Syphon = require('backbone.syphon');
 var Marionette = require('backbone.marionette');
 var template = require('./template.hbs');
@@ -9,7 +10,8 @@ module.exports = Marionette.ItemView.extend({
 
   templateHelpers: function() {
     return {
-      errors: this.model.validationError
+      errors: this.model.validationError,
+      serverError: this.model.serverError
     };
   },
 
@@ -17,19 +19,17 @@ module.exports = Marionette.ItemView.extend({
     'submit .colors__form' : 'handleSubmit'
   },
 
+  modelEvents: {
+    'all': 'render'
+  },
+
   initialize: function (options) {
+    _.bindAll(this, 'handleSaveSuccess');
     this.model = options.model;
-    this.listenTo(this.model, 'all', this.render);
   },
 
   onDomRefresh: function () {
     Syphon.deserialize(this, this.model.attributes);
-    this.once('before:render', this._reserialize);
-  },
-
-  _reserialize: function() {
-    var data = Syphon.serialize(this);
-    this.model.set(data, { silent: true });
   },
 
   handleSubmit: function (event) {
@@ -44,7 +44,10 @@ module.exports = Marionette.ItemView.extend({
   },
 
   handleValid: function () {
-    this.model.save();
+    this.model.save().done(this.handleSaveSuccess);
+  },
+
+  handleSaveSuccess: function() {
     Backbone.history.navigate('colors/' + this.model.id, { trigger: true });
   }
 });

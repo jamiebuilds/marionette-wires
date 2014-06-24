@@ -3,7 +3,7 @@ var channel = require('./channel');
 
 module.exports = Marionette.Behavior.extend({
   initialize: function () {
-    this.listenToOnce(this.view, 'modal:open',  this.openModal);
+    this.listenToOnce(this.view, 'open',  this.openModal);
   },
 
   openModal: function (callback) {
@@ -12,7 +12,7 @@ module.exports = Marionette.Behavior.extend({
       callback: callback
     });
 
-    this.listenToOnce(this.view, 'modal:destroy', this.destroyModal);
+    this.listenToOnce(this.view, 'destroy', this.destroyModal);
   },
 
   destroyModal: function (callback) {

@@ -1,5 +1,5 @@
 require('./plugins');
 
-var Application = require('./application/application');
+var Application = require('./application/controller');
 
 window.app = new Application();
