@@ -1,14 +1,11 @@
 var Marionette = require('backbone.marionette');
 var template = require('./item-template.hbs');
-var ModalBehavior = require('../../modal/behavior');
 
 module.exports = Marionette.ItemView.extend({
   template: template,
 
   behaviors: {
-    Modal: {
-      behaviorClass: ModalBehavior
-    }
+    modal: {}
   },
 
   events: {

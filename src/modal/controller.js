@@ -2,6 +2,7 @@ var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var LayoutView = require('./layout-view');
+var Behavior = require('./behavior');
 
 var modalChannel = Backbone.Wreqr.radio.channel('modal');
 var applicationChannel = Backbone.Wreqr.radio.channel('application');

@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 
 var channel = Backbone.Wreqr.radio.channel('modal');
 
-module.exports = Marionette.Behavior.extend({
+Marionette.Behaviors.behaviorsLookup.modal = Marionette.Behavior.extend({
   initialize: function () {
     this.listenToOnce(this.view, 'open',  this.openModal);
   },
