@@ -3,6 +3,7 @@ var Backbone = require('backbone');
 var IndexView = require('./item-view');
 
 var indexChannel = Backbone.Wreqr.radio.channel('colors');
+var headerChannel = Backbone.Wreqr.radio.channel('header');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {
@@ -12,5 +13,6 @@ module.exports = Marionette.Controller.extend({
   index: function () {
     var indexView = new IndexView();
     this.container.show(indexView);
+    headerChannel.vent.trigger('active', 'Index');
   }
 });

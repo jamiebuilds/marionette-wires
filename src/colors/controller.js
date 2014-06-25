@@ -8,12 +8,15 @@ var ShowView = require('./show/item-view');
 var EditView = require('./edit/item-view');
 
 var colorsChannel = Backbone.Wreqr.radio.channel('colors');
+var headerChannel = Backbone.Wreqr.radio.channel('header');
 
 module.exports = Marionette.Controller.extend({
   initialize: function (options) {
     this.container = options.container;
     this.collection = new Collection();
     this.collection.fetch();
+
+    headerChannel.vent.trigger('add', 'Colors', 'colors');
   },
 
   index: function () {
@@ -22,6 +25,7 @@ module.exports = Marionette.Controller.extend({
     });
 
     this.container.show(indexView);
+    headerChannel.vent.trigger('active', 'Colors');
   },
 
   create: function () {
@@ -33,6 +37,7 @@ module.exports = Marionette.Controller.extend({
     });
 
     this.container.show(createView);
+    headerChannel.vent.trigger('active', 'Colors');
   },
 
   show: function (id) {
@@ -43,6 +48,7 @@ module.exports = Marionette.Controller.extend({
     });
 
     this.container.show(showView);
+    headerChannel.vent.trigger('active', 'Colors');
   },
 
   edit: function (id) {
@@ -53,6 +59,7 @@ module.exports = Marionette.Controller.extend({
     });
 
     this.container.show(editView);
+    headerChannel.vent.trigger('active', 'Colors');
   },
 
   _getModel: function(id) {

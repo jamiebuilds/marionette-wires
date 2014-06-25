@@ -14,13 +14,11 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   onRender: function () {
-    var headerController = new HeaderController({
+    var header = new HeaderController({
       container  : this.header,
       collection : [
         { name: 'Colors', path: 'colors', route: 'colorsList' }
       ]
     });
-
-    headerController.render();
   }
 });
