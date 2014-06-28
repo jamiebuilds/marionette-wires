@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var logger = require('morgan');
 var mockApi = require('./mock-api');
 
@@ -12,6 +13,14 @@ module.exports = function (grunt) {
     jshint: {
       javascripts: {
         src: ['src/**/*.js']
+      },
+
+      tests: {
+        options: {
+          jshintrc: 'test/.jshintrc'
+        },
+
+        src: ['test/**/*.js']
       }
     },
 
@@ -77,6 +86,21 @@ module.exports = function (grunt) {
       }
     },
 
+    mochaTest: {
+      tests: {
+        options: {
+          require: 'test/setup/node.js',
+          reporter: 'dot',
+          clearRequireCache: true,
+          mocha: require('mocha')
+        },
+        src: [
+          'test/setup/helpers.js',
+          'test/unit/**/*.spec.js'
+        ]
+      }
+    },
+
     concurrent: {
       options: {
         logConcurrentOutput: true
@@ -91,12 +115,13 @@ module.exports = function (grunt) {
 
     watch: {
       options: {
-        livereload: true
+        livereload: true,
+        spawn: false
       },
 
       javascripts: {
-        files: 'src/**/*.js',
-        tasks: ['jshint']
+        files: ['src/**/*.js', 'src/**/*.hbs'],
+        tasks: ['jshint:javascripts', 'mochaTest']
       },
 
       views: {
@@ -107,6 +132,11 @@ module.exports = function (grunt) {
       stylesheets: {
         files: 'src/**/*.less',
         tasks: ['less', 'autoprefixer']
+      },
+
+      tests: {
+        files: 'test/unit/**/*.spec.js',
+        tasks: ['jshint:tests', 'mochaTest']
       }
     }
   });
@@ -121,7 +151,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'jshint'
+    'jshint',
+    'mochaTest'
   ]);
 
   grunt.registerTask('serve', [
@@ -132,5 +163,7 @@ module.exports = function (grunt) {
     'build',
     'serve'
   ]);
+
+  require('./tasks/events')(grunt);
 
 };
