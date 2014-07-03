@@ -1,18 +1,20 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
 var _ = require('underscore');
+var Backbone = require('backbone');
+var Controller = require('../classes/controller');
+var Radio = require('../classes/radio');
+
 var Router = require('./router');
 var LayoutView = require('./layout-view');
 var ModalController = require('../modal/controller');
 
-var applicationChannel = Backbone.Wreqr.radio.channel('application');
+Radio.channel('application');
 
 var modules = [
   require('../index/router'),
   require('../colors/router')
 ];
 
-module.exports = Marionette.Controller.extend({
+module.exports = Controller.extend({
   initialize: function() {
     this.router = new Router();
     this.layout = new LayoutView();

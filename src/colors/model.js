@@ -1,6 +1,6 @@
-var Backbone = require('backbone');
+var Model = require('../classes/model');
 
-module.exports = Backbone.Model.extend({
+module.exports = Model.extend({
   urlRoot: '/api/v1/colors',
 
   defaults: {

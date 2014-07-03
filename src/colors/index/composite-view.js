@@ -1,8 +1,8 @@
-var Marionette = require('backbone.marionette');
+var CompositeView = require('../../classes/composite-view');
 var ItemView = require('./item-view');
 var template = require('./composite-template.hbs');
 
-module.exports = Marionette.CompositeView.extend({
+module.exports = CompositeView.extend({
   template: template,
   className: 'colors container',
 

@@ -1,9 +1,10 @@
 var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
+var Behavior = require('../classes/behavior');
+var Radio = require('../classes/radio');
 
-var channel = Backbone.Wreqr.radio.channel('modal');
+var channel = Radio.channel('modal');
 
-Marionette.Behaviors.behaviorsLookup.modal = Marionette.Behavior.extend({
+Marionette.Behaviors.behaviorsLookup.modal = Behavior.extend({
   initialize: function () {
     this.listenToOnce(this.view, 'open',  this.openModal);
   },

@@ -26,4 +26,3 @@ chai.use(chaiJquery);
 global.sinon = sinon;
 global.expect = chai.expect;
 global.proxyquire = proxyquire;
-

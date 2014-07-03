@@ -1,18 +1,18 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
-var IndexView = require('./item-view');
+var Controller = require('../classes/controller');
+var Radio = require('../classes/radio');
+var View = require('./view');
 
-var indexChannel = Backbone.Wreqr.radio.channel('colors');
-var headerChannel = Backbone.Wreqr.radio.channel('header');
+var indexChannel = Radio.channel('colors');
+var headerChannel = Radio.channel('header');
 
-module.exports = Marionette.Controller.extend({
+module.exports = Controller.extend({
   initialize: function (options) {
     this.container = options.container;
   },
 
   index: function () {
-    var indexView = new IndexView();
-    this.container.show(indexView);
+    this.view = new View();
+    this.container.show(this.view);
     headerChannel.vent.trigger('active', 'Index');
   }
 });

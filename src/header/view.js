@@ -1,11 +1,11 @@
-var Marionette = require('backbone.marionette');
-var Backone = require('backbone');
+var View = require('../classes/view');
+var Radio = require('../classes/radio');
 var _ = require('underscore');
-var template = require('./item-template.hbs');
+var template = require('./template.hbs');
 
-var headerChannel = Backone.Wreqr.radio.channel('header');
+var headerChannel = Radio.channel('header');
 
-module.exports = Marionette.ItemView.extend({
+module.exports = View.extend({
   template: template,
   tagName: 'nav',
   className: 'navbar navbar-default navbar-fixed-top',

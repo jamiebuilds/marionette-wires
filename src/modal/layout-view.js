@@ -1,7 +1,7 @@
-var Marionette = require('backbone.marionette');
+var LayoutView = require('../classes/layout-view');
 var template = require('./layout-template.hbs');
 
-module.exports = Marionette.LayoutView.extend({
+module.exports = LayoutView.extend({
   template: template,
   className: 'modal fade',
 

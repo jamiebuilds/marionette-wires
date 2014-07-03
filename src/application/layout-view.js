@@ -1,9 +1,9 @@
-var Marionette = require('backbone.marionette');
+var LayoutView = require('../classes/layout-view');
 var template = require('./layout-template.hbs');
 
 var HeaderController = require('../header/controller');
 
-module.exports = Marionette.LayoutView.extend({
+module.exports = LayoutView.extend({
   el: '.application',
   template: template,
 

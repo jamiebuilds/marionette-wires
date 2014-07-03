@@ -1,15 +1,15 @@
-var Marionette = require('backbone.marionette');
-var Backone = require('backbone');
-var HeaderView = require('./item-view');
+var Controller = require('../classes/controller');
+var Radio = require('../classes/radio');
+var View = require('./view');
 
-var headerChannel = Backone.Wreqr.radio.channel('header');
+var headerChannel = Radio.channel('header');
 
-module.exports = Marionette.Controller.extend({
+module.exports = Controller.extend({
   initialize: function (options) {
     this.container  = options.container;
     this.collection = options.collection;
 
-    this.view = new HeaderView();
+    this.view = new View();
     this.container.show(this.view);
   }
 });

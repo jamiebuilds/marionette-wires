@@ -1,16 +1,18 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
+var Controller = require('../classes/controller');
+var Radio = require('../classes/radio');
+
 var Model = require('./model');
 var Collection = require('./collection');
-var IndexView = require('./index/composite-view');
-var CreateView = require('./create/item-view');
-var ShowView = require('./show/item-view');
-var EditView = require('./edit/item-view');
 
-var colorsChannel = Backbone.Wreqr.radio.channel('colors');
-var headerChannel = Backbone.Wreqr.radio.channel('header');
+var IndexView  = require('./index/composite-view');
+var CreateView = require('./create/view');
+var ShowView   = require('./show/view');
+var EditView   = require('./edit/view');
 
-module.exports = Marionette.Controller.extend({
+var colorsChannel = Radio.channel('colors');
+var headerChannel = Radio.channel('header');
+
+module.exports = Controller.extend({
   initialize: function (options) {
     this.container = options.container;
     this.collection = new Collection();

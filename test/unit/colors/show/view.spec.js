@@ -1,4 +1,4 @@
-describe('colors/show/item-view.js', function() {
+describe('colors/show/view.js', function() {
   beforeEach(function() {
     this.ModalViewStub = this.sinon.stub();
     this.templateStub = this.sinon.stub();
@@ -7,12 +7,12 @@ describe('colors/show/item-view.js', function() {
     this.modelInstance.url = 'foo';
     this.modelInstance.cleanup = this.cleanupStub;
 
-    this.ItemView = proxyquire('../../src/colors/show/item-view.js', {
-      '../modal/item-view'  : this.ModalViewStub,
-      './item-template.hbs' : this.templateStub
+    this.View = proxyquire('../../src/colors/show/view.js', {
+      '../modal/view'  : this.ModalViewStub,
+      './template.hbs' : this.templateStub
     });
 
-    this.itemView = new this.ItemView({
+    this.itemView = new this.View({
       model: this.modelInstance
     });
   });

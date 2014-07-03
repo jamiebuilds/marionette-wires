@@ -1,13 +1,13 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
+var Controller = require('../classes/controller');
+var Radio = require('../classes/radio');
 var _ = require('underscore');
 var LayoutView = require('./layout-view');
 var Behavior = require('./behavior');
 
-var modalChannel = Backbone.Wreqr.radio.channel('modal');
-var applicationChannel = Backbone.Wreqr.radio.channel('application');
+var modalChannel = Radio.channel('modal');
+var applicationChannel = Radio.channel('application');
 
-module.exports = Marionette.Controller.extend({
+module.exports = Controller.extend({
   initialize: function (options) {
     _.bindAll(this, 'openModal', 'destroyModal');
 

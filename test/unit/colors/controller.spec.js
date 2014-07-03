@@ -31,9 +31,9 @@ describe('colors/controller.js', function() {
       './model'                : this.ModelStub,
       './collection'           : this.CollectionStub,
       './index/composite-view' : this.IndexViewStub,
-      './create/item-view'     : this.CreateViewStub,
-      './show/item-view'       : this.ShowViewStub,
-      './edit/item-view'       : this.EditViewStub
+      './create/view'          : this.CreateViewStub,
+      './show/view'            : this.ShowViewStub,
+      './edit/view'            : this.EditViewStub
     });
 
     this.controller = new this.Controller({

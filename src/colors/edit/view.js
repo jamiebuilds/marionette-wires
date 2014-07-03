@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 var Syphon = require('backbone.syphon');
 var Marionette = require('backbone.marionette');
-var template = require('./item-template.hbs');
+var template = require('./template.hbs');
 
 module.exports = Marionette.ItemView.extend({
   template: template,
