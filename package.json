@@ -27,6 +27,7 @@
     "browserify-shim": "^3.5.0",
     "chai": "^1.9.1",
     "chai-jquery": "^1.2.3",
+    "contextify": "^0.1.8",
     "deglobalify": "^0.2.0",
     "express": "^4.4.4",
     "grunt": "^0.4.5",

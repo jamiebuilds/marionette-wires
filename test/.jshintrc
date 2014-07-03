@@ -15,7 +15,7 @@
   "camelcase"     : true,
   "curly"         : true,
   "eqeqeq"        : true,
-  "es3"           : true,
+  "es3"           : false,
   "forin"         : true,
   "immed"         : true,
   "indent"        : 2,
@@ -32,7 +32,7 @@
   "trailing"      : true,
   "maxparams"     : 3,
   "maxdepth"      : 3,
-  "maxstatements" : 6,
+  "maxstatements" : 20,
   "maxcomplexity" : 4,
   "maxlen"        : 100,
 

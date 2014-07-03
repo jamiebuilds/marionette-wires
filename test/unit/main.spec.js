@@ -1,4 +1,4 @@
-describe('App startup', function() {
+describe('main.js', function() {
   beforeEach(function() {
     this.appControllerStub = this.sinon.stub();
     proxyquire('../../src/main.js', {
