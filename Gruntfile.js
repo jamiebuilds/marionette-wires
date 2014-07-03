@@ -142,12 +142,12 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
-    'test',
     'clean:dist',
     'copy:views',
     'less',
     'autoprefixer',
-    'browserify:dist'
+    'browserify:dist',
+    'test'
   ]);
 
   grunt.registerTask('test', [
