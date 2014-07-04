@@ -1,5 +1,5 @@
-var _ = require('underscore');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 var mockApi = require('./mock-api');
 
 module.exports = function (grunt) {
@@ -51,6 +51,7 @@ module.exports = function (grunt) {
           base: 'dist',
           middleware: function (connect, options, middlewares) {
             middlewares.unshift(logger('dev'));
+            middlewares.unshift(bodyParser.json());
             middlewares.push(mockApi);
             return middlewares;
           }

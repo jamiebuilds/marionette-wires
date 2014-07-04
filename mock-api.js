@@ -1,48 +1,46 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var _ = require('underscore');
-var app = express();
+var Backbone = require('backbone');
 
-app.use(bodyParser.json());
+var api = module.exports = express();
 
-var COLORS = [
-  { id: _.uniqueId(), name: 'blue',  hex: '#00f' },
-  { id: _.uniqueId(), name: 'red',   hex: '#f00' },
-  { id: _.uniqueId(), name: 'green', hex: '#0f0' }
-];
+var Color = Backbone.Model.extend({
+  defaults: function() {
+    return { id: parseInt(this.cid.replace('c', ''), 10) };
+  }
+});
 
-app.route('/api/v1/colors')
+var Colors = Backbone.Collection.extend({
+  model: Color
+});
+
+var colors = new Colors([
+  { name: 'blue',  hex: '#00f' },
+  { name: 'red',   hex: '#f00' },
+  { name: 'green', hex: '#0f0' }
+]);
+
+api.route('/api/v1/colors')
   .get(function(req, res) {
-    res.json(COLORS);
+    res.json(colors.toJSON());
   })
   .post(function(req, res) {
-    var color = req.body;
-    color.id = _.uniqueId();
-    COLORS.push(color);
-    res.json(color);
+    var color = new Color(req.body);
+    colors.add(color);
+    res.json(color.toJSON());
   });
 
-app.route('/api/v1/colors/:id')
+api.route('/api/v1/colors/:id')
   .get(function(req, res) {
-    var color = _.findWhere(COLORS, { id: req.params.id });
-    res.json(color);
+    var color = colors.get(req.params.id);
+    res.json(color.toJSON());
   })
   .put(function(req, res) {
-    var resColor;
-    COLORS = _.map(COLORS, function(color) {
-      if (color.id === req.params.id) {
-        resColor = _.extend(color, req.body);
-      }
-      return color;
-    });
-    res.json(resColor);
+    var color = colors.get(req.params.id);
+    color.set(req.params.body);
+    res.json(color.toJSON());
   })
   .delete(function(req, res) {
-    var resColor;
-    COLORS = _.reject(COLORS, function(color) {
-      return color.id === req.params.id && (resColor = color);
-    });
-    res.json(resColor);
+    var color = colors.get(req.params.id);
+    colors.remove(color);
+    res.json(color.toJSON());
   });
-
-module.exports = app;
