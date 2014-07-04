@@ -9,9 +9,7 @@ module.exports = CompositeView.extend({
   childView: ItemView,
   childViewContainer: 'div.list-group',
 
-  initialize: function (options) {
-    this.collection = options.collection;
-    this.model = options.model;
+  initialize: function () {
     this.listenTo(this.collection, 'change', this.render);
   }
 });

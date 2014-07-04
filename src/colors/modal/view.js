@@ -14,8 +14,7 @@ module.exports = View.extend({
     'click .destroy' : 'cancel'
   },
 
-  initialize: function (options) {
-    this.model = options.model;
+  initialize: function () {
     this.trigger('open');
   },
 

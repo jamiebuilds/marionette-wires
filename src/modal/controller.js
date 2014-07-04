@@ -2,7 +2,6 @@ var Controller = require('../classes/controller');
 var Radio = require('../classes/radio');
 var _ = require('underscore');
 var LayoutView = require('./layout-view');
-var Behavior = require('./behavior');
 
 var modalChannel = Radio.channel('modal');
 var applicationChannel = Radio.channel('application');
