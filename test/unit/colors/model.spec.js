@@ -6,20 +6,19 @@ describe('colors/model.js', function() {
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.onStub = this.sinon.stub();
-      this.model.on = this.onStub;
+      stub(this.model, 'on');
       this.model.initialize();
     });
 
     it('should register event handlers', function() {
-      expect(this.onStub).to.have.been.calledWith('request');
-      expect(this.onStub).to.have.been.calledWith('error');
+      expect(this.model.on).to.have.been.calledWith('request');
+      expect(this.model.on).to.have.been.calledWith('error');
     });
   });
 
   describe('#validate', function() {
     beforeEach(function() {
-      this.validateSpy = this.sinon.spy(this.model, 'validate');
+      spy(this.model, 'validate');
     });
 
     describe('when missing "name" field', function() {
@@ -29,7 +28,7 @@ describe('colors/model.js', function() {
       });
 
       it('should return an error', function() {
-        expect(this.validateSpy).to.have.returned(['Missing "name" field']);
+        expect(this.model.validate).to.have.returned(['Missing "name" field']);
       });
     });
 
@@ -40,7 +39,7 @@ describe('colors/model.js', function() {
       });
 
       it('should return an error', function() {
-        expect(this.validateSpy).to.have.returned(['Missing "hex" field']);
+        expect(this.model.validate).to.have.returned(['Missing "hex" field']);
       });
     });
 
@@ -51,7 +50,7 @@ describe('colors/model.js', function() {
       });
 
       it('should return an error', function() {
-        expect(this.validateSpy).to.have.returned(undefined);
+        expect(this.model.validate).to.have.returned(undefined);
       });
     });
   });

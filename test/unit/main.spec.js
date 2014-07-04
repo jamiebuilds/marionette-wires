@@ -1,13 +1,13 @@
 describe('main.js', function() {
   beforeEach(function() {
-    this.appControllerStub = this.sinon.stub();
+    this.appController = stub();
     proxyquire('../../src/main.js', {
       './plugins': {},
-      './application/controller': this.appControllerStub
+      './application/controller': this.appController
     });
   });
 
   it('should initantiate a new application', function() {
-    expect(this.appControllerStub).to.have.been.calledWithNew;
+    expect(this.appController).to.have.been.calledWithNew;
   });
 });

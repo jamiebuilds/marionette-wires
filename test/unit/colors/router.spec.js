@@ -1,28 +1,28 @@
 describe('colors/router.js', function() {
   beforeEach(function() {
-    this.controllerInstance = { controller: true };
-    this.controllerStub = this.sinon.stub().returns(this.controllerInstance);
+    this.controller = { controller: true };
+    this.Controller = stub().returns(this.controller);
 
-    this.contentInstance = { content: true };
-    this.processAppRoutesStub = this.sinon.stub();
-    this.applicationInstance = {
-      layout: { content: this.contentInstance },
-      router: { processAppRoutes: this.processAppRoutesStub }
+    this.app = {
+      layout: { content: stub() },
+      router: { processAppRoutes: stub() }
     };
 
     this.router = proxyquire('../../src/colors/router.js', {
-      './controller' : this.controllerStub
+      './controller' : this.Controller
     });
 
-    this.router.call(this.applicationInstance);
+    this.router.call(this.app);
   });
 
   it('should create a controller', function() {
-    expect(this.controllerStub).to.have.been.calledWith({ container: this.contentInstance });
+    expect(this.Controller).to.have.been.calledWithNew.and.calledWith({
+      container: this.app.layout.content
+    });
   });
 
   it('should process its routes', function() {
-    expect(this.processAppRoutesStub).to.have.been.calledWith(this.controllerInstance, {
+    expect(this.app.router.processAppRoutes).to.have.been.calledWith(this.controller, {
       'colors'          : 'index',
       'colors/new'      : 'create',
       'colors/:id'      : 'show',

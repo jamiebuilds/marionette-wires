@@ -1,19 +1,20 @@
 describe('application/controller.js', function() {
   beforeEach(function() {
-    this.routerStub = this.sinon.stub();
-    this.layoutViewInstance = { render: this.sinon.stub() };
-    this.layoutViewStub = this.sinon.stub().returns(this.layoutViewInstance);
+    this.Router = stub();
 
-    this.modalControllerStub = this.sinon.stub();
-    this.indexRouterStub     = this.sinon.stub();
-    this.colorsRouterStub    = this.sinon.stub();
+    this.layoutView = { render: stub() };
+    this.LayoutView = stub().returns(this.layoutView);
+
+    this.ModalController = stub();
+    this.IndexRouter     = stub();
+    this.ColorsRouter    = stub();
 
     this.Controller = proxyquire('../../src/application/controller.js', {
-      './router'            : this.routerStub,
-      './layout-view'       : this.layoutViewStub,
-      '../modal/controller' : this.modalControllerStub,
-      '../index/router'     : this.indexRouterStub,
-      '../colors/router'    : this.colorsRouterStub
+      './router'            : this.Router,
+      './layout-view'       : this.LayoutView,
+      '../modal/controller' : this.ModalController,
+      '../index/router'     : this.IndexRouter,
+      '../colors/router'    : this.ColorsRouter
     });
 
     this.controller = new this.Controller();
@@ -21,39 +22,39 @@ describe('application/controller.js', function() {
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.routerInstance = { router: true };
-      this.routerStub.returns(this.routerInstance);
+      this.router = { router: true };
+      this.Router.returns(this.router);
 
-      this.overlayInstance = { overlay: true };
-      this.layoutViewInstance.overlay = this.overlayInstance;
+      this.overlay = { overlay: true };
+      this.layoutView.overlay = this.overlay;
 
-      this.historyStartStub = this.sinon.stub(this.Backbone.history, 'start');
+      stub(Backbone.history, 'start');
 
       this.controller.initialize();
     });
 
     it('should create a layout', function() {
-      expect(this.layoutViewStub).to.have.been.calledWithNew;
-      expect(this.controller).to.have.property('layout', this.layoutInstance);
+      expect(this.LayoutView).to.have.been.calledWithNew;
+      expect(this.controller).to.have.property('layout', this.layout);
     });
 
     it('should create a router', function() {
-      expect(this.routerStub).to.have.been.calledWithNew;
-      expect(this.controller).to.have.property('router', this.routerInstance);
+      expect(this.Router).to.have.been.calledWithNew;
+      expect(this.controller).to.have.property('router', this.router);
     });
 
     it('should create a modal controller', function() {
-      expect(this.modalControllerStub).to.have.been.calledWithNew
-        .and.calledWith({ container: this.overlayInstance });
+      expect(this.ModalController).to.have.been.calledWithNew
+        .and.calledWith({ container: this.overlay });
     });
 
     it('should start all of the routers', function() {
-      expect(this.indexRouterStub).to.have.been.calledOn(this.controller);
-      expect(this.colorsRouterStub).to.have.been.calledOn(this.controller);
+      expect(this.IndexRouter).to.have.been.calledOn(this.controller);
+      expect(this.ColorsRouter).to.have.been.calledOn(this.controller);
     });
 
     it('should start Backbone.history', function() {
-      expect(this.historyStartStub).to.have.been.calledOnce;
+      expect(Backbone.history.start).to.have.been.calledOnce;
     });
   });
 });

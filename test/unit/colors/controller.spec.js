@@ -1,156 +1,141 @@
 describe('colors/controller.js', function() {
   beforeEach(function() {
-    this.headerChannel = this.Backbone.Wreqr.radio.channel('header');
-    this.triggerStub = this.sinon.stub(this.headerChannel.vent, 'trigger');
+    this.headerChannel = Backbone.Wreqr.radio.channel('header');
+    this.trigger = stub(this.headerChannel.vent, 'trigger');
 
-    this.modelFetchStub = this.sinon.stub();
-    this.modelInstance = {
-      fetch : this.modelFetchStub
-    };
-    this.ModelStub = this.sinon.stub().returns(this.modelInstance);
+    this.model      = { fetch: stub() };
+    this.collection = { fetch: stub(), get: stub(), add: stub() };
 
-    this.collectionFetchStub = this.sinon.stub();
-    this.collectionGetStub = this.sinon.stub();
-    this.collectionAddStub = this.sinon.stub();
-    this.collectionInstance = {
-      fetch : this.collectionFetchStub,
-      get   : this.collectionGetStub,
-      add   : this.collectionAddStub
-    };
-    this.CollectionStub = this.sinon.stub().returns(this.collectionInstance);
+    this.Model      = stub().returns(this.model);
+    this.Collection = stub().returns(this.collection);
 
-    this.IndexViewStub  = this.sinon.stub();
-    this.CreateViewStub = this.sinon.stub();
-    this.ShowViewStub   = this.sinon.stub();
-    this.EditViewStub   = this.sinon.stub();
+    this.IndexView  = stub();
+    this.CreateView = stub();
+    this.ShowView   = stub();
+    this.EditView   = stub();
 
-    this.showStub = this.sinon.stub();
-    this.containerInstance = { container: true, show: this.showStub };
+    this.container = { show: stub() };
 
     this.Controller = proxyquire('../../src/colors/controller.js', {
-      './model'                : this.ModelStub,
-      './collection'           : this.CollectionStub,
-      './index/composite-view' : this.IndexViewStub,
-      './create/view'          : this.CreateViewStub,
-      './show/view'            : this.ShowViewStub,
-      './edit/view'            : this.EditViewStub
+      './model'                : this.Model,
+      './collection'           : this.Collection,
+      './index/composite-view' : this.IndexView,
+      './create/view'          : this.CreateView,
+      './show/view'            : this.ShowView,
+      './edit/view'            : this.EditView
     });
 
-    this.controller = new this.Controller({
-      container: this.containerInstance
-    });
+    this.controller = new this.Controller({ container: this.container });
   });
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.controller.initialize({
-        container: this.containerInstance
-      });
+      this.controller.initialize({ container: this.container });
     });
 
     it('should attach container', function() {
-      expect(this.controller).to.have.ownProperty('container', this.containerInstance);
+      expect(this.controller).to.have.ownProperty('container', this.container);
     });
 
     it('should create a collection', function() {
-      expect(this.CollectionStub).to.have.been.calledWithNew;
+      expect(this.Collection).to.have.been.calledWithNew;
     });
 
     it('should fetch the collection', function() {
-      expect(this.collectionFetchStub).to.have.been.called;
+      expect(this.collection.fetch).to.have.been.called;
     });
 
     it('should trigger a header#add event', function() {
-      expect(this.triggerStub).to.have.been.calledWith('add', 'Colors', 'colors');
+      expect(this.trigger).to.have.been.calledWith('add', 'Colors', 'colors');
     });
   });
 
   describe('#index', function() {
     beforeEach(function() {
+      this.indexView = { indexView: true };
+      this.IndexView.returns(this.indexView);
       this.controller.index();
     });
 
     it('should create an IndexView', function() {
-      expect(this.IndexViewStub).to.have.been.calledWithNew.and.calledWith({
-        collection : this.collectionInstance
+      expect(this.IndexView).to.have.been.calledWithNew.and.calledWith({
+        collection: this.collection
       });
     });
 
     it('should show the IndexView', function() {
-      expect(this.showStub).to.have.been.calledWith(
-        sinon.match.instanceOf(this.IndexViewStub)
-      );
+      expect(this.container.show).to.have.been.calledWith(this.indexView);
     });
 
     it('should trigger a header#active event', function() {
-      expect(this.triggerStub).to.have.been.calledWith('active', 'Colors');
+      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
     });
   });
 
   describe('#create', function() {
     beforeEach(function() {
+      this.createView = { createView: true };
+      this.CreateView.returns(this.createView);
       this.controller.create();
     });
 
     it('should create a CreateView', function() {
-      expect(this.CreateViewStub).to.have.been.calledWithNew.and.calledWith({
-        collection : this.collectionInstance,
-        model      : this.modelInstance
+      expect(this.CreateView).to.have.been.calledWithNew.and.calledWith({
+        collection : this.collection,
+        model      : this.model
       });
     });
 
     it('should show the CreateView', function() {
-      expect(this.showStub).to.have.been.calledWith(
-        sinon.match.instanceOf(this.CreateViewStub)
-      );
+      expect(this.container.show).to.have.been.calledWith(this.createView);
     });
 
     it('should trigger a header#active event', function() {
-      expect(this.triggerStub).to.have.been.calledWith('active', 'Colors');
+      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
     });
   });
 
   describe('#show', function() {
     beforeEach(function() {
+      this.showView = { showView: true };
+      this.ShowView.returns(this.showView);
       this.controller.show();
     });
 
     it('should create an ShowView', function() {
-      expect(this.ShowViewStub).to.have.been.calledWithNew.and.calledWith({
-        model: this.modelInstance
+      expect(this.ShowView).to.have.been.calledWithNew.and.calledWith({
+        model: this.model
       });
     });
 
     it('should show the ShowView', function() {
-      expect(this.showStub).to.have.been.calledWith(
-        sinon.match.instanceOf(this.ShowViewStub)
-      );
+      expect(this.container.show).to.have.been.calledWith(this.showView);
     });
 
     it('should trigger a header#active event', function() {
-      expect(this.triggerStub).to.have.been.calledWith('active', 'Colors');
+      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
     });
   });
 
   describe('#edit', function() {
     beforeEach(function() {
+      this.editView = { editView: true };
+      this.EditView.returns(this.editView);
       this.controller.edit();
     });
 
     it('should create an EditView', function() {
-      expect(this.EditViewStub).to.have.been.calledWithNew.and.calledWith({
-        model: this.modelInstance
+      expect(this.EditView).to.have.been.calledWithNew.and.calledWith({
+        model: this.model
       });
     });
 
     it('should show the EditView', function() {
-      expect(this.showStub).to.have.been.calledWith(
-        sinon.match.instanceOf(this.EditViewStub)
-      );
+      expect(this.container.show).to.have.been.calledWith(this.editView);
     });
 
     it('should trigger a header#active event', function() {
-      expect(this.triggerStub).to.have.been.calledWith('active', 'Colors');
+      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
     });
   });
 });

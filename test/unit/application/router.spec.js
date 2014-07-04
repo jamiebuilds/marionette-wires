@@ -6,15 +6,15 @@ describe('application/router.js', function () {
 
   describe('#onRoute', function() {
     beforeEach(function() {
-      this.applicationChannel = this.Backbone.Wreqr.radio.channel('application');
-      this.triggerStub = this.sinon.stub(this.applicationChannel.vent, 'trigger');
-      this.routeArgs = ['routeName', 'routePath', 'routeRegex', 'routeArgs'];
-      this.triggerArgs = ['route'].concat(this.routeArgs);
-      this.router.onRoute.apply(this.router, this.routeArgs);
+      this.channel = Backbone.Wreqr.radio.channel('application');
+      stub(this.channel.vent, 'trigger');
+      this.router.onRoute('routeName', 'routePath', 'routeRegex', 'routeArgs');
     });
 
     it('should trigger a route event on the application channel', function() {
-      expect(this.triggerStub.lastCall.args).to.deep.equal(this.triggerArgs);
+      expect(this.channel.vent.trigger).to.have.been.calledWith(
+        'route', 'routeName', 'routePath', 'routeRegex', 'routeArgs'
+      );
     });
   });
 });

@@ -1,57 +1,53 @@
 describe('colors/show/view.js', function() {
   beforeEach(function() {
-    this.ModalViewStub = this.sinon.stub();
-    this.templateStub = this.sinon.stub();
-    this.cleanupStub = this.sinon.stub();
-    this.modelInstance = new this.Backbone.Model();
-    this.modelInstance.url = 'foo';
-    this.modelInstance.cleanup = this.cleanupStub;
+    this.ModalView = stub();
+    this.template = stub();
+
+    this.model = new Backbone.Model();
+    this.model.url = 'foo';
+    this.model.cleanup = stub();
 
     this.View = proxyquire('../../src/colors/show/view.js', {
-      '../modal/view'  : this.ModalViewStub,
-      './template.hbs' : this.templateStub
+      '../modal/view'  : this.ModalView,
+      './template.hbs' : this.template
     });
 
-    this.itemView = new this.View({
-      model: this.modelInstance
-    });
+    this.itemView = new this.View({ model: this.model });
   });
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.bindAllStub = this.sinon.stub(this._, 'bindAll');
-      this.itemView.initialize({
-        model: this.modelInstance
-      });
+      this.bindAll = stub(_, 'bindAll');
+      this.itemView.initialize({ model: this.model });
     });
 
     it('should bind all methods that can be called by third-party', function() {
-      expect(this.bindAllStub).to.have.been.calledWith(
+      expect(this.bindAll).to.have.been.calledWith(
         this.itemView, 'handleToggleFailure', 'handleDestroySuccess'
       );
     });
 
     it('should attach the model', function() {
-      expect(this.itemView).to.have.ownProperty('model', this.modelInstance);
+      expect(this.itemView).to.have.ownProperty('model', this.model);
     });
 
     it('should cleanup the model', function() {
-      expect(this.cleanupStub).to.have.been.called;
+      expect(this.model.cleanup).to.have.been.called;
     });
   });
 
   describe('#templateHelpers', function() {
     beforeEach(function() {
-      this.templateHelpersSpy = this.sinon.spy(this.itemView, 'templateHelpers');
-      this.modelInstance.validationError = 'foo';
-      this.modelInstance.serverError = 'bar';
+      spy(this.itemView, 'templateHelpers');
+      this.model.validationError = 'foo';
+      this.model.serverError = 'bar';
       this.itemView.templateHelpers();
     });
 
     it('should return model errors', function() {
-      expect(this.templateHelpersSpy).to.have.returned({
-        errors      : this.modelInstance.validationError,
-        serverError : this.modelInstance.serverError
+      expect(this.itemView.templateHelpers).to.have.returned({
+        errors      : this.model.validationError,
+        serverError : this.model.serverError
       });
     });
   });

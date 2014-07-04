@@ -8,7 +8,12 @@
     "after"      : true,
     "afterEach"  : true,
     "sinon"      : true,
-    "proxyquire" : true
+    "proxyquire" : true,
+    "stub"       : true,
+    "spy"        : true,
+    "_"          : true,
+    "Backbone"   : true,
+    "Marionette" : true
   },
 
   "bitwise"       : true,
