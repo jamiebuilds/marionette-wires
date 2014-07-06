@@ -15,10 +15,7 @@ module.exports = LayoutView.extend({
 
   onRender: function () {
     var header = new HeaderController({
-      container  : this.header,
-      collection : [
-        { name: 'Colors', path: 'colors', route: 'colorsList' }
-      ]
+      container: this.header
     });
   }
 });

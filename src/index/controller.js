@@ -1,18 +1,15 @@
 var Controller = require('../classes/controller');
-var Radio = require('../classes/radio');
+var Router = require('./router');
 var View = require('./view');
-
-var indexChannel = Radio.channel('colors');
-var headerChannel = Radio.channel('header');
 
 module.exports = Controller.extend({
   initialize: function (options) {
     this.container = options.container;
+    this.router = new Router({ controller: this });
   },
 
   index: function () {
     this.view = new View();
     this.container.show(this.view);
-    headerChannel.vent.trigger('active', 'Index');
   }
 });

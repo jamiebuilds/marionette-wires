@@ -1,10 +1,11 @@
-var Controller = require('./controller');
+var Router = require('../classes/router');
 
-module.exports = function () {
-  var controller = new Controller({
-    container: this.layout.content
-  });
-  this.router.processAppRoutes(controller, {
-    '' : 'index'
-  });
-};
+module.exports = Router.extend({
+  title: 'Index',
+  rootPath: '',
+  addToHeader: false,
+
+  appRoutes: {
+    '': 'index'
+  }
+});

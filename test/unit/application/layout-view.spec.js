@@ -19,10 +19,7 @@ describe('application/layout-view.js', function() {
 
     it('should create a header controller', function() {
       expect(this.HeaderController).to.have.been.calledWithNew.and.calledWith({
-        container: this.layoutView.header,
-        collection: [
-          { name: 'Colors', path: 'colors', route: 'colorsList' }
-        ]
+        container: this.layoutView.header
       });
     });
   });

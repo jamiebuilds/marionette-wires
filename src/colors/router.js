@@ -1,14 +1,13 @@
-var Controller = require('./controller');
+var Router = require('../classes/router');
 
-module.exports = function () {
-  var controller = new Controller({
-    container : this.layout.content
-  });
+module.exports = Router.extend({
+  title: 'Colors',
+  rootPath: 'colors',
 
-  this.router.processAppRoutes(controller, {
+  appRoutes: {
     'colors'          : 'index',
     'colors/new'      : 'create',
     'colors/:id'      : 'show',
     'colors/:id/edit' : 'edit'
-  });
-};
+  }
+});

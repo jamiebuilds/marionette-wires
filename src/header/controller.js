@@ -1,8 +1,5 @@
 var Controller = require('../classes/controller');
-var Radio = require('../classes/radio');
 var View = require('./view');
-
-var headerChannel = Radio.channel('header');
 
 module.exports = Controller.extend({
   initialize: function (options) {

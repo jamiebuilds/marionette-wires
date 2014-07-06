@@ -66,10 +66,6 @@ describe('colors/controller.js', function() {
     it('should show the IndexView', function() {
       expect(this.container.show).to.have.been.calledWith(this.indexView);
     });
-
-    it('should trigger a header#active event', function() {
-      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
-    });
   });
 
   describe('#create', function() {
@@ -89,10 +85,6 @@ describe('colors/controller.js', function() {
     it('should show the CreateView', function() {
       expect(this.container.show).to.have.been.calledWith(this.createView);
     });
-
-    it('should trigger a header#active event', function() {
-      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
-    });
   });
 
   describe('#show', function() {
@@ -111,10 +103,6 @@ describe('colors/controller.js', function() {
     it('should show the ShowView', function() {
       expect(this.container.show).to.have.been.calledWith(this.showView);
     });
-
-    it('should trigger a header#active event', function() {
-      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
-    });
   });
 
   describe('#edit', function() {
@@ -132,10 +120,6 @@ describe('colors/controller.js', function() {
 
     it('should show the EditView', function() {
       expect(this.container.show).to.have.been.calledWith(this.editView);
-    });
-
-    it('should trigger a header#active event', function() {
-      expect(this.trigger).to.have.been.calledWith('active', 'Colors');
     });
   });
 });

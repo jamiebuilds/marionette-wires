@@ -1,22 +1,13 @@
 var _ = require('underscore');
-var Backbone = require('backbone');
 var Controller = require('../classes/controller');
-var Radio = require('../classes/radio');
 
-var Router = require('./router');
 var LayoutView = require('./layout-view');
 var ModalController = require('../modal/controller');
 
-Radio.channel('application');
-
-var modules = [
-  require('../index/router'),
-  require('../colors/router')
-];
-
 module.exports = Controller.extend({
-  initialize: function() {
-    this.router = new Router();
+  initialize: function(options) {
+    this.modules = options.modules;
+
     this.layout = new LayoutView();
     this.layout.render();
 
@@ -24,10 +15,10 @@ module.exports = Controller.extend({
       container: this.layout.overlay
     });
 
-    _.each(modules, function (module) {
-      module.apply(this);
+    _.each(this.modules, function(module) {
+      module._controller = new module.controller({
+        container: this.layout.content
+      });
     }, this);
-
-    Backbone.history.start();
   }
 });
