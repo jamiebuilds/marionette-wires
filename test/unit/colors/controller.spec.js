@@ -1,8 +1,5 @@
 describe('colors/controller.js', function() {
   beforeEach(function() {
-    this.headerChannel = Backbone.Wreqr.radio.channel('header');
-    this.trigger = stub(this.headerChannel.vent, 'trigger');
-
     this.model      = { fetch: stub() };
     this.collection = { fetch: stub(), get: stub(), add: stub() };
 
@@ -43,10 +40,6 @@ describe('colors/controller.js', function() {
 
     it('should fetch the collection', function() {
       expect(this.collection.fetch).to.have.been.called;
-    });
-
-    it('should trigger a header#add event', function() {
-      expect(this.trigger).to.have.been.calledWith('add', 'Colors', 'colors');
     });
   });
 
