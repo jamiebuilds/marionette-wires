@@ -13,13 +13,12 @@ module.exports = View.extend({
 
   templateHelpers: function() {
     return {
-      errors: this.model.validationError
+      errors: this.errors
     };
   },
 
   initialize: function () {
     _.bindAll(this, 'handleSaveSuccess');
-    this.model.cleanup();
   },
 
   events: {
@@ -27,8 +26,13 @@ module.exports = View.extend({
   },
 
   handleSubmit: function () {
-    if (this.model.isValid()) {
-      this.model.save().done(this.handleSaveSuccess);
+    var errors = this.model.validate(this.form);
+
+    if (!errors) {
+      this.model.save(this.form).done(this.handleSaveSuccess);
+    } else {
+      this.errors = errors;
+      this.render();
     }
   },
 

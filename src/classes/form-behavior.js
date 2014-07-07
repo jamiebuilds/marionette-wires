@@ -7,30 +7,38 @@ Marionette.Behaviors.behaviorsLookup.form = Behavior.extend({
     'submit form' : 'handleSubmit'
   },
 
-  modelEvents: {
-    'all': 'render'
+  initialize: function() {
+    this.listenTo(this.view.options.model, 'change', this.onChange);
   },
 
-  render: function() {
-    this.view.render();
+  serialize: function() {
+    this.view.form = Syphon.serialize(this);
+  },
+
+  deserialize: function() {
+    return Syphon.deserialize(this, this.view.form);
+  },
+
+  onChange: function() {
+    this.view.form = this.view.model.attributes;
+    this.deserialize();
   },
 
   onBeforeRender: function() {
-    if (this._formData) {
-      this._formData = Syphon.serialize(this);
+    if (this.view.form) {
+      this.serialize();
     }
   },
 
   onDomRefresh: function () {
-    if (!this._formData) {
-      this._formData = this.view.model.attributes;
+    if (!this.view.form) {
+      this.view.form = this.view.model.attributes;
     }
-    Syphon.deserialize(this, this._formData);
+    this.deserialize();
   },
 
   handleSubmit: function (event) {
     event.preventDefault();
-    var data = Syphon.serialize(this);
-    this.view.model.set(data);
+    this.view.form = Syphon.serialize(this);
   }
 });
