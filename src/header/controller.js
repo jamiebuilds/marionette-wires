@@ -6,15 +6,17 @@ var View = require('./view');
 var headerChannel = Radio.channel('header');
 
 module.exports = Controller.extend({
-  initialize: function (options) {
-    this.container = options.container;
+  channelName: 'header',
 
+  channelEvents: {
+    'add'    : 'addNavitem',
+    'active' : 'setActive'
+  },
+
+  initialize: function () {
     this.collection = new Collection();
     this.view = new View({ collection: this.collection });
     this.container.show(this.view);
-
-    this.listenTo(headerChannel.vent, 'add', this.addNavitem);
-    this.listenTo(headerChannel.vent, 'active', this.setActive);
   },
 
   addNavitem: function(name, path) {

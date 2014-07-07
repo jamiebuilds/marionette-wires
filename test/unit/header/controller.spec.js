@@ -14,9 +14,6 @@ describe('header/controller.js', function() {
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.headerChannel = Backbone.Wreqr.radio.channel('header');
-      stub(this.controller, 'listenTo');
-
       this.view = { view: true };
       this.View.returns(this.view);
 
@@ -43,13 +40,6 @@ describe('header/controller.js', function() {
 
     it('should show the view', function() {
       expect(this.container.show).to.have.been.calledWith(this.view);
-    });
-
-    it('should listen to channel events', function() {
-      expect(this.controller.listenTo)
-        .to.have.been.calledWith(this.headerChannel.vent, 'add', this.controller.addNavitem);
-      expect(this.controller.listenTo)
-        .to.have.been.calledWith(this.headerChannel.vent, 'active', this.controller.setActive);
     });
   });
 

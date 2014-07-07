@@ -17,9 +17,6 @@ describe('flashes/controller.js', function() {
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.flashesChannel = Backbone.Wreqr.radio.channel('flashes');
-      stub(this.controller, 'listenTo');
-
       this.collectionView = { collectionView: true };
       this.CollectionView.returns(this.collectionView);
       this.controller.initialize({ container: this.container });
@@ -42,13 +39,6 @@ describe('flashes/controller.js', function() {
 
     it('should show the CollectionView', function() {
       expect(this.container.show).to.have.been.calledWith(this.collectionView);
-    });
-
-    it('should listen to channel events', function() {
-      expect(this.controller.listenTo)
-        .to.have.been.calledWith(this.flashesChannel.vent, 'add', this.controller.add);
-      expect(this.controller.listenTo)
-        .to.have.been.calledWith(this.flashesChannel.vent, 'remove', this.controller.remove);
     });
   });
 

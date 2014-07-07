@@ -8,6 +8,8 @@ var HeaderController = require('../header/controller');
 var FlashesController = require('../flashes/controller');
 
 module.exports = Controller.extend({
+  channelName: 'application',
+
   initialize: function(options) {
     this.modules = options.modules;
 

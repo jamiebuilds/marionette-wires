@@ -10,10 +10,10 @@ var ShowView   = require('./show/view');
 var EditView   = require('./edit/view');
 
 module.exports = Controller.extend({
-  initialize: function (options) {
-    this.container = options.container;
-    this.router = new Router({ controller: this });
+  channelName: 'colors',
 
+  initialize: function () {
+    this.router = new Router({ controller: this });
     this.collection = new Collection();
     this.collection.fetch();
   },

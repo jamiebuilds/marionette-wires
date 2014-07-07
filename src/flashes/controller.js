@@ -3,12 +3,15 @@ var Radio = require('../classes/radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');
 
-var flashesChannel = Radio.channel('flashes');
-
 module.exports = Controller.extend({
-  initialize: function(options) {
-    this.container = options.container;
+  channelName: 'flashes',
 
+  channelEvents: {
+    'add'    : 'add',
+    'remove' : 'remove'
+  },
+
+  initialize: function() {
     this.collection = new Collection();
 
     this.view = new CollectionView({
@@ -16,9 +19,6 @@ module.exports = Controller.extend({
     });
 
     this.container.show(this.view);
-
-    this.listenTo(flashesChannel.vent, 'add', this.add);
-    this.listenTo(flashesChannel.vent, 'remove', this.remove);
   },
 
   add: function(flash) {

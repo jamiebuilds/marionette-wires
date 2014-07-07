@@ -3,25 +3,23 @@ var Radio = require('../classes/radio');
 var _ = require('underscore');
 var LayoutView = require('./layout-view');
 
-var modalChannel = Radio.channel('modal');
-var applicationChannel = Radio.channel('application');
+var routerChannel = Radio.channel('router');
 
 module.exports = Controller.extend({
-  initialize: function (options) {
-    _.bindAll(this, 'openModal', 'destroyModal');
+  channelName: 'modal',
 
-    this.container = options.container;
+  initialize: function () {
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
-    modalChannel.commands.setHandler('open', this.openModal);
-    modalChannel.commands.setHandler('destroy', this.destroyModal);
+    this.channel.commands.setHandler('open', this.openModal, this);
+    this.channel.commands.setHandler('destroy', this.destroyModal, this);
   },
 
   openModal: function (options) {
     this.layout.openModal(options);
 
-    this.listenToOnce(applicationChannel.vent, 'route', function () {
+    this.listenToOnce(routerChannel.vent, 'route', function () {
       this.destroyModal();
     });
   },
