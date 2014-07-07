@@ -85,7 +85,7 @@ describe('header/controller.js', function() {
         this.controller.setActive('Foo');
       });
 
-      it('should not set anything', function() {
+      it('should set "active" to true', function() {
         expect(this.model.set).to.have.been.calledWith('active', true);
       });
     });

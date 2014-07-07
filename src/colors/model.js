@@ -7,11 +7,6 @@ module.exports = Model.extend({
     active: false
   },
 
-  initialize: function() {
-    this.on('request', this.handleRequest);
-    this.on('error', this.handleError);
-  },
-
   validate: function (attrs) {
     var errors = [];
 
@@ -24,18 +19,5 @@ module.exports = Model.extend({
     }
 
     return errors.length > 0 ? errors : undefined;
-  },
-
-  handleRequest: function() {
-    this.serverError = false;
-  },
-
-  handleError: function() {
-    this.serverError = true;
-  },
-
-  cleanup: function() {
-    delete this.serverError;
-    delete this.validationError;
   }
 });

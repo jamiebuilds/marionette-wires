@@ -13,8 +13,7 @@ module.exports = View.extend({
 
   templateHelpers: function() {
     return {
-      errors: this.model.validationError,
-      serverError: this.model.serverError
+      errors: this.model.validationError
     };
   },
 

@@ -36,7 +36,7 @@ api.route('/api/v1/colors/:id')
   })
   .put(function(req, res) {
     var color = colors.get(req.params.id);
-    color.set(req.params.body);
+    color.set(req.body);
     res.json(color.toJSON());
   })
   .delete(function(req, res) {

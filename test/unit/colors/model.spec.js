@@ -4,18 +4,6 @@ describe('colors/model.js', function() {
     this.model = new this.Model();
   });
 
-  describe('#initialize', function() {
-    beforeEach(function() {
-      stub(this.model, 'on');
-      this.model.initialize();
-    });
-
-    it('should register event handlers', function() {
-      expect(this.model.on).to.have.been.calledWith('request');
-      expect(this.model.on).to.have.been.calledWith('error');
-    });
-  });
-
   describe('#validate', function() {
     beforeEach(function() {
       spy(this.model, 'validate');
@@ -52,42 +40,6 @@ describe('colors/model.js', function() {
       it('should return an error', function() {
         expect(this.model.validate).to.have.returned(undefined);
       });
-    });
-  });
-
-  describe('#handleRequest', function() {
-    beforeEach(function() {
-      this.model.handleRequest();
-    });
-
-    it('should set "serverError" to "false"', function() {
-      expect(this.model).to.have.ownProperty('serverError', false);
-    });
-  });
-
-  describe('#handleError', function() {
-    beforeEach(function() {
-      this.model.handleError();
-    });
-
-    it('should set "serverError" to "true"', function() {
-      expect(this.model).to.have.ownProperty('serverError', true);
-    });
-  });
-
-  describe('#cleanup', function() {
-    beforeEach(function() {
-      this.model.serverError = true;
-      this.model.validationError = true;
-      this.model.cleanup();
-    });
-
-    it('should delete "serverError"', function() {
-      expect(this.model).not.to.have.ownProperty('serverError');
-    });
-
-    it('should delete "validationError"', function() {
-      expect(this.model).not.to.have.ownProperty('validationError');
     });
   });
 });

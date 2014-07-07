@@ -12,7 +12,7 @@ module.exports = ItemView.extend({
     };
   },
 
-  initialize: function () {
-    this.listenTo(this.model, 'all', this.render);
+  modelEvents: {
+    'all': 'render'
   }
 });

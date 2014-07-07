@@ -1,8 +1,11 @@
+var Radio = require('../../classes/radio');
 var View = require('../../classes/view');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var ModalView = require('../modal/view');
 var template = require('./template.hbs');
+
+var flashesChannel = Radio.channel('flashes');
 
 module.exports = View.extend({
   template: template,
@@ -16,8 +19,7 @@ module.exports = View.extend({
 
   templateHelpers: function() {
     return {
-      errors: this.model.validationError,
-      serverError: this.model.serverError
+      errors: this.model.validationError
     };
   },
 
@@ -61,5 +63,11 @@ module.exports = View.extend({
 
   handleDestroySuccess: function() {
     Backbone.history.navigate('colors', { trigger: true });
+    flashesChannel.vent.trigger('add', {
+      timeout : 5000,
+      type    : 'info',
+      title   : 'It\'s gone!',
+      body    : 'You have deleted ' + this.model.get('name') + '.'
+    });
   }
 });

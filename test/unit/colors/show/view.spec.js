@@ -46,8 +46,7 @@ describe('colors/show/view.js', function() {
 
     it('should return model errors', function() {
       expect(this.itemView.templateHelpers).to.have.returned({
-        errors      : this.model.validationError,
-        serverError : this.model.serverError
+        errors: this.model.validationError
       });
     });
   });

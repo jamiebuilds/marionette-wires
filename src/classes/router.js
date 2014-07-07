@@ -1,6 +1,7 @@
 var Marionette = require('backbone.marionette');
 var Radio = require('./radio');
 
+var routerChannel = Radio.channel('router');
 var headerChannel = Radio.channel('header');
 
 module.exports = Marionette.AppRouter.extend({
@@ -18,6 +19,7 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _onRoute: function() {
+    routerChannel.vent.trigger('route');
     if (this.title && this.rootPath !== null) {
       headerChannel.vent.trigger('active', this.title);
     }
