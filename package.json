@@ -17,7 +17,7 @@
     "backbone"
   ],
   "author": "James Kyle <me@thejameskyle.com>",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/thejameskyle/marionette-browserify-starter-kit/issues"
   },

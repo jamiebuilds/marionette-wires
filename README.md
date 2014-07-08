@@ -19,3 +19,7 @@ npm install && npm start
 ```
 
 Once that's done, open up http://localhost:9000/ in your browser.
+
+===
+
+&copy; 2014 James Kyle. Distributed under [ISC license](LICENSE.md).
