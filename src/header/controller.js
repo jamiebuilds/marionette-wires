@@ -1,9 +1,6 @@
 var Controller = require('../classes/controller');
 var Collection = require('../classes/collection');
-var Radio = require('../classes/radio');
 var View = require('./view');
-
-var headerChannel = Radio.channel('header');
 
 module.exports = Controller.extend({
   channelName: 'header',
