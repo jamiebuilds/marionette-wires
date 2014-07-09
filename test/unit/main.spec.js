@@ -11,7 +11,7 @@ describe('main.js', function() {
     });
   });
 
-  it('should initantiate a new application', function() {
+  it('should instantiate a new application', function() {
     expect(this.appController).to.have.been.calledWithNew;
   });
 
