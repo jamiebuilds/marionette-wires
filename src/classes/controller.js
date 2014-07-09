@@ -28,6 +28,9 @@ module.exports = Marionette.Controller.extend({
     }
   },
 
+  start: function() {},
+  stop: function() {},
+
   bindEntityEvents: Marionette.proxyBindEntityEvents,
   unbindEntityEvents: Marionette.proxyUnbindEntityEvents
 });

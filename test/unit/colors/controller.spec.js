@@ -25,28 +25,11 @@ describe('colors/controller.js', function() {
     this.controller = new this.Controller({ container: this.container });
   });
 
-  describe('#initialize', function() {
-    beforeEach(function() {
-      this.controller.initialize({ container: this.container });
-    });
-
-    it('should attach container', function() {
-      expect(this.controller).to.have.ownProperty('container', this.container);
-    });
-
-    it('should create a collection', function() {
-      expect(this.Collection).to.have.been.calledWithNew;
-    });
-
-    it('should fetch the collection', function() {
-      expect(this.collection.fetch).to.have.been.called;
-    });
-  });
-
   describe('#index', function() {
     beforeEach(function() {
       this.indexView = { indexView: true };
       this.IndexView.returns(this.indexView);
+      this.controller.start();
       this.controller.index();
     });
 
@@ -65,6 +48,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.createView = { createView: true };
       this.CreateView.returns(this.createView);
+      this.controller.start();
       this.controller.create();
     });
 
@@ -84,6 +68,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.showView = { showView: true };
       this.ShowView.returns(this.showView);
+      this.controller.start();
       this.controller.show();
     });
 
@@ -102,6 +87,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.editView = { editView: true };
       this.EditView.returns(this.editView);
+      this.controller.start();
       this.controller.edit();
     });
 

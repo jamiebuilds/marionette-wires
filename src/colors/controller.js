@@ -14,8 +14,15 @@ module.exports = Controller.extend({
 
   initialize: function () {
     this.router = new Router({ controller: this });
+  },
+
+  start: function() {
     this.collection = new Collection();
     this.collection.fetch();
+  },
+
+  stop: function() {
+    delete this.collection;
   },
 
   index: function () {

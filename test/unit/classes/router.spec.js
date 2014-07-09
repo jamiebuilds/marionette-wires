@@ -1,7 +1,7 @@
 describe('classes/router.js', function() {
   beforeEach(function() {
     spy(Marionette, 'AppRouter');
-    this.channel = { vent: { trigger: stub() } };
+    this.channel = { vent: { trigger: stub(), on: stub() } };
 
     this.Router = proxyquire('../../src/classes/router', {
       './radio': { channel: stub().returns(this.channel) }

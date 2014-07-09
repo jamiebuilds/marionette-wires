@@ -1,0 +1,32 @@
+.books__title {
+  @media (min-width: @screen-md-min) {
+    float: left;
+  }
+}
+
+.books__image {
+  @media (max-width: @screen-md-min) {
+    width: 100%;
+    padding: @padding-large-vertical @padding-large-horizontal;
+    margin: @padding-large-vertical 0;
+    background: @gray-lighter;
+    text-align: center;
+    border-radius: @border-radius-large;
+  }
+
+  @media (min-width: @screen-md-min) {
+    float: right;
+    margin-left: @padding-large-horizontal;
+    margin-bottom: @padding-large-horizontal;
+  }
+
+  img {
+    max-width: 300px;
+  }
+}
+
+.books__content {
+  clear: left;
+}
+
+
