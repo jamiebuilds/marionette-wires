@@ -1,3 +1,4 @@
+var Radio = require('backbone.radio');
 var Controller = require('../classes/controller');
 var Router = require('./router');
 var LayoutView = require('./layout-view');
@@ -8,9 +9,9 @@ var Collection = require('./collection');
 var LibraryController = require('./library/controller');
 var ViewerController = require('./viewer/controller');
 
-module.exports = Controller.extend({
-  channelName: 'books',
+var channel = Radio.channel('books');
 
+module.exports = Controller.extend({
   initialize: function() {
     this.router = new Router({ controller: this });
   },
@@ -45,12 +46,12 @@ module.exports = Controller.extend({
 
   index: function() {
     var model = this._getModel(1);
-    this.channel.trigger('select', model);
+    channel.trigger('select', model);
   },
 
   show: function(id) {
     var model = this._getModel(id);
-    this.channel.trigger('select', model);
+    channel.trigger('select', model);
   },
 
   _getModel: function(id) {

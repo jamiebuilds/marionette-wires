@@ -3,8 +3,6 @@ var Router = require('./router');
 var View = require('./view');
 
 module.exports = Controller.extend({
-  channelName: 'index',
-
   initialize: function () {
     this.router = new Router({ controller: this });
   },

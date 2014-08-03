@@ -1,19 +1,20 @@
+var Radio = require('backbone.radio');
 var Controller = require('../classes/controller');
 var Collection = require('../classes/collection');
 var View = require('./view');
 
+var channel = Radio.channel('header');
+
 module.exports = Controller.extend({
-  channelName: 'header',
-
-  channelEvents: {
-    'add'    : 'addNavitem',
-    'active' : 'setActive'
-  },
-
   initialize: function () {
     this.collection = new Collection();
     this.view = new View({ collection: this.collection });
     this.container.show(this.view);
+
+    channel.on({
+      'add'    : this.addNavitem,
+      'active' : this.setActive
+    }, this);
   },
 
   addNavitem: function(name, path) {

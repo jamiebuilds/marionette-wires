@@ -3,14 +3,9 @@ var Radio = require('backbone.radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');
 
+var channel = Radio.channel('flashes');
+
 module.exports = Controller.extend({
-  channelName: 'flashes',
-
-  channelEvents: {
-    'add'    : 'add',
-    'remove' : 'remove'
-  },
-
   initialize: function() {
     this.collection = new Collection();
 
@@ -19,6 +14,11 @@ module.exports = Controller.extend({
     });
 
     this.container.show(this.view);
+
+    channel.on({
+      add    : this.add,
+      remove : this.remove
+    }, this);
   },
 
   add: function(flash) {

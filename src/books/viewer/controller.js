@@ -1,11 +1,12 @@
+var Radio = require('backbone.radio');
 var Controller = require('../../classes/controller');
 var View = require('./view');
 
-module.exports = Controller.extend({
-  channelName: 'books',
+var channel = Radio.channel('books');
 
-  channelEvents: {
-    'select': 'select'
+module.exports = Controller.extend({
+  initialize: function() {
+    channel.on('select', this.select, this);
   },
 
   select: function(model) {
