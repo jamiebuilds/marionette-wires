@@ -6,7 +6,8 @@ var View = require('./view');
 var channel = Radio.channel('header');
 
 module.exports = Controller.extend({
-  initialize: function () {
+  initialize: function (options) {
+    this.container = options.container;
     this.collection = new Collection();
     this.view = new View({ collection: this.collection });
     this.container.show(this.view);

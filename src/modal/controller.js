@@ -6,7 +6,8 @@ var modalChannel = Radio.channel('modal');
 var routerChannel = Radio.channel('router');
 
 module.exports = Controller.extend({
-  initialize: function () {
+  initialize: function (options) {
+    this.container = options.container;
     this.layout = new LayoutView();
     this.container.show(this.layout);
 

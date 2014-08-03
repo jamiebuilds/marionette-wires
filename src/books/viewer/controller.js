@@ -5,7 +5,8 @@ var View = require('./view');
 var channel = Radio.channel('books');
 
 module.exports = Controller.extend({
-  initialize: function() {
+  initialize: function(options) {
+    this.container = options.container;
     channel.on('select', this.select, this);
   },
 

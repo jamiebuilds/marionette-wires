@@ -3,7 +3,8 @@ var Router = require('./router');
 var View = require('./view');
 
 module.exports = Controller.extend({
-  initialize: function () {
+  initialize: function (options) {
+    this.container = options.container;
     this.router = new Router({ controller: this });
   },
 

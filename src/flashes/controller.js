@@ -6,7 +6,9 @@ var CollectionView = require('./collection-view');
 var channel = Radio.channel('flashes');
 
 module.exports = Controller.extend({
-  initialize: function() {
+  initialize: function(options) {
+    this.container = options.container;
+
     this.collection = new Collection();
 
     this.view = new CollectionView({

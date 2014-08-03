@@ -12,7 +12,8 @@ var ViewerController = require('./viewer/controller');
 var channel = Radio.channel('books');
 
 module.exports = Controller.extend({
-  initialize: function() {
+  initialize: function(options) {
+    this.container = options.container;
     this.router = new Router({ controller: this });
   },
 
@@ -31,25 +32,16 @@ module.exports = Controller.extend({
     this.viewer = new ViewerController({
       container: this.layout.viewer
     });
-
-    this.library.start();
-    this.viewer.start();
-  },
-
-  stop: function() {
-    this.viewer.stop();
-    this.library.stop();
-    delete this.layout;
-    delete this.library;
-    delete this.viewer;
   },
 
   index: function() {
+    this.start();
     var model = this._getModel(1);
     channel.trigger('select', model);
   },
 
   show: function(id) {
+    this.start();
     var model = this._getModel(id);
     channel.trigger('select', model);
   },

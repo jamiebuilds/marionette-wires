@@ -10,7 +10,8 @@ var ShowView   = require('./show/view');
 var EditView   = require('./edit/view');
 
 module.exports = Controller.extend({
-  initialize: function () {
+  initialize: function (options) {
+    this.container = options.container;
     this.router = new Router({ controller: this });
   },
 
@@ -24,6 +25,7 @@ module.exports = Controller.extend({
   },
 
   index: function () {
+    this.start();
     var indexView = new IndexView({
       collection: this.collection
     });
@@ -32,6 +34,7 @@ module.exports = Controller.extend({
   },
 
   create: function () {
+    this.start();
     var model = new Model();
 
     var createView = new CreateView({
@@ -43,6 +46,7 @@ module.exports = Controller.extend({
   },
 
   show: function (id) {
+    this.start();
     var model = this._getModel(id);
 
     var showView = new ShowView({
@@ -53,6 +57,7 @@ module.exports = Controller.extend({
   },
 
   edit: function (id) {
+    this.start();
     var model = this._getModel(id);
 
     var editView = new EditView({
