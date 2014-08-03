@@ -7,7 +7,8 @@ describe('main.js', function() {
       './plugins': {},
       './application/controller': this.appController,
       './index/controller': stub(),
-      './colors/controller': stub()
+      './colors/controller': stub(),
+      './books/controller': stub()
     });
   });
 
