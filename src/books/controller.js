@@ -45,12 +45,12 @@ module.exports = Controller.extend({
 
   index: function() {
     var model = this._getModel(1);
-    this.channel.vent.trigger('select', model);
+    this.channel.trigger('select', model);
   },
 
   show: function(id) {
     var model = this._getModel(id);
-    this.channel.vent.trigger('select', model);
+    this.channel.trigger('select', model);
   },
 
   _getModel: function(id) {

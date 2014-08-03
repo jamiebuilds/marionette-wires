@@ -1,6 +1,6 @@
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
-var Radio = require('./radio');
+var Radio = require('backbone.radio');
 
 module.exports = Marionette.Controller.extend({
   channelName: false,
@@ -24,7 +24,7 @@ module.exports = Marionette.Controller.extend({
     var channelEvents = this.getOption('channelEvents');
 
     if (this.channel && channelEvents) {
-      this.bindEntityEvents(this.channel.vent, channelEvents);
+      this.bindEntityEvents(this.channel, channelEvents);
     }
   },
 

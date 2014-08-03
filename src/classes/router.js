@@ -1,6 +1,6 @@
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
-var Radio = require('./radio');
+var Radio = require('backbone.radio');
 
 var routerChannel = Radio.channel('router');
 var headerChannel = Radio.channel('header');
@@ -15,10 +15,10 @@ module.exports = Marionette.AppRouter.extend({
     this.on('route', this._onRoute);
 
     if (this.title && this.rootPath !== null && this.addToHeader) {
-      headerChannel.vent.trigger('add', this.title, this.rootPath);
+      headerChannel.trigger('add', this.title, this.rootPath);
     }
 
-    this.listenTo(routerChannel.vent, 'route', this._onGlobalRoute);
+    this.listenTo(routerChannel, 'route', this._onGlobalRoute);
   },
 
   route: function(route, name, callback) {
@@ -37,10 +37,10 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _onRoute: function() {
-    routerChannel.vent.trigger('route', this);
+    routerChannel.trigger('route', this);
 
     if (this.title && this.rootPath !== null) {
-      headerChannel.vent.trigger('active', this.title);
+      headerChannel.trigger('active', this.title);
     }
   },
 

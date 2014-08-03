@@ -1,5 +1,5 @@
 var Controller = require('../classes/controller');
-var Radio = require('../classes/radio');
+var Radio = require('backbone.radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');
 

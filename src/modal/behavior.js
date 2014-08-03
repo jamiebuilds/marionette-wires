@@ -1,6 +1,6 @@
 var Marionette = require('backbone.marionette');
 var Behavior = require('../classes/behavior');
-var Radio = require('../classes/radio');
+var Radio = require('backbone.radio');
 
 var channel = Radio.channel('modal');
 
@@ -10,7 +10,7 @@ Marionette.Behaviors.behaviorsLookup.modal = Behavior.extend({
   },
 
   openModal: function (callback) {
-    channel.commands.execute('open', {
+    channel.command('open', {
       view: this.view,
       callback: callback
     });
@@ -19,7 +19,7 @@ Marionette.Behaviors.behaviorsLookup.modal = Behavior.extend({
   },
 
   destroyModal: function (callback) {
-    channel.commands.execute('destroy', {
+    channel.command('destroy', {
       callback: callback
     });
   }

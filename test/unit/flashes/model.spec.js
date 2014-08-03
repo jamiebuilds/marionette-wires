@@ -40,19 +40,19 @@ describe('flashes/model.js', function() {
 
     describe('when "clearOnRoute" is true', function() {
       beforeEach(function() {
-        this.routerChannel = Backbone.Wreqr.radio.channel('router');
+        this.routerChannel = Backbone.Radio.channel('router');
         this.model.initialize();
       });
 
       it('should listen for "route" events', function() {
         expect(this.model.listenTo)
-          .to.have.been.calledWith(this.routerChannel.vent, 'route', this.model.destroy);
+          .to.have.been.calledWith(this.routerChannel, 'route', this.model.destroy);
       });
     });
 
     describe('when "clearOnRoute" is false', function() {
       beforeEach(function() {
-        this.routerChannel = Backbone.Wreqr.radio.channel('router');
+        this.routerChannel = Backbone.Radio.channel('router');
         this.model.attributes.clearOnRoute = false;
         this.model.initialize();
       });

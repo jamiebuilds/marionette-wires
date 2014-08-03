@@ -1,5 +1,5 @@
 var ItemView = require('../../classes/item-view');
-var Radio = require('../../classes/radio');
+var Radio = require('backbone.radio');
 var template = require('./item-template.hbs');
 
 var booksChannel = Radio.channel('books');
@@ -20,7 +20,7 @@ module.exports = ItemView.extend({
   },
 
   initialize: function() {
-    this.listenTo(booksChannel.vent, 'select', this.select);
+    this.listenTo(booksChannel, 'select', this.select);
   },
 
   select: function(model) {

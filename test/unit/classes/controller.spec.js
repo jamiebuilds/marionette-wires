@@ -61,7 +61,7 @@ describe('classes/controller.js', function() {
 
     describe('when "channelName" is a string', function() {
       beforeEach(function() {
-        this.channel = Backbone.Wreqr.radio.channel('foo');
+        this.channel = Backbone.Radio.channel('foo');
         this.controller.channelName = 'foo';
         this.controller.getChannel();
       });
@@ -73,7 +73,7 @@ describe('classes/controller.js', function() {
 
     describe('when "channelName" is a function', function() {
       beforeEach(function() {
-        this.channel = Backbone.Wreqr.radio.channel('foo');
+        this.channel = Backbone.Radio.channel('foo');
         this.controller.channelName = stub().returns('foo');
         this.controller.getChannel();
       });
@@ -87,7 +87,7 @@ describe('classes/controller.js', function() {
   describe('#bindChannelEvents', function() {
     beforeEach(function() {
       stub(this.controller, 'bindEntityEvents');
-      this.controller.channel = Backbone.Wreqr.radio.channel('foo');
+      this.controller.channel = Backbone.Radio.channel('foo');
     });
 
     describe('when "channelEvents" is undefined', function() {
@@ -107,7 +107,7 @@ describe('classes/controller.js', function() {
 
       it('should call "bindEntityEvents" with the channel and hash', function() {
         expect(this.controller.bindEntityEvents)
-          .to.have.been.calledWith(this.controller.channel.vent, this.controller.channelEvents);
+          .to.have.been.calledWith(this.controller.channel, this.controller.channelEvents);
       });
     });
   });

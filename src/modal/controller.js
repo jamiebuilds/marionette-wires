@@ -1,5 +1,5 @@
 var Controller = require('../classes/controller');
-var Radio = require('../classes/radio');
+var Radio = require('backbone.radio');
 var LayoutView = require('./layout-view');
 
 var routerChannel = Radio.channel('router');
@@ -11,14 +11,14 @@ module.exports = Controller.extend({
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
-    this.channel.commands.setHandler('open', this.openModal, this);
-    this.channel.commands.setHandler('destroy', this.destroyModal, this);
+    this.channel.comply('open', this.openModal, this);
+    this.channel.comply('destroy', this.destroyModal, this);
   },
 
   openModal: function (options) {
     this.layout.openModal(options);
 
-    this.listenToOnce(routerChannel.vent, 'route', function () {
+    this.listenToOnce(routerChannel, 'route', function () {
       this.destroyModal();
     });
   },

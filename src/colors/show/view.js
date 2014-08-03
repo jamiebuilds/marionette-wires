@@ -1,5 +1,5 @@
-var Radio = require('../../classes/radio');
 var View = require('../../classes/view');
+var Radio = require('backbone.radio');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var ModalView = require('../modal/view');
@@ -63,7 +63,7 @@ module.exports = View.extend({
 
   handleDestroySuccess: function() {
     Backbone.history.navigate('colors', { trigger: true });
-    flashesChannel.vent.trigger('add', {
+    flashesChannel.trigger('add', {
       timeout : 5000,
       type    : 'info',
       title   : 'It\'s gone!',

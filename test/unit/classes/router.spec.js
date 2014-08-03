@@ -1,10 +1,10 @@
 describe('classes/router.js', function() {
   beforeEach(function() {
     spy(Marionette, 'AppRouter');
-    this.channel = { vent: { trigger: stub(), on: stub() } };
+    this.channel = { trigger: stub(), on: stub() };
 
     this.Router = proxyquire('../../src/classes/router', {
-      './radio': { channel: stub().returns(this.channel) }
+      'backbone.radio': { channel: stub().returns(this.channel) }
     });
   });
 
@@ -25,7 +25,7 @@ describe('classes/router.js', function() {
       });
 
       it('should add the subrouter to the header', function() {
-        expect(this.channel.vent.trigger)
+        expect(this.channel.trigger)
           .to.have.been.calledWith('add', this.fooRouter.title, this.fooRouter.rootPath);
       });
     });
@@ -42,7 +42,7 @@ describe('classes/router.js', function() {
       });
 
       it('should not add the subrouter to the header', function() {
-        expect(this.channel.vent.trigger).not.to.have.been.called;
+        expect(this.channel.trigger).not.to.have.been.called;
       });
     });
   });

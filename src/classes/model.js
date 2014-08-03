@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var Radio = require('./radio');
+var Radio = require('backbone.radio');
 
 var flashesChannel = Radio.channel('flashes');
 
@@ -11,18 +11,18 @@ module.exports = Backbone.Model.extend({
   },
 
   handleRequest: function() {
-    flashesChannel.vent.trigger('remove', this.serverError);
+    flashesChannel.trigger('remove', this.serverError);
     delete this.serverError;
   },
 
   handleError: function() {
     this.serverError = { type: 'danger', title: 'Server Error' };
-    flashesChannel.vent.trigger('add', this.serverError);
+    flashesChannel.trigger('add', this.serverError);
   },
 
   cleanup: function() {
     if (this.serverError) {
-      flashesChannel.vent.trigger('remove', this.serverError);
+      flashesChannel.trigger('remove', this.serverError);
     }
     delete this.serverError;
     delete this.validationError;
