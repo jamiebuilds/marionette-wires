@@ -1,11 +1,12 @@
 var View = require('../../classes/view');
+var ModalBehavior = require('../../modal/behavior');
 var template = require('./template.hbs');
 
 module.exports = View.extend({
   template: template,
 
   behaviors: {
-    modal: {}
+    modal: { behaviorClass: ModalBehavior }
   },
 
   events: {

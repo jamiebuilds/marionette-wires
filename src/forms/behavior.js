@@ -1,8 +1,7 @@
-var Marionette = require('backbone.marionette');
 var Syphon = require('backbone.syphon');
-var Behavior = require('./behavior');
+var Behavior = require('../classes/behavior');
 
-Marionette.Behaviors.behaviorsLookup.form = Behavior.extend({
+module.exports = Behavior.extend({
   events: {
     'submit form' : 'handleSubmit'
   },

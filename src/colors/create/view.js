@@ -1,4 +1,5 @@
 var View = require('../../classes/view');
+var FormBehavior = require('../../forms/behavior');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var template = require('./template.hbs');
@@ -8,7 +9,7 @@ module.exports = View.extend({
   className: 'colors container',
 
   behaviors: {
-    form: {}
+    form: { behaviorClass: FormBehavior }
   },
 
   templateHelpers: function() {
