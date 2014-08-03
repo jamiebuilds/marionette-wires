@@ -3,13 +3,10 @@ var Controller = require('../classes/controller');
 var Router = require('./router');
 var LayoutView = require('./layout-view');
 
-var Model = require('./model');
 var Collection = require('./collection');
 
-var LibraryController = require('./library/controller');
-var ViewerController = require('./viewer/controller');
-
-var channel = Radio.channel('books');
+var LibraryView = require('./library/collection-view');
+var ViewerView = require('./viewer/view');
 
 module.exports = Controller.extend({
   initialize: function(options) {
@@ -17,44 +14,38 @@ module.exports = Controller.extend({
     this.router = new Router({ controller: this });
   },
 
-  start: function() {
-    this.collection = new Collection();
-    this.collection.fetch();
-
-    this.layout = new LayoutView();
-    this.container.show(this.layout);
-
-    this.library = new LibraryController({
-      container: this.layout.library,
-      collection: this.collection
-    });
-
-    this.viewer = new ViewerController({
-      container: this.layout.viewer
-    });
-  },
-
   index: function() {
-    this.start();
-    var model = this._getModel(1);
-    channel.trigger('select', model);
+    this.router.navigate('books/1', { trigger: true });
   },
 
   show: function(id) {
-    this.start();
-    var model = this._getModel(id);
-    channel.trigger('select', model);
+    var self = this;
+    if (this.collection) {
+      this.render(id);
+    } else {
+      this.collection = new Collection();
+      this.collection.fetch().then(function() {
+        self.render(id);
+      });
+    }
   },
 
-  _getModel: function(id) {
+  render: function(id) {
     var model = this.collection.get(id);
+    this.collection.active = model;
 
-    if (!model) {
-      model = new Model({ id: id });
-      model.fetch();
-      this.collection.add(model, { merge: true, silent: true });
-    }
+    var layout = new LayoutView();
 
-    return model;
+    var library = new LibraryView({
+      collection: this.collection
+    });
+
+    var viewer = new ViewerView({
+      model: model
+    });
+
+    this.container.show(layout);
+    layout.library.show(library);
+    layout.viewer.show(viewer);
   }
 });

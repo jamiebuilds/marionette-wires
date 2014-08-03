@@ -1,7 +1,9 @@
 describe('colors/controller.js', function() {
   beforeEach(function() {
     this.model      = { fetch: stub() };
-    this.collection = { fetch: stub(), get: stub(), add: stub() };
+    this.collection = { fetch: stub(), get: stub().returns(this.model), add: stub() };
+
+    this.collection.fetch.returns($.Deferred().resolve(this.collection));
 
     this.Model      = stub().returns(this.model);
     this.Collection = stub().returns(this.collection);
@@ -29,8 +31,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.indexView = { indexView: true };
       this.IndexView.returns(this.indexView);
-      this.controller.start();
-      this.controller.index();
+      return this.controller.index();
     });
 
     it('should create an IndexView', function() {
@@ -48,8 +49,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.createView = { createView: true };
       this.CreateView.returns(this.createView);
-      this.controller.start();
-      this.controller.create();
+      return this.controller.create();
     });
 
     it('should create a CreateView', function() {
@@ -68,8 +68,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.showView = { showView: true };
       this.ShowView.returns(this.showView);
-      this.controller.start();
-      this.controller.show();
+      return this.controller.show();
     });
 
     it('should create an ShowView', function() {
@@ -87,8 +86,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.editView = { editView: true };
       this.EditView.returns(this.editView);
-      this.controller.start();
-      this.controller.edit();
+      return this.controller.edit();
     });
 
     it('should create an EditView', function() {

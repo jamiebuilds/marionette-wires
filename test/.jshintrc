@@ -13,7 +13,8 @@
     "spy"        : true,
     "_"          : true,
     "Backbone"   : true,
-    "Marionette" : true
+    "Marionette" : true,
+    "$"          : true
   },
 
   "bitwise"       : true,

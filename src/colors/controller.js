@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var Controller = require('../classes/controller');
 
 var Router = require('./router');
@@ -15,67 +16,70 @@ module.exports = Controller.extend({
     this.router = new Router({ controller: this });
   },
 
-  start: function() {
-    this.collection = new Collection();
-    this.collection.fetch();
-  },
-
-  stop: function() {
-    delete this.collection;
-  },
-
   index: function () {
-    this.start();
-    var indexView = new IndexView({
-      collection: this.collection
-    });
+    var self = this;
+    return this._getCollection().then(function() {
+      var indexView = new IndexView({
+        collection: self.collection
+      });
 
-    this.container.show(indexView);
+      self.container.show(indexView);
+    });
   },
 
   create: function () {
-    this.start();
-    var model = new Model();
+    var self = this;
+    return this._getCollection().then(function() {
+      var model = new Model();
 
-    var createView = new CreateView({
-      collection: this.collection,
-      model: model
+      var createView = new CreateView({
+        collection: self.collection,
+        model: model
+      });
+
+      self.container.show(createView);
     });
-
-    this.container.show(createView);
   },
 
   show: function (id) {
-    this.start();
-    var model = this._getModel(id);
+    var self = this;
+    return this._getModel(id).then(function(model) {
+      var showView = new ShowView({
+        model: model
+      });
 
-    var showView = new ShowView({
-      model: model
+      self.container.show(showView);
     });
-
-    this.container.show(showView);
   },
 
   edit: function (id) {
-    this.start();
-    var model = this._getModel(id);
+    var self = this;
+    return this._getModel(id).then(function(model) {
+      var editView = new EditView({
+        model: model
+      });
 
-    var editView = new EditView({
-      model: model
+      self.container.show(editView);
     });
+  },
 
-    this.container.show(editView);
+  _getCollection: function() {
+    var deferred = $.Deferred();
+
+    if (this.collection) {
+      deferred.resolve(this.collection);
+    } else {
+      this.collection = new Collection();
+      this.collection.fetch().then(deferred.resolve);
+    }
+
+    return deferred;
   },
 
   _getModel: function(id) {
-    var model = this.collection.get(id);
-
-    if (!model) {
-      model = new Model({ id: id });
-      model.fetch();
-      this.collection.add(model, { merge: true, silent: true });
-    }
-
-    return model;
+    var self = this;
+    return this._getCollection().then(function() {
+      return self.collection.get(id);
+    });
   }
 });
