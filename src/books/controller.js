@@ -22,31 +22,39 @@ module.exports = Controller.extend({
   show: function(id) {
     var self = this;
     if (this.collection) {
-      this.render(id);
+      this._showShowView(id);
     } else {
       this.collection = new Collection();
       this.collection.fetch().then(function() {
-        self.render(id);
+        self._showShowView(id);
       });
     }
   },
 
-  render: function(id) {
+  _showShowView: function(id) {
     var model = this.collection.get(id);
     this.collection.active = model;
+    this._showLayoutView();
+    this._showLibraryView();
+    this._showViewerView(model);
+  },
 
-    var layout = new LayoutView();
+  _showLayoutView: function() {
+    this.layout = new LayoutView();
+    this.container.show(this.layout);
+  },
 
+  _showLibraryView: function() {
     var library = new LibraryView({
       collection: this.collection
     });
+    this.layout.library.show(library);
+  },
 
+  _showViewerView: function(model) {
     var viewer = new ViewerView({
       model: model
     });
-
-    this.container.show(layout);
-    layout.library.show(library);
-    layout.viewer.show(viewer);
+    this.layout.viewer.show(viewer);
   }
 });

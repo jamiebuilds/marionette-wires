@@ -8,19 +8,9 @@ var channel = Radio.channel('flashes');
 module.exports = Controller.extend({
   initialize: function(options) {
     this.container = options.container;
-
     this.collection = new Collection();
-
-    this.view = new CollectionView({
-      collection: this.collection
-    });
-
-    this.container.show(this.view);
-
-    channel.on({
-      add    : this.add,
-      remove : this.remove
-    }, this);
+    this._showFlashesView();
+    this._bindChannelCommands();
   },
 
   add: function(flash) {
@@ -30,5 +20,19 @@ module.exports = Controller.extend({
   remove: function(flash) {
     var model = this.collection.findWhere(flash);
     if (model) model.destroy();
+  },
+
+  _showFlashesView: function() {
+    this.view = new CollectionView({
+      collection: this.collection
+    });
+    this.container.show(this.view);
+  },
+
+  _bindChannelCommands: function() {
+    channel.comply({
+      add    : this.add,
+      remove : this.remove
+    }, this);
   }
 });

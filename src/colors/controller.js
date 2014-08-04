@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var _ = require('underscore');
 var Radio = require('backbone.radio');
 var Controller = require('../classes/controller');
 
@@ -19,50 +20,54 @@ module.exports = Controller.extend({
   },
 
   index: function () {
-    var self = this;
-    return this._getCollection().then(function() {
-      var indexView = new IndexView({
-        collection: self.collection
-      });
-
-      self.container.show(indexView);
-    });
+    return this._getCollection().then(_.bind(this._showIndexView, this));
   },
 
   create: function () {
-    var self = this;
-    return this._getCollection().then(function() {
-      var model = new Model();
-
-      var createView = new CreateView({
-        collection: self.collection,
-        model: model
-      });
-
-      self.container.show(createView);
-    });
+    return this._getCollection().then(_.bind(this._showCreateView, this));
   },
 
   show: function (id) {
-    var self = this;
-    return this._getModel(id).then(function(model) {
-      var showView = new ShowView({
-        model: model
-      });
-
-      self.container.show(showView);
-    });
+    return this._getModel(id).then(_.bind(this._showShowView, this));
   },
 
   edit: function (id) {
-    var self = this;
-    return this._getModel(id).then(function(model) {
-      var editView = new EditView({
-        model: model
-      });
+    return this._getModel(id).then(_.bind(this._showEditView, this));
+  },
 
-      self.container.show(editView);
+  _showIndexView: function() {
+    var indexView = new IndexView({
+      collection: this.collection
     });
+
+    this.container.show(indexView);
+  },
+
+  _showCreateView: function() {
+    var model = new Model();
+
+    var createView = new CreateView({
+      collection: this.collection,
+      model: model
+    });
+
+    this.container.show(createView);
+  },
+
+  _showShowView: function(model) {
+    var showView = new ShowView({
+      model: model
+    });
+
+    this.container.show(showView);
+  },
+
+  _showEditView: function(model) {
+    var editView = new EditView({
+      model: model
+    });
+
+    this.container.show(editView);
   },
 
   _getCollection: function() {
