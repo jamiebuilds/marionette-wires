@@ -26,12 +26,14 @@ There are additional `README.md` files all throughout the application. However, 
 
 As a general rule, be sure to read through all of the source code yourself and make sure you understand what is happening.
 
-- [api](./api)
-- [dist](./dist)
-- [lib](./lib)
-- [src](./src)
-- [tasks](./tasks)
-- [test](./test)
+| Directories | Purpose |
+| ---:|:--- |
+| [api](./api) | Mock api routes |
+| [dist](./dist) | Built assets |
+| [lib](./lib) | Libraries (only ones not on npm) |
+| [src](./src) | Source files |
+| [tasks](./tasks) | Grunt tasks |
+| [test](./test) | Test files |
 
 ===
 
