@@ -1,7 +1,7 @@
 Colors
 ======
 
-### Classes
+## Classes
 - [Controller](controller.js)
 - [Router](router.js)
 - [Model](model.js)

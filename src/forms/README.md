@@ -1,5 +1,5 @@
 Forms
 =====
 
-### Classes
+## Classes
 - [Behavior](behavior.js)

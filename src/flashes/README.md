@@ -1,7 +1,7 @@
 Flashes
 =======
 
-### Classes
+## Classes
 - [Controller](controller.js)
 - [Model](model.js)
 - [Collection](collection.js)

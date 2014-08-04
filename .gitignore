@@ -1,5 +1,6 @@
 # Build files
 dist/
+!dist/README.md
 
 # nightwatch
 test/integration/reports/*

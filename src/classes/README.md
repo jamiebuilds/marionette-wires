@@ -1,7 +1,7 @@
 Classes
 =======
 
-### Classes
+## Classes
 - [Behavior](behavior.js)
 - [CollectionView](collection-view.js)
 - [Collection](collection.js)
