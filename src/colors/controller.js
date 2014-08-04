@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var Radio = require('backbone.radio');
 var Controller = require('../classes/controller');
 
 var Router = require('./router');
@@ -14,6 +15,7 @@ module.exports = Controller.extend({
   initialize: function (options) {
     this.container = options.container;
     this.router = new Router({ controller: this });
+    Radio.command('header', 'add', 'Colors', 'colors');
   },
 
   index: function () {

@@ -56,40 +56,4 @@ describe('header/controller.js', function() {
       });
     });
   });
-
-  describe('#setActive', function() {
-    beforeEach(function() {
-      this.collection = { invoke: stub(), findWhere: stub() };
-      this.controller.collection = this.collection;
-    });
-
-    it('should deactivate all models', function() {
-      this.controller.setActive();
-      expect(this.collection.invoke).to.have.been.calledWith('set', 'active', false);
-    });
-
-    describe('when model exists', function() {
-      beforeEach(function() {
-        this.model = { set: stub() };
-        this.collection.findWhere.returns(this.model);
-        this.controller.setActive('Foo');
-      });
-
-      it('should set "active" to true', function() {
-        expect(this.model.set).to.have.been.calledWith('active', true);
-      });
-    });
-
-    describe('when model does not exist', function() {
-      beforeEach(function() {
-        spy(Backbone.Model.prototype, 'set');
-        this.collection.findWhere.returns(undefined);
-        this.controller.setActive();
-      });
-
-      it('should not set anything', function() {
-        expect(Backbone.Model.prototype.set).not.to.have.been.called;
-      });
-    });
-  });
 });

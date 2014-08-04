@@ -12,6 +12,7 @@ module.exports = Controller.extend({
   initialize: function(options) {
     this.container = options.container;
     this.router = new Router({ controller: this });
+    Radio.command('header', 'add', 'Books', 'books');
   },
 
   index: function() {
