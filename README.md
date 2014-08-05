@@ -15,7 +15,9 @@ Make sure [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.org/) are
 [installed](http://nodejs.org/download/).
 
 ```sh
-npm install && npm start
+npm install
+npm install -g grunt-cli
+grunt
 ```
 
 Once that's done, open up http://localhost:9000/ in your browser.
