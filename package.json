@@ -61,31 +61,13 @@
     "underscore": "^1.6.0"
   },
   "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js",
-    "underscore": "./node_modules/underscore/underscore.js",
-    "backbone": "./node_modules/backbone/backbone.js",
     "jquery.bootstrap": "./lib/bootstrap-3.1.1/js/bootstrap.js",
     "backbone.syphon": "./lib/backbone.syphon-0.4.1/backbone.syphon.js"
   },
   "browserify-shim": {
-    "jquery": "$",
-    "underscore": "_",
-    "backbone": {
-      "depends": [
-        "underscore",
-        "jquery:$"
-      ],
-      "exports": "Backbone"
-    },
-    "backbone.marionette": {
-      "depends": [
-        "underscore",
-        "backbone"
-      ]
-    },
     "jquery.bootstrap": {
       "depends": [
-        "jquery:$"
+        "jquery:jQuery"
       ],
       "exports": null
     }
