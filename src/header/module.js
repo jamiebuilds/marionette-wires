@@ -1,14 +1,22 @@
 var Radio = require('backbone.radio');
-var Controller = require('../classes/controller');
+var Module = require('../classes/module');
 var Collection = require('../classes/collection');
 var View = require('./view');
 
-module.exports = Controller.extend({
-  initialize: function (options) {
-    this.container = options.container;
+module.exports = Module.extend({
+  initialize: function() {
+    this.container = this.options.container;
     this.collection = new Collection();
+    this.start();
+  },
+
+  onStart: function() {
     this._showHeaderView();
     this._bindChannelCommands();
+  },
+
+  onStop: function() {
+    Radio.stopComplying('header');
   },
 
   addNavitem: function(name, path) {

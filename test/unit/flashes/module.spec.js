@@ -1,34 +1,44 @@
-describe('flashes/controller.js', function() {
+describe('flashes/module', function() {
   beforeEach(function() {
     this.collection = { findWhere: stub(), add: stub() };
+    this.collectionView = { collectionView: true };
 
     this.Collection     = stub().returns(this.collection);
-    this.CollectionView = stub();
+    this.CollectionView = stub().returns(this.collectionView);
 
     this.container = { show: stub() };
 
-    this.Controller = proxyquire('../../src/flashes/controller.js', {
+    this.Module = proxyquire('../../src/flashes/module.js', {
       './collection'      : this.Collection,
       './collection-view' : this.CollectionView
     });
 
-    this.controller = new this.Controller({ container: this.container });
+    this.module = new this.Module('flashes', {}, { container: this.container });
   });
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.collectionView = { collectionView: true };
-      this.CollectionView.returns(this.collectionView);
-      this.controller.initialize({ container: this.container });
+      stub(this.module, 'start');
+      this.module.initialize({ container: this.container });
     });
 
     it('should attach container', function() {
-      expect(this.controller).to.have.ownProperty('container', this.container);
+      expect(this.module).to.have.ownProperty('container', this.container);
     });
 
     it('should create a collection', function() {
       expect(this.Collection).to.have.been.calledWithNew;
-      expect(this.controller).to.have.property('collection', this.collection);
+      expect(this.module).to.have.property('collection', this.collection);
+    });
+
+    it('should call "start"', function() {
+      expect(this.module.start).to.have.been.called;
+    });
+  });
+
+  describe('#onStart', function() {
+    beforeEach(function() {
+      this.module.onStart();
     });
 
     it('should create a CollectionView', function() {
@@ -42,10 +52,22 @@ describe('flashes/controller.js', function() {
     });
   });
 
+  describe('#onStop', function() {
+    beforeEach(function() {
+      this.flashesChannel = Backbone.Radio.channel('flashes');
+      stub(this.flashesChannel, 'stopComplying');
+      this.module.onStop();
+    });
+
+    it('should clear the commands on the channel', function() {
+      expect(this.flashesChannel.stopComplying).to.have.been.called;
+    });
+  });
+
   describe('#add', function() {
     beforeEach(function() {
       this.flash = { flash: true };
-      this.controller.add(this.flash);
+      this.module.add(this.flash);
     });
 
     it('should add the flash to the collection', function() {
@@ -58,7 +80,7 @@ describe('flashes/controller.js', function() {
       beforeEach(function() {
         this.model = { destroy: stub() };
         this.collection.findWhere.returns(this.model);
-        this.controller.remove();
+        this.module.remove();
       });
 
       it('should destroy the model', function() {
@@ -70,7 +92,7 @@ describe('flashes/controller.js', function() {
       beforeEach(function() {
         spy(Backbone.Model.prototype, 'destroy');
         this.collection.findWhere.returns(undefined);
-        this.controller.remove();
+        this.module.remove();
       });
 
       it('should not destroy anything', function() {

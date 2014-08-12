@@ -1,4 +1,4 @@
-describe('flashes/model.js', function() {
+describe('flashes/model', function() {
   beforeEach(function() {
     this.Model = proxyquire('../../src/flashes/model.js', {});
     this.model = new this.Model();

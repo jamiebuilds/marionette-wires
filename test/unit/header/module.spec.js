@@ -1,35 +1,33 @@
-describe('header/controller.js', function() {
+describe('header/module', function() {
   beforeEach(function() {
-    this.Collection = stub();
-    this.View = stub();
+    this.collection = { collection: true };
+    this.view = { view: true };
+
+    this.Collection = stub().returns(this.collection);
+    this.View = stub().returns(this.view);
+
     this.container = { show: stub() };
 
-    this.Controller = proxyquire('../../src/header/controller.js', {
+    this.Module = proxyquire('../../src/header/module.js', {
       './view' : this.View,
       '../classes/collection': this.Collection
     });
 
-    this.controller = new this.Controller({ container: this.container });
+    this.module = new this.Module('header', {}, { container: this.container });
   });
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.view = { view: true };
-      this.View.returns(this.view);
-
-      this.collection = { collection: true };
-      this.Collection.returns(this.collection);
-
-      this.controller.initialize({ container: this.container });
+      this.module.initialize({ container: this.container });
     });
 
     it('should attach container', function() {
-      expect(this.controller).to.have.ownProperty('container', this.container);
+      expect(this.module).to.have.ownProperty('container', this.container);
     });
 
     it('should create a collection', function() {
       expect(this.Collection).to.have.been.calledWithNew;
-      expect(this.controller).to.have.ownProperty('collection', this.collection);
+      expect(this.module).to.have.ownProperty('collection', this.collection);
     });
 
     it('should create a View', function() {
@@ -45,12 +43,12 @@ describe('header/controller.js', function() {
 
   describe('#addNavitem', function() {
     beforeEach(function() {
-      this.controller.collection = { add: stub() };
-      this.controller.addNavitem('Foo', 'foo');
+      this.module.collection = { add: stub() };
+      this.module.addNavitem('Foo', 'foo');
     });
 
     it('should add the nav item to the collection', function() {
-      expect(this.controller.collection.add).to.have.been.calledWith({
+      expect(this.module.collection.add).to.have.been.calledWith({
         name: 'Foo',
         path: 'foo'
       });

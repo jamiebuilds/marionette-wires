@@ -1,4 +1,4 @@
-describe('colors/modal/view.js', function() {
+describe('colors/modal/view', function() {
   beforeEach(function() {
     this.View = proxyquire('../../src/colors/modal/view.js', {});
   });

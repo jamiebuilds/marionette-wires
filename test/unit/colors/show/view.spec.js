@@ -1,4 +1,4 @@
-describe('colors/show/view.js', function() {
+describe('colors/show/view', function() {
   beforeEach(function() {
     this.ModalView = stub();
     this.template = stub();

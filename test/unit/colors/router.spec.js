@@ -1,4 +1,4 @@
-describe('colors/controller.js', function() {
+describe('colors/router', function() {
   beforeEach(function() {
     this.model      = { fetch: stub() };
     this.collection = { fetch: stub(), get: stub().returns(this.model), add: stub() };
@@ -15,7 +15,7 @@ describe('colors/controller.js', function() {
 
     this.container = { show: stub() };
 
-    this.Controller = proxyquire('../../src/colors/controller.js', {
+    this.Router = proxyquire('../../src/colors/router.js', {
       './model'                : this.Model,
       './collection'           : this.Collection,
       './index/composite-view' : this.IndexView,
@@ -24,14 +24,14 @@ describe('colors/controller.js', function() {
       './edit/view'            : this.EditView
     });
 
-    this.controller = new this.Controller({ container: this.container });
+    this.router = new this.Router({ container: this.container });
   });
 
   describe('#index', function() {
     beforeEach(function() {
       this.indexView = { indexView: true };
       this.IndexView.returns(this.indexView);
-      return this.controller.index();
+      return this.router.index();
     });
 
     it('should create an IndexView', function() {
@@ -49,7 +49,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.createView = { createView: true };
       this.CreateView.returns(this.createView);
-      return this.controller.create();
+      return this.router.create();
     });
 
     it('should create a CreateView', function() {
@@ -68,7 +68,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.showView = { showView: true };
       this.ShowView.returns(this.showView);
-      return this.controller.show();
+      return this.router.show();
     });
 
     it('should create an ShowView', function() {
@@ -86,7 +86,7 @@ describe('colors/controller.js', function() {
     beforeEach(function() {
       this.editView = { editView: true };
       this.EditView.returns(this.editView);
-      return this.controller.edit();
+      return this.router.edit();
     });
 
     it('should create an EditView', function() {

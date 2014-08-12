@@ -1,15 +1,23 @@
-var Controller = require('../classes/controller');
+var Module = require('../classes/module');
 var Radio = require('backbone.radio');
 var LayoutView = require('./layout-view');
 
 var modalChannel = Radio.channel('modal');
 var routerChannel = Radio.channel('router');
 
-module.exports = Controller.extend({
-  initialize: function (options) {
-    this.container = options.container;
+module.exports = Module.extend({
+  initialize: function () {
+    this.container = this.options.container;
+    this.start();
+  },
+
+  onStart: function() {
     this._showLayoutView();
     this._bindChannelCommands();
+  },
+
+  onStop: function() {
+    this.stopListening();
   },
 
   openModal: function (options) {

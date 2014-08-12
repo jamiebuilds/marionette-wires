@@ -1,16 +1,24 @@
-var Controller = require('../classes/controller');
+var Module = require('../classes/module');
 var Radio = require('backbone.radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');
 
 var channel = Radio.channel('flashes');
 
-module.exports = Controller.extend({
-  initialize: function(options) {
-    this.container = options.container;
+module.exports = Module.extend({
+  initialize: function() {
+    this.container = this.options.container;
     this.collection = new Collection();
+    this.start();
+  },
+
+  onStart: function() {
     this._showFlashesView();
     this._bindChannelCommands();
+  },
+
+  onStop: function() {
+    channel.stopComplying();
   },
 
   add: function(flash) {

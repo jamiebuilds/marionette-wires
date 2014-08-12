@@ -1,4 +1,4 @@
-describe('flashes/item-view.js', function() {
+describe('flashes/item-view', function() {
   beforeEach(function() {
     this.model = { get: stub(), destroy: stub() };
     this.ItemView = proxyquire('../../src/flashes/item-view.js', {
