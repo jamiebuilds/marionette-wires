@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
-var FormBehavior = require('../../forms/behavior');
+var FormBehavior = require('src/forms/behavior');
 var _ = require('underscore');
-var View = require('../../common/view');
+var View = require('src/common/view');
 var template = require('./template.hbs');
 
 module.exports = View.extend({

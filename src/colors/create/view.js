@@ -1,5 +1,5 @@
-var View = require('../../common/view');
-var FormBehavior = require('../../forms/behavior');
+var View = require('src/common/view');
+var FormBehavior = require('src/forms/behavior');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var template = require('./template.hbs');

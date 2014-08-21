@@ -15,7 +15,7 @@ describe('colors/router', function() {
 
     this.container = { show: stub() };
 
-    this.Router = proxyquire('../../src/colors/router.js', {
+    this.Router = proxyquire('src/colors/router.js', {
       './model'                : this.Model,
       './collection'           : this.Collection,
       './index/composite-view' : this.IndexView,

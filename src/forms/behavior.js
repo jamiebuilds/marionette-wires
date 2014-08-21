@@ -1,5 +1,5 @@
 var Syphon = require('backbone.syphon');
-var Behavior = require('../common/behavior');
+var Behavior = require('src/common/behavior');
 
 module.exports = Behavior.extend({
   events: {

@@ -7,7 +7,7 @@ describe('colors/show/view', function() {
     this.model.url = 'foo';
     this.model.cleanup = stub();
 
-    this.View = proxyquire('../../src/colors/show/view.js', {
+    this.View = proxyquire('src/colors/show/view.js', {
       '../modal/view'  : this.ModalView,
       './template.hbs' : this.template
     });

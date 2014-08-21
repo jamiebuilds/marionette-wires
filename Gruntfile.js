@@ -69,6 +69,17 @@ module.exports = function (grunt) {
       dist: ['dist']
     },
 
+    symlink: {
+      src: {
+        src: 'src',
+        dest: 'node_modules/src'
+      },
+      lib: {
+        src: 'lib',
+        dest: 'node_modules/lib'
+      }
+    },
+
     copy: {
       views: {
         expand: true,
@@ -149,6 +160,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+    'symlink',
     'clean:dist',
     'copy:views',
     'less',
@@ -158,6 +170,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'symlink',
     'jshint',
     'mochaTest'
   ]);

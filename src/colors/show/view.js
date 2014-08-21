@@ -1,4 +1,4 @@
-var View = require('../../common/view');
+var View = require('src/common/view');
 var Radio = require('backbone.radio');
 var _ = require('underscore');
 var Backbone = require('backbone');

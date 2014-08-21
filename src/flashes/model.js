@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var Radio = require('backbone.radio');
-var Model = require('../common/model');
+var Model = require('src/common/model');
 
 var routerChannel = Radio.channel('router');
 

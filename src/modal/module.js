@@ -1,4 +1,4 @@
-var Module = require('../common/module');
+var Module = require('src/common/module');
 var Radio = require('backbone.radio');
 var LayoutView = require('./layout-view');
 

@@ -8,7 +8,7 @@ describe('flashes/module', function() {
 
     this.container = { show: stub() };
 
-    this.Module = proxyquire('../../src/flashes/module.js', {
+    this.Module = proxyquire('src/flashes/module.js', {
       './collection'      : this.Collection,
       './collection-view' : this.CollectionView
     });

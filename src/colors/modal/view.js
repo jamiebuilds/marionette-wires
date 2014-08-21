@@ -1,5 +1,5 @@
-var View = require('../../common/view');
-var ModalBehavior = require('../../modal/behavior');
+var View = require('src/common/view');
+var ModalBehavior = require('src/modal/behavior');
 var template = require('./template.hbs');
 
 module.exports = View.extend({

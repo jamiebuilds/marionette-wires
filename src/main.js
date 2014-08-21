@@ -1,36 +1,36 @@
 require('./plugins');
 var Backbone = require('backbone');
-var Application = require('./application/application');
+var Application = require('src/application/application');
 
 var app = new Application();
 
 app.module('modal', {
-  moduleClass: require('./modal/module'),
+  moduleClass: require('src/modal/module'),
   container: app.layout.overlay
 });
 
 app.module('header', {
-  moduleClass: require('./header/module'),
+  moduleClass: require('src/header/module'),
   container: app.layout.header
 });
 
 app.module('flashes', {
-  moduleClass: require('./flashes/module'),
+  moduleClass: require('src/flashes/module'),
   container: app.layout.flashes
 });
 
 app.module('index', {
-  moduleClass: require('./index/module'),
+  moduleClass: require('src/index/module'),
   container: app.layout.content
 });
 
 app.module('colors', {
-  moduleClass: require('./colors/module'),
+  moduleClass: require('src/colors/module'),
   container: app.layout.content
 });
 
 app.module('books', {
-  moduleClass: require('./books/module'),
+  moduleClass: require('src/books/module'),
   container: app.layout.content
 });
 

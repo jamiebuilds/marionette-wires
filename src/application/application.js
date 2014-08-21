@@ -1,4 +1,4 @@
-var Application = require('../common/application');
+var Application = require('src/common/application');
 var LayoutView = require('./layout-view');
 
 module.exports = Application.extend({

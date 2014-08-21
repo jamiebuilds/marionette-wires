@@ -1,6 +1,6 @@
 var Radio = require('backbone.radio');
-var Module = require('../common/module');
-var Collection = require('../common/collection');
+var Module = require('src/common/module');
+var Collection = require('src/common/collection');
 var View = require('./view');
 
 module.exports = Module.extend({

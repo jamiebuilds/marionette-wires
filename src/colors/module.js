@@ -1,5 +1,5 @@
 var Radio = require('backbone.radio');
-var Module = require('../common/module');
+var Module = require('src/common/module');
 
 var Router = require('./router');
 
