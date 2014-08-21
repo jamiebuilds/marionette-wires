@@ -1,14 +1,14 @@
-Marionette Starter Kit
-======================
+Marionette Wires
+================
 
 A nice starter kit for Marionette.js apps.
 
 ## Quick start
 
-[Clone](http://git-scm.com/docs/git-clone) or [download](https://github.com/thejameskyle/marionette-starter-kit/archive/master.zip) this repo.
+[Clone](http://git-scm.com/docs/git-clone) or [download](https://github.com/thejameskyle/marionette-wires/archive/master.zip) this repo.
 
 ```sh
-git clone git@github.com:thejameskyle/marionette-starter-kit.git && cd marionette-starter-kit
+git clone git@github.com:thejameskyle/marionette-wires.git && cd marionette-wires
 ```
 
 Make sure [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.org/) are

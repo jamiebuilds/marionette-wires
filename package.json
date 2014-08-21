@@ -1,5 +1,5 @@
 {
-  "name": "marionette-browserify-starter-kit",
+  "name": "marionette-wires",
   "version": "0.0.0",
   "description": "Starter kit for Marionette.js Applications using Browserify",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thejameskyle/marionette-browserify-starter-kit.git"
+    "url": "git://github.com/thejameskyle/marionette-wires.git"
   },
   "keywords": [
     "marionette",
@@ -19,9 +19,9 @@
   "author": "James Kyle <me@thejameskyle.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thejameskyle/marionette-browserify-starter-kit/issues"
+    "url": "https://github.com/thejameskyle/marionette-wires/issues"
   },
-  "homepage": "https://github.com/thejameskyle/marionette-browserify-starter-kit",
+  "homepage": "https://github.com/thejameskyle/marionette-wires",
   "devDependencies": {
     "body-parser": "^1.4.3",
     "browserify": "^4.1.11",
