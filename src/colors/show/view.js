@@ -63,7 +63,7 @@ module.exports = View.extend({
 
   handleDestroySuccess: function() {
     Backbone.history.navigate('colors', { trigger: true });
-    flashesChannel.trigger('add', {
+    flashesChannel.command('add', {
       timeout : 5000,
       type    : 'info',
       title   : 'It\'s gone!',
