@@ -4,8 +4,6 @@ var Router = require('./router');
 
 module.exports = Module.extend({
   initialize: function() {
-    this.router = new Router({
-      container: this.options.container
-    });
+    this.router = new Router(this.options);
   }
 });

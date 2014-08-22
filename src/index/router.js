@@ -1,5 +1,5 @@
 var Router = require('src/common/router');
-var View = require('./view');
+var IndexRoute = require('./route');
 
 module.exports = Router.extend({
   initialize: function(options) {
@@ -11,7 +11,8 @@ module.exports = Router.extend({
   },
 
   index: function() {
-    this.view = new View();
-    this.container.show(this.view);
+    return new IndexRoute({
+      container: this.container
+    });
   }
 });

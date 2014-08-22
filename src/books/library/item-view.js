@@ -10,9 +10,5 @@ module.exports = ItemView.extend({
       'class' : 'list-group-item ' + (this.model.isActive() ? 'active' : ''),
       'href'  : '#books/' + this.model.get('id')
     };
-  },
-
-  modelEvents: {
-    'all': 'render'
   }
 });
