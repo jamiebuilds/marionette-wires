@@ -10,13 +10,23 @@ var Colors = Backbone.Collection.extend({
   model: Color
 });
 
-var colors = new Colors([
-  { name: 'blue',  hex: '#00f' },
-  { name: 'red',   hex: '#f00' },
-  { name: 'green', hex: '#0f0' }
-]);
+getDefaultColors = function() {
+  return new Colors([
+    { name: 'blue',  hex: '#00f' },
+    { name: 'red',   hex: '#f00' },
+    { name: 'green', hex: '#0f0' }
+  ]);
+}
+
+var colors = getDefaultColors();
 
 module.exports = function(api) {
+  api.route('/api/v1/colors/reset')
+    .get(function(req, res) {
+      colors = getDefaultColors();
+      res.send(200);
+    });
+
   api.route('/api/v1/colors')
     .get(function(req, res) {
       res.json(colors.toJSON());

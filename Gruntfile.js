@@ -53,10 +53,11 @@ module.exports = function (grunt) {
       server: {
         options: {
           port: 9000,
-          keepalive: true,
           base: 'dist',
           middleware: function (connect, options, middlewares) {
-            middlewares.unshift(logger('dev'));
+            if (this.flags.keepalive) {
+              middlewares.unshift(logger('dev'));
+            }
             middlewares.unshift(bodyParser.json());
             middlewares.push(mockApi);
             return middlewares;
@@ -119,6 +120,15 @@ module.exports = function (grunt) {
       }
     },
 
+    pioneer: {
+      options: {
+        features : 'test/integration/features',
+        steps    : 'test/integration/steps',
+        widgets  : 'test/integration/widgets',
+        format   : 'pretty'
+      }
+    },
+
     concurrent: {
       options: {
         logConcurrentOutput: true
@@ -127,7 +137,7 @@ module.exports = function (grunt) {
       watchers: [
         'watch',
         'browserify:watch',
-        'connect'
+        'connect:server:keepalive'
       ]
     },
 
@@ -175,8 +185,13 @@ module.exports = function (grunt) {
     'mochaTest'
   ]);
 
+  grunt.registerTask('test:integration', [
+    'connect',
+    'pioneer'
+  ]);
+
   grunt.registerTask('serve', [
-    'concurrent'
+    'concurrent:watchers'
   ]);
 
   grunt.registerTask('default', [

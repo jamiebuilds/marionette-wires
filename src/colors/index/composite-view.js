@@ -4,7 +4,7 @@ var template = require('./composite-template.hbs');
 
 module.exports = CompositeView.extend({
   template: template,
-  className: 'colors container',
+  className: 'colors colors--index container',
 
   childView: ItemView,
   childViewContainer: 'div.list-group',

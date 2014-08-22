@@ -10,7 +10,7 @@ var flashesChannel = Radio.channel('flashes');
 
 module.exports = View.extend({
   template: template,
-  className: 'colors container',
+  className: 'colors colors--show container',
 
   initialize: function (options) {
     _.bindAll(this, 'handleToggleFailure', 'handleDestroySuccess');

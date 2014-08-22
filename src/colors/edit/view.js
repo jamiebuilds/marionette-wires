@@ -7,7 +7,7 @@ var template = require('./template.hbs');
 
 module.exports = View.extend({
   template: template,
-  className: 'colors container',
+  className: 'colors colors--edit container',
 
   behaviors: {
     form: { behaviorClass: FormBehavior }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "grunt",
-    "test": "grunt test"
+    "test": "grunt test",
+    "integration": "pioneer"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/thejameskyle/marionette-wires",
   "devDependencies": {
+    "bluebird": "^2.3.0",
     "body-parser": "^1.4.3",
     "browserify": "^4.1.11",
     "browserify-shim": "^3.5.0",
@@ -43,13 +45,17 @@
     "grunt-contrib-symlink": "^0.3.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-mocha-test": "^0.11.0",
+    "grunt-pioneer": "^0.1.0",
     "hbsfy": "^1.3.2",
     "jsdom": "^0.11.0",
     "load-grunt-tasks": "^0.6.0",
     "minimatch": "^0.3.0",
     "mocha": "^1.20.1",
     "morgan": "^1.1.1",
+    "pioneer": "^0.8.2",
     "proxyquire": "^1.0.1",
+    "request": "^2.40.0",
+    "selenium-webdriver": "^2.42.1",
     "sinon": "^1.10.2",
     "sinon-chai": "^2.5.0"
   },
