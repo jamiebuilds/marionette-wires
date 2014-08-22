@@ -1,4 +1,4 @@
-var Behavior = require('../classes/behavior');
+var Behavior = require('../common/behavior');
 var Radio = require('backbone.radio');
 
 var channel = Radio.channel('modal');

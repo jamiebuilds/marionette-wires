@@ -1,4 +1,4 @@
-var View = require('../../classes/view');
+var View = require('../../common/view');
 var ModalBehavior = require('../../modal/behavior');
 var template = require('./template.hbs');
 

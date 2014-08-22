@@ -1,4 +1,4 @@
-var LayoutView = require('../classes/layout-view');
+var LayoutView = require('../common/layout-view');
 var template = require('./layout-template.hbs');
 
 module.exports = LayoutView.extend({

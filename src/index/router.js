@@ -1,4 +1,4 @@
-var Router = require('../classes/router');
+var Router = require('../common/router');
 var View = require('./view');
 
 module.exports = Router.extend({

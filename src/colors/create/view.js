@@ -1,4 +1,4 @@
-var View = require('../../classes/view');
+var View = require('../../common/view');
 var FormBehavior = require('../../forms/behavior');
 var _ = require('underscore');
 var Backbone = require('backbone');

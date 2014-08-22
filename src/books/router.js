@@ -1,4 +1,4 @@
-var Router = require('../classes/router');
+var Router = require('../common/router');
 
 var Collection = require('./collection');
 var LayoutView = require('./layout-view');

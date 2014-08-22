@@ -1,5 +1,5 @@
-Classes
-=======
+Common
+======
 
 ## Classes
 - [Behavior](behavior.js)

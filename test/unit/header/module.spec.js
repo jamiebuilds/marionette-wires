@@ -10,7 +10,7 @@ describe('header/module', function() {
 
     this.Module = proxyquire('../../src/header/module.js', {
       './view' : this.View,
-      '../classes/collection': this.Collection
+      '../common/collection': this.Collection
     });
 
     this.module = new this.Module('header', {}, { container: this.container });

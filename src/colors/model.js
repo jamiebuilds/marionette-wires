@@ -1,4 +1,4 @@
-var Model = require('../classes/model');
+var Model = require('../common/model');
 
 module.exports = Model.extend({
   urlRoot: '/api/v1/colors',

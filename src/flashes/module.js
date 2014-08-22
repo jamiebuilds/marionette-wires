@@ -1,4 +1,4 @@
-var Module = require('../classes/module');
+var Module = require('../common/module');
 var Radio = require('backbone.radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');

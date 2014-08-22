@@ -1,4 +1,4 @@
-var Module = require('../classes/module');
+var Module = require('../common/module');
 var Router = require('./router');
 
 

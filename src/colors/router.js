@@ -1,6 +1,6 @@
 var $ = require('jquery');
 var _ = require('underscore');
-var Router = require('../classes/router');
+var Router = require('../common/router');
 
 var Model = require('./model');
 var Collection = require('./collection');
