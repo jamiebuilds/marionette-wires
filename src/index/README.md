@@ -4,6 +4,7 @@ Index
 The index (`/`) page for your entire application.
 
 ## Classes
-- [Controller](controller.js)
+- [Module](module.js)
 - [Router](router.js)
+- [Route](route.js)
 - [View](view.js)

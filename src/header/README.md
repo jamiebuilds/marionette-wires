@@ -4,5 +4,5 @@ Header
 A universal header for your entire application.
 
 ## Classes
-- [Controller](controller.js)
+- [Module](module.js)
 - [View](view.js)

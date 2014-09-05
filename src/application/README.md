@@ -3,5 +3,5 @@ Application
 
 ## Classes
 
-[Controller](controller.js)
+[Application](application.js)
 [LayoutView](layout-view.js)
