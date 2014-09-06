@@ -6,8 +6,8 @@ module.exports = Behavior.extend({
     'submit form' : 'handleSubmit'
   },
 
-  initialize: function() {
-    this.listenTo(this.view.options.model, 'change', this.onChange);
+  modelEvents: {
+    'change' : 'onChange'
   },
 
   serialize: function() {

@@ -41,10 +41,13 @@ describe('header/module', function() {
     });
   });
 
-  describe('#addNavitem', function() {
+  describe('#onAdd', function() {
     beforeEach(function() {
       this.module.collection = { add: stub() };
-      this.module.addNavitem('Foo', 'foo');
+      this.module.onAdd({
+        name: 'Foo',
+        path: 'foo'
+      });
     });
 
     it('should add the nav item to the collection', function() {

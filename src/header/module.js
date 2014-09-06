@@ -11,24 +11,25 @@ module.exports = Module.extend({
   },
 
   onStart: function() {
-    this._showHeaderView();
-    this._bindChannelCommands();
+    this.view = new View({ collection: this.collection });
+    this.container.show(this.view);
+
+    Radio.comply('header', {
+      add      : this.onAdd,
+      remove   : this.onRemove
+    }, this);
   },
 
   onStop: function() {
     Radio.stopComplying('header');
   },
 
-  addNavitem: function(name, path) {
-    this.collection.add({ name: name, path: path });
+  onAdd: function(model) {
+    this.collection.add(model);
   },
 
-  _showHeaderView: function() {
-    this.view = new View({ collection: this.collection });
-    this.container.show(this.view);
-  },
-
-  _bindChannelCommands: function() {
-    Radio.comply('header', 'add', this.addNavitem, this);
+  onRemove: function(model) {
+    model = this.collection.findWhere(model);
+    this.collection.remove(model);
   }
 });

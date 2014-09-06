@@ -4,6 +4,10 @@ var Application = require('src/application/application');
 
 var app = new Application();
 
+app.module('auth', {
+  moduleClass: require('src/auth/module')
+});
+
 app.module('modal', {
   moduleClass: require('src/modal/module'),
   container: app.layout.overlay
@@ -24,13 +28,18 @@ app.module('index', {
   container: app.layout.content
 });
 
-app.module('colors', {
-  moduleClass: require('src/colors/module'),
+app.module('account', {
+  moduleClass: require('src/account/module'),
   container: app.layout.content
 });
 
 app.module('books', {
   moduleClass: require('src/books/module'),
+  container: app.layout.content
+});
+
+app.module('colors', {
+  moduleClass: require('src/colors/module'),
   container: app.layout.content
 });
 

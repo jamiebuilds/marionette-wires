@@ -1,4 +1,5 @@
 var Router = require('src/common/router');
+var Radio = require('backbone.radio');
 
 var IndexRoute  = require('./index/route');
 var CreateRoute = require('./create/route');

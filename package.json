@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/thejameskyle/marionette-wires",
   "devDependencies": {
+    "Base64": "^0.3.0",
+    "MD5": "^1.2.1",
     "body-parser": "^1.4.3",
     "browserify": "^4.1.11",
     "browserify-shim": "^3.5.0",
