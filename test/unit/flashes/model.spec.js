@@ -40,13 +40,12 @@ describe('flashes/model', function() {
 
     describe('when "clearOnRoute" is true', function() {
       beforeEach(function() {
-        this.routerChannel = Backbone.Radio.channel('router');
         this.model.initialize();
       });
 
       it('should listen for "route" events', function() {
         expect(this.model.listenTo)
-          .to.have.been.calledWith(this.routerChannel, 'route', this.model.destroy);
+          .to.have.been.calledWith(Backbone.history, 'route', this.model.destroy);
       });
     });
 

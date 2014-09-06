@@ -1,8 +1,7 @@
 var _ = require('underscore');
+var Backbone = require('backbone');
 var Radio = require('backbone.radio');
 var Model = require('src/common/model');
-
-var routerChannel = Radio.channel('router');
 
 module.exports = Model.extend({
   defaults: {
@@ -19,7 +18,7 @@ module.exports = Model.extend({
     this.on('destroy', this._clearTimeout);
 
     if (this.get('clearOnRoute')) {
-      this.listenTo(routerChannel, 'route', this.destroy);
+      this.listenTo(Backbone.history, 'route', this.destroy);
     }
   },
 

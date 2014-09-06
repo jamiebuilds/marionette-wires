@@ -12,7 +12,10 @@ module.exports = Route.extend({
   },
 
   onEnter: function() {
-    var id = this.collection.last().get('id');
-    this.navigate('books/' + id, { trigger: true });
+    var id = this.collection.first().get('id');
+    this.navigate('books/' + id, {
+      trigger: true,
+      replace: true
+    });
   }
 });

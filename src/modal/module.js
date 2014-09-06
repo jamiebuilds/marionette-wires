@@ -1,9 +1,9 @@
+var Backbone = require('backbone');
 var Module = require('src/common/module');
 var Radio = require('backbone.radio');
 var LayoutView = require('./layout-view');
 
 var modalChannel = Radio.channel('modal');
-var routerChannel = Radio.channel('router');
 
 module.exports = Module.extend({
   initialize: function () {
@@ -22,7 +22,7 @@ module.exports = Module.extend({
 
   openModal: function (options) {
     this.layout.openModal(options);
-    this.listenToOnce(routerChannel, 'route', function () {
+    this.listenToOnce(Backbone.history, 'route', function () {
       this.destroyModal();
     });
   },
