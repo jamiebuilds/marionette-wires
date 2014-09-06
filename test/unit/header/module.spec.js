@@ -41,16 +41,21 @@ describe('header/module', function() {
     });
   });
 
-  describe('#addNavitem', function() {
+  describe('#onAdd', function() {
     beforeEach(function() {
       this.module.collection = { add: stub() };
-      this.module.addNavitem('Foo', 'foo');
+      this.module.onAdd({
+        name: 'Foo',
+        path: 'foo',
+        type: 'primary'
+      });
     });
 
     it('should add the nav item to the collection', function() {
       expect(this.module.collection.add).to.have.been.calledWith({
         name: 'Foo',
-        path: 'foo'
+        path: 'foo',
+        type: 'primary'
       });
     });
   });

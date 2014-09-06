@@ -7,28 +7,30 @@ module.exports = Module.extend({
   initialize: function() {
     this.container = this.options.container;
     this.collection = new Collection();
+    this.channel = Radio.channel('header');
     this.start();
   },
 
   onStart: function() {
-    this._showHeaderView();
-    this._bindChannelCommands();
+    this.view = new View({ collection: this.collection });
+    this.container.show(this.view);
+
+    this.channel.comply({
+      add    : this.onAdd,
+      remvoe : this.onRemove
+    }, this);
   },
 
   onStop: function() {
-    Radio.stopComplying('header');
+    this.channel.reset();
   },
 
-  addNavitem: function(name, path) {
-    this.collection.add({ name: name, path: path });
+  onAdd: function(model) {
+    this.collection.add(model);
   },
 
-  _showHeaderView: function() {
-    this.view = new View({ collection: this.collection });
-    this.container.show(this.view);
-  },
-
-  _bindChannelCommands: function() {
-    Radio.comply('header', 'add', this.addNavitem, this);
+  onRemove: function(model) {
+    model = this.collection.findWhere(model);
+    this.collection.remove(model);
   }
 });
