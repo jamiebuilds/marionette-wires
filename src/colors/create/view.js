@@ -1,3 +1,4 @@
+var nprogress = require('nprogress');
 var View = require('src/common/view');
 var FormBehavior = require('src/forms/behavior');
 var _ = require('underscore');
@@ -30,6 +31,7 @@ module.exports = View.extend({
     var errors = this.model.validate(this.form);
 
     if (!errors) {
+      nprogress.start();
       this.model.save(this.form).done(this.handleSaveSuccess);
     } else {
       this.errors = errors;

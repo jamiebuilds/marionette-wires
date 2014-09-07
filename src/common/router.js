@@ -1,11 +1,18 @@
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
+var Radio = require('backbone.radio');
 var Route = require('./route');
 
 module.exports = Marionette.AppRouter.extend({
   constructor: function() {
     this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
+    this.channel = Radio.channel('router');
+
+    this.on('all', function() {
+      this.channel.trigger.apply(this.channel, arguments);
+    });
+
     Marionette.AppRouter.apply(this, arguments);
   },
 
@@ -39,6 +46,7 @@ module.exports = Marionette.AppRouter.extend({
     var route = callback.apply(this, args);
 
     if (route instanceof Route) {
+      route.router = this;
       return route.enter(args);
     }
   },

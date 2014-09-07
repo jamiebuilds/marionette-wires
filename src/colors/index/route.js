@@ -6,11 +6,13 @@ var View = require('./composite-view');
 module.exports = Route.extend({
   initialize: function(options) {
     this.container = options.container;
+    this.collection = options.collection;
   },
 
   fetch: function() {
-    this.collection = new Collection();
-    return this.collection.fetch();
+    if (this.collection.isNew()) {
+      return this.collection.fetch();
+    }
   },
 
   render: function() {

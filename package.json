@@ -60,18 +60,18 @@
     "bootstrap": "^3.2.0",
     "handlebars": "^1.3.0",
     "jquery": "^2.1.0",
+    "nprogress": "^0.1.6",
     "underscore": "^1.6.0"
   },
   "browser": {
-    "bootstrap": "bootstrap/dist/js/bootstrap.js",
+    "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
     "backbone.syphon": "./lib/backbone.syphon-0.4.1/backbone.syphon.js"
   },
   "browserify-shim": {
     "bootstrap": {
       "depends": [
         "jquery:jQuery"
-      ],
-      "exports": null
+      ]
     }
   },
   "browserify": {

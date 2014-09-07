@@ -1,3 +1,4 @@
+var nprogress = require('nprogress');
 var Backbone = require('backbone');
 var FormBehavior = require('src/forms/behavior');
 var _ = require('underscore');
@@ -30,7 +31,10 @@ module.exports = View.extend({
     var errors = this.model.validate(this.form);
 
     if (!errors) {
-      this.model.save(this.form).done(this.handleSaveSuccess);
+      nprogress.start();
+      this.model
+        .save(this.form)
+        .done(this.handleSaveSuccess);
     } else {
       this.model.validationError = errors;
       this.render();

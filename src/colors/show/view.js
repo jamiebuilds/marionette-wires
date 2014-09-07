@@ -1,3 +1,4 @@
+var nprogress = require('nprogress');
 var View = require('src/common/view');
 var Radio = require('backbone.radio');
 var _ = require('underscore');
@@ -53,7 +54,10 @@ module.exports = View.extend({
   handleConfirmDestroy: function() {
     this.stopListening(this.modalView);
     delete this.modalView;
-    this.model.destroy({ wait: true }).done(this.handleDestroySuccess);
+    nprogress.start();
+    this.model
+      .destroy({ wait: true })
+      .done(this.handleDestroySuccess);
   },
 
   handleCancelDestroy: function() {

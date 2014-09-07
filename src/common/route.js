@@ -8,22 +8,28 @@ module.exports = Marionette.Object.extend({
     this.initialize.apply(this, arguments);
   },
 
-  enter: function(args) {
-    var self = this;
+  _triggerMethod: function(name, args) {
+    if (this.router) {
+      this.router.triggerMethod.apply(this.router, [name + ':route'].concat(args));
+    }
+    this.triggerMethod.apply(this, [name].concat(args));
+  },
 
-    this.triggerMethod.apply(this, ['before:enter'].concat(args));
-    this.triggerMethod.apply(this, ['before:fetch'].concat(args));
+  enter: function(args, router) {
+    var self = this;
+    this._triggerMethod('before:enter', args);
+    this._triggerMethod('before:fetch', args);
 
     return $.when(this.fetch.apply(this, args)).then(function() {
-      self.triggerMethod.apply(self, ['fetch'].concat(args));
-      self.triggerMethod.apply(self, ['before:render'].concat(args));
+      self._triggerMethod('fetch', args);
+      self._triggerMethod('before:render', args);
     }).then(function() {
       return self.render.apply(self, args);
     }).then(function() {
-      self.triggerMethod.apply(self, ['render'].concat(args));
-      self.triggerMethod.apply(self, ['enter'].concat(args));
+      self._triggerMethod('render', args);
+      self._triggerMethod('enter', args);
     }).fail(function() {
-      self.triggerMethod.apply(self, ['error'].concat(args));
+      self._triggerMethod('error', args);
     });
   },
 
