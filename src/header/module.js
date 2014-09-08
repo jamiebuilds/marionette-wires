@@ -3,6 +3,8 @@ var Module = require('src/common/module');
 var Collection = require('src/common/collection');
 var View = require('./view');
 
+var routerChannel = Radio.channel('router');
+
 module.exports = Module.extend({
   initialize: function() {
     this.container = this.options.container;
@@ -16,8 +18,9 @@ module.exports = Module.extend({
     this.container.show(this.view);
 
     this.channel.comply({
-      add    : this.onAdd,
-      remvoe : this.onRemove
+      add      : this.onAdd,
+      activate : this.onActivate,
+      remove   : this.onRemove
     }, this);
   },
 
@@ -32,5 +35,13 @@ module.exports = Module.extend({
   onRemove: function(model) {
     model = this.collection.findWhere(model);
     this.collection.remove(model);
+  },
+
+  onActivate: function(model) {
+    this.collection.invoke('set', 'active', false);
+    model = this.collection.findWhere(model);
+    if (model) {
+      model.set('active', true);
+    }
   }
 });

@@ -54,6 +54,7 @@
     "sinon-chai": "^2.5.0"
   },
   "dependencies": {
+    "animate.css": "^3.1.1",
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.0.0",
     "backbone.radio": "^0.6.0",

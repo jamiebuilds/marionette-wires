@@ -1,3 +1,5 @@
+@import (less) "node_modules/animate.css/animate.css";
+
 .index {
   position: relative;
   width: 100%;
@@ -5,12 +7,14 @@
   display: table;
 
   &__billboard {
-    padding: @padding-large-vertical * 6 @padding-large-horizontal;
+    padding: (@padding-large-vertical * 6) @padding-large-horizontal;
     text-align: center;
     color: @gray;
 
     h1 {
       color: @brand-danger;
+      .animated();
+      .slideInDown();
 
       span {
         color: white;
@@ -23,6 +27,9 @@
     }
 
     p {
+      .animated();
+      .fadeIn();
+      animation-delay: 1s;
       font-weight: 200;
       font-size: (@font-size-base * 1.4);
     }

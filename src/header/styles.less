@@ -16,4 +16,16 @@
       font-weight: 200;
     }
   }
+
+  .navbar-nav > .active > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      color: @brand-danger;
+      border-bottom: 3px solid @brand-danger;
+      margin-bottom: -1px;
+      padding-bottom: @navbar-padding-vertical - 2px;
+    }
+  }
 }
