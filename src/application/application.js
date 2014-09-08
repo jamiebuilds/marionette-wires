@@ -1,4 +1,4 @@
-var Backbone = require('backbone');
+var $ = require('jquery');
 var Radio = require('backbone.radio');
 var nprogress = require('nprogress');
 var Application = require('src/common/application');
@@ -12,6 +12,7 @@ nprogress.configure({
 
 module.exports = Application.extend({
   initialize: function() {
+    this.$body = $(document.body);
     this.layout = new LayoutView();
     this.layout.render();
 
@@ -27,7 +28,7 @@ module.exports = Application.extend({
   },
 
   onEnterRoute: function() {
-    this.layout.$el.scrollTop(0);
+    this.$body.scrollTop(0);
     nprogress.done();
   },
 

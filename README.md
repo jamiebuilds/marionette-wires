@@ -1,7 +1,7 @@
 Marionette Wires
 ================
 
-A nice starter kit for Marionette.js apps.
+An opinionated starter application built with Marionette.js.
 
 ## Quick start
 

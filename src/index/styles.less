@@ -1,0 +1,48 @@
+.index {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: table;
+
+  &__billboard {
+    padding: @padding-large-vertical * 6 @padding-large-horizontal;
+    text-align: center;
+    color: @gray;
+
+    h1 {
+      color: @brand-danger;
+
+      span {
+        color: white;
+        text-shadow:
+           1px  1px @brand-danger,
+           1px -1px @brand-danger,
+          -1px  1px @brand-danger,
+          -1px -1px @brand-danger;
+      }
+    }
+
+    p {
+      font-weight: 200;
+      font-size: (@font-size-base * 1.4);
+    }
+
+    a {
+      color: @brand-danger;
+      text-decoration: underline;
+    }
+
+    @media screen and (min-width: @screen-sm-min) {
+      display: table-cell;
+      vertical-align: middle;
+
+      h1  {
+        font-size: (@font-size-base * 6);
+      }
+
+      p {
+        font-size: (@font-size-base * 2);
+      }
+    }
+  }
+}
