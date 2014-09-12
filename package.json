@@ -54,7 +54,7 @@
     "pioneer": "0.10.3",
     "proxyquire": "^1.0.1",
     "request": "^2.40.0",
-    "selenium-webdriver": "^2.42.1",
+    "selenium-webdriver": "2.42.1",
     "sinon": "^1.10.2",
     "sinon-chai": "^2.5.0",
     "grunt-run": "^0.2.4"
