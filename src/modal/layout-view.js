@@ -27,7 +27,7 @@ module.exports = LayoutView.extend({
   },
 
   openModal: function(options) {
-    options || (options = {});
+    options = options || {};
     var self = this;
     var deferred = $.Deferred();
 
@@ -45,7 +45,7 @@ module.exports = LayoutView.extend({
   },
 
   destroyModal: function(options) {
-    options || (options = {});
+    options = options || {};
     var self = this;
     var deferred = $.Deferred();
 
