@@ -1,4 +1,5 @@
 var LayoutView = require('src/common/layout-view');
+var $ = require('jquery');
 var template = require('./layout-template.hbs');
 
 module.exports = LayoutView.extend({
@@ -25,30 +26,43 @@ module.exports = LayoutView.extend({
     'hidden.bs.modal' : { preventDefault: false, event: 'hide' }
   },
 
-  openModal: function (options) {
-    options = options || {};
-    this.once('after:show', options.callback);
-    this.setupModal(options);
-    this.$el.modal('show');
+  openModal: function(options) {
+    options || (options = {});
+    var self = this;
+    var deferred = $.Deferred();
+
+    this.destroyModal().then(function() {
+      self.once('show', options.callback);
+      self.once('show', function() {
+        self.isShown = true;
+        deferred.resolve();
+      });
+      self.content.show(options.view);
+      self.$el.modal('show');
+    });
+
+    return deferred;
   },
 
-  destroyModal: function (options) {
-    options = options || {};
-    this.once('hide', options.callback);
-    this.once('hide', this.teardownModal);
-    this.$el.modal('hide');
-  },
+  destroyModal: function(options) {
+    options || (options = {});
+    var self = this;
+    var deferred = $.Deferred();
 
-  setupModal: function (options) {
-    options = options || {};
-    if (this.isShown) this.teardownModal();
-    this.content.show(options.view);
-    this.isShown = true;
-  },
+    if (this.isShown && !this.isDestroying) {
+      this.isDestroying = true;
+      this.once('hide', options.callback);
+      this.once('hide', function() {
+        self.content.empty();
+        self.isShown = false;
+        self.isDestroying = false;
+        deferred.resolve();
+      });
+      this.$el.modal('hide');
+    } else {
+      deferred.resolve();
+    }
 
-  teardownModal: function () {
-    if (!this.isShown) return;
-    this.content.empty();
-    this.isShown = false;
+    return deferred;
   }
 });
