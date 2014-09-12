@@ -1,5 +1,3 @@
-var Driver = require('selenium-webdriver');
-
 module.exports = function() {
   var Widget = this.Widget;
 

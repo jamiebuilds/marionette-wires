@@ -1,3 +1,4 @@
+/* global -Promise */
 var Promise = require('bluebird');
 var _ = require('underscore');
 
