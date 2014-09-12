@@ -1,7 +1,7 @@
 /* global -Promise */
 var Promise = require('bluebird');
 var request = Promise.promisify(require('request'));
-var baseUrl = 'http://localhost:9000/';
+var baseUrl = 'http://0.0.0.0:9000/';
 
 module.exports = function() {
   this.visit = function(path) {
