@@ -22,8 +22,11 @@ module.exports = Module.extend({
 
   openModal: function (options) {
     this.layout.openModal(options);
+    this.originalFragment = Backbone.history.fragment;
     this.listenToOnce(Backbone.history, 'route', function () {
-      this.destroyModal();
+      if (Backbone.history.fragment != this.originalFragment) {
+        this.destroyModal();
+      }
     });
   },
 
@@ -39,5 +42,12 @@ module.exports = Module.extend({
   _bindChannelCommands: function() {
     modalChannel.comply('open', this.openModal, this);
     modalChannel.comply('destroy', this.destroyModal, this);
+  },
+
+  onRoute: function() {
+    if (Backbone.history.fragment != this.originalFragment) {
+      this.destroyModal();
+      delete this.originalFragment;
+    }
   }
 });
