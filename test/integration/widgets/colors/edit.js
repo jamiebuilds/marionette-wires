@@ -7,16 +7,5 @@ module.exports = function() {
 
   Widget.ColorsEdit.Form = Widget.Form.extend({
     root: '.colors__form',
-
-    clearAndSubmitWith: function(vals) {
-      var self = this;
-      return this.findAll('input').then(function(els) {
-        return Driver.promise.map(els, function(el) {
-          return el.clear();
-        });
-      }).then(function() {
-        return self.submitWith(vals);
-      });
-    }
   });
 };

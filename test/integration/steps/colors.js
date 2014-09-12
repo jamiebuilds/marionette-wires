@@ -21,7 +21,7 @@ module.exports = function() {
   this.When(/^I edit a color$/, function() {
     return new Widget.ColorsIndex.List().clickAt(0).then(function() {
       return new Widget.ColorsShow().edit().then(function() {
-        return new Widget.ColorsEdit.Form().clearAndSubmitWith(violet);
+        return new Widget.ColorsEdit.Form().submitWith(violet);
       });
     });
   });

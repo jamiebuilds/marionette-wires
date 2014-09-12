@@ -3,9 +3,7 @@ module.exports = function() {
 
   Widget.BooksLibraryItem = Widget.extend({
     isActive: function() {
-      return this.getAttribute('class').then(function(className) {
-        return className.indexOf('active') !== -1;
-      });
+      return this.hasClass('active');
     },
     getTitle: function() {
       return this.read('.list-group-item-heading');
