@@ -12,12 +12,16 @@ module.exports = Module.extend({
   },
 
   onStart: function() {
-    this._showLayoutView();
-    this._bindChannelCommands();
+    this.layout = new LayoutView();
+    this.container.show(this.layout);
+    modalChannel.comply({
+      'open'    : this.openModal,
+      'destroy' : this.destroyModal
+    }, this);
   },
 
   onStop: function() {
-    this.stopListening();
+    modalChannel.reset();
   },
 
   openModal: function (options) {
@@ -32,16 +36,6 @@ module.exports = Module.extend({
 
   destroyModal: function (options) {
     this.layout.destroyModal(options);
-  },
-
-  _showLayoutView: function() {
-    this.layout = new LayoutView();
-    this.container.show(this.layout);
-  },
-
-  _bindChannelCommands: function() {
-    modalChannel.comply('open', this.openModal, this);
-    modalChannel.comply('destroy', this.destroyModal, this);
   },
 
   onRoute: function() {
