@@ -6,8 +6,8 @@
     "test/integration/widgets"
   ],
   "format": "pioneerformat.js",
-  "driver": "phantomjs",
   "error_formatter": "error_formatter.js",
+  "driver": "phantomjs",
   "preventReload": false,
   "coffee": false
 }
