@@ -183,7 +183,9 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'symlink',
     'jshint',
-    'mochaTest'
+    'mochaTest',
+    'connect',
+    'run:pioneer'
   ]);
 
   grunt.registerTask('test:integration', [
