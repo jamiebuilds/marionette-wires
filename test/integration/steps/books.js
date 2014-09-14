@@ -6,7 +6,9 @@ module.exports = function() {
   });
 
   this.When(/^I view a new book$/, function() {
-    return new Widget.BooksLibrary().clickAt(1);
+    return new this.W({root: 'html'}).getInnerHTML().then(function(h) {
+      console.log(h);
+    });
   });
 
   this.Then(/^I should see the book marked as active$/, function() {
