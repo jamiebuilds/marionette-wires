@@ -188,6 +188,13 @@ module.exports = function (grunt) {
     'run:pioneer'
   ]);
 
+  grunt.registerTask('test-travis', [
+    'symlink',
+    'jshint',
+    'mochaTest',
+    'run:pioneer'
+  ]);
+
   grunt.registerTask('test:integration', [
     'connect',
     'run:pioneer'
