@@ -1,6 +1,5 @@
 describe('colors/show/view', function() {
   beforeEach(function() {
-    this.ModalView = stub();
     this.template = stub();
 
     this.model = new Backbone.Model();
@@ -8,7 +7,6 @@ describe('colors/show/view', function() {
     this.model.cleanup = stub();
 
     this.View = proxyquire('src/colors/show/view.js', {
-      '../modal/view'  : this.ModalView,
       './template.hbs' : this.template
     });
 
@@ -17,14 +15,7 @@ describe('colors/show/view', function() {
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.bindAll = stub(_, 'bindAll');
       this.itemView.initialize({ model: this.model });
-    });
-
-    it('should bind all methods that can be called by third-party', function() {
-      expect(this.bindAll).to.have.been.calledWith(
-        this.itemView, 'handleToggleFailure', 'handleDestroySuccess'
-      );
     });
 
     it('should attach the model', function() {
@@ -54,10 +45,6 @@ describe('colors/show/view', function() {
   describe('#handleToggle', function() {
     beforeEach(function() {
       this.itemView.handleToggle();
-    });
-
-    it('should', function() {
-
     });
   });
 

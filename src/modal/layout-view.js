@@ -16,53 +16,31 @@ module.exports = LayoutView.extend({
   },
 
   initialize: function (options) {
-    this.$el.modal({ show: false });
+    this.$el.modal({ show: false, backdrop: 'static' });
   },
 
   triggers: {
     'show.bs.modal'   : { preventDefault: false, event: 'before:show' },
     'shown.bs.modal'  : { preventDefault: false, event: 'show' },
-    'hide.bs.modal'   : { preventDefault: false, event: 'before:hide' },
-    'hidden.bs.modal' : { preventDefault: false, event: 'hide' }
+    'hide.bs.modal'   : { preventDefault: false, event: 'before:close' },
+    'hidden.bs.modal' : { preventDefault: false, event: 'close' }
   },
 
-  openModal: function(options) {
-    options = options || {};
-    var self = this;
+  open: function(view) {
     var deferred = $.Deferred();
-
-    this.destroyModal().then(function() {
-      self.once('show', options.callback);
-      self.once('show', function() {
-        self.isShown = true;
-        deferred.resolve();
-      });
-      self.content.show(options.view);
-      self.$el.modal('show');
-    });
-
+    this.once('open', deferred.resolve);
+    this.content.show(view);
+    this.$el.modal('show');
     return deferred;
   },
 
-  destroyModal: function(options) {
-    options = options || {};
-    var self = this;
+  close: function() {
     var deferred = $.Deferred();
-
-    if (this.isShown && !this.isDestroying) {
-      this.isDestroying = true;
-      this.once('hide', options.callback);
-      this.once('hide', function() {
-        self.content.empty();
-        self.isShown = false;
-        self.isDestroying = false;
-        deferred.resolve();
-      });
-      this.$el.modal('hide');
-    } else {
+    this.once('close', function() {
       deferred.resolve();
-    }
-
+      this.content.empty();
+    });
+    this.$el.modal('hide');
     return deferred;
   }
 });
