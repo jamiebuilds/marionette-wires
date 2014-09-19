@@ -20,8 +20,8 @@ module.exports = LayoutView.extend({
   },
 
   triggers: {
-    'show.bs.modal'   : { preventDefault: false, event: 'before:show' },
-    'shown.bs.modal'  : { preventDefault: false, event: 'show' },
+    'show.bs.modal'   : { preventDefault: false, event: 'before:open' },
+    'shown.bs.modal'  : { preventDefault: false, event: 'open' },
     'hide.bs.modal'   : { preventDefault: false, event: 'before:close' },
     'hidden.bs.modal' : { preventDefault: false, event: 'close' }
   },
@@ -37,8 +37,8 @@ module.exports = LayoutView.extend({
   close: function() {
     var deferred = $.Deferred();
     this.once('close', function() {
-      deferred.resolve();
       this.content.empty();
+      deferred.resolve();
     });
     this.$el.modal('hide');
     return deferred;

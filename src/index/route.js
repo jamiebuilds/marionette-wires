@@ -4,7 +4,6 @@ var View = require('./view');
 module.exports = Route.extend({
   initialize: function(options) {
     this.container = options.container;
-    this.render();
   },
 
   render: function() {
