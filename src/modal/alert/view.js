@@ -1,5 +1,4 @@
 var Radio = require('backbone.radio');
-var $ = require('jquery');
 var View = require('src/common/view');
 var Model = require('src/common/model');
 var template = require('./template.hbs');
@@ -8,7 +7,6 @@ module.exports = View.extend({
   template: template,
 
   initialize: function() {
-    this.deferred = $.Deferred();
     this.model = new Model(this.options);
     Radio.request('modal', 'open', this);
   },

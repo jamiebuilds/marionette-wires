@@ -1,5 +1,4 @@
 var Radio = require('backbone.radio');
-var $ = require('jquery');
 var View = require('src/common/view');
 var Model = require('src/common/model');
 var template = require('./template.hbs');
