@@ -9,8 +9,6 @@ var AlertView   = require('./alert/view');
 var ConfirmView = require('./confirm/view');
 var PromptView  = require('./prompt/view');
 
-window.Radio = Radio;
-
 module.exports = Module.extend({
   initialize: function() {
     this.container = this.options.container;
