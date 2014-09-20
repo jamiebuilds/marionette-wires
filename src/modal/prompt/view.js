@@ -17,12 +17,12 @@ module.exports = View.extend({
   },
 
   events: {
-    'submit'             : 'onSubmit',
-    'click .btn-default' : 'onCancel',
-    'click .close'       : 'onCancel'
+    'submit'             : 'submit',
+    'click .btn-default' : 'cancel',
+    'click .close'       : 'cancel'
   },
 
-  onSubmit: function(e) {
+  submit: function(e) {
     e.preventDefault();
     var self = this;
     var val = this.ui.input.val();
@@ -31,7 +31,7 @@ module.exports = View.extend({
     });
   },
 
-  onCancel: function() {
+  cancel: function() {
     var self = this;
     Radio.request('modal', 'close').then(function() {
       self.trigger('cancel');

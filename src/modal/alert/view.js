@@ -12,18 +12,18 @@ module.exports = View.extend({
   },
 
   events: {
-    'click .btn-primary' : 'onConfirm',
-    'click .close'       : 'onCancel'
+    'click .btn-primary' : 'confirm',
+    'click .close'       : 'cancel'
   },
 
-  onConfirm: function() {
+  confirm: function() {
     var self = this;
     Radio.request('modal', 'close').then(function() {
       self.trigger('confirm');
     });
   },
 
-  onCancel: function() {
+  cancel: function() {
     var self = this;
     Radio.request('modal', 'close').then(function() {
       self.trigger('cancel');

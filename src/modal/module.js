@@ -49,8 +49,7 @@ module.exports = Module.extend({
 
     view.on({
       'confirm' : deferred.resolve,
-      'cancel'  : deferred.resolve,
-      'destroy' : deferred.resolve
+      'cancel'  : deferred.resolve
     });
 
     return deferred;
@@ -62,8 +61,7 @@ module.exports = Module.extend({
 
     view.on({
       'confirm' : deferred.resolve,
-      'cancel'  : deferred.reject,
-      'destroy' : deferred.reject
+      'cancel'  : deferred.reject
     });
 
     return deferred;
@@ -74,9 +72,8 @@ module.exports = Module.extend({
     var view = new PromptView(options);
 
     view.on({
-      'submit'  : deferred.resolve,
-      'cancel'  : deferred.reject,
-      'destroy' : deferred.reject
+      'submit' : deferred.resolve,
+      'cancel' : deferred.reject
     });
 
     return deferred;
