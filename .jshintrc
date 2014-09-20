@@ -1,9 +1,11 @@
 {
   "globals": {
-    "require"            : true,
-    "module"             : true,
-    "exports"            : true
+    "require" : true,
+    "module"  : true,
+    "exports" : true
   },
+
+  "predef": ["-Promise"],
 
   "bitwise"       : true,
   "camelcase"     : true,

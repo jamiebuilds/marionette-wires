@@ -17,6 +17,8 @@
     "$"          : true
   },
 
+  "predef": ["-Promise"],
+
   "bitwise"       : true,
   "camelcase"     : true,
   "curly"         : true,
