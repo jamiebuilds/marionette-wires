@@ -1,7 +1,7 @@
 var Model = require('src/common/model');
 
 module.exports = Model.extend({
-  urlRoot: '/api/v1/colors',
+  urlRoot: '/api/colors',
 
   defaults: {
     active: false

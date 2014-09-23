@@ -15,10 +15,14 @@ module.exports = Route.extend({
     }
   },
 
-  render: function() {
+  render: function(params) {
+    var page = params && parseInt(params.page) || 1;
+
     this.view = new View({
-      collection: this.collection
+      collection: this.collection,
+      page: page
     });
+
     this.container.show(this.view);
   }
 });

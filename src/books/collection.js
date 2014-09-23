@@ -2,6 +2,6 @@ var Collection = require('src/common/collection');
 var Model = require('./model');
 
 module.exports = Collection.extend({
-  url: '/api/v1/books',
+  url: '/api/books',
   model: Model
 });
