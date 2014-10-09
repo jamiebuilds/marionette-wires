@@ -15,7 +15,7 @@ module.exports = LayoutView.extend({
     content: '.modal-content'
   },
 
-  initialize: function (options) {
+  initialize: function() {
     this.$el.modal({ show: false, backdrop: 'static' });
   },
 

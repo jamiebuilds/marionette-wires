@@ -3,11 +3,10 @@ var Radio = require('backbone.radio');
 var Collection = require('./collection');
 var CollectionView = require('./collection-view');
 
-var channel = Radio.channel('flashes');
-
 module.exports = Module.extend({
   initialize: function() {
     this.container = this.options.container;
+    this.channel = Radio.channel('flashes');
     this.collection = new Collection();
     this.start();
   },
@@ -18,7 +17,7 @@ module.exports = Module.extend({
   },
 
   onStop: function() {
-    channel.stopComplying();
+    this.channel.stopComplying();
   },
 
   add: function(flash) {
@@ -27,7 +26,9 @@ module.exports = Module.extend({
 
   remove: function(flash) {
     var model = this.collection.findWhere(flash);
-    if (model) model.destroy();
+    if (model) {
+      model.destroy();
+    }
   },
 
   _showFlashesView: function() {
@@ -38,7 +39,7 @@ module.exports = Module.extend({
   },
 
   _bindChannelCommands: function() {
-    channel.comply({
+    this.channel.comply({
       add    : this.add,
       remove : this.remove
     }, this);

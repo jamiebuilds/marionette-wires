@@ -16,8 +16,8 @@ Make sure [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.org/) are
 
 ```sh
 npm install
-npm install -g grunt-cli
-grunt
+npm install -g gulp
+gulp
 ```
 
 Once that's done, open up http://localhost:9000/ in your browser.
@@ -34,7 +34,6 @@ As a general rule, be sure to read through all of the source code yourself and m
 | [dist](./dist) | Built assets |
 | [lib](./lib) | Libraries (only ones not on npm) |
 | [src](./src) | Source files |
-| [tasks](./tasks) | Grunt tasks |
 | [test](./test) | Test files |
 
 ===

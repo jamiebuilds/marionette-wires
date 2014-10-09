@@ -3,8 +3,6 @@ var Module = require('src/common/module');
 var Collection = require('src/common/collection');
 var View = require('./view');
 
-var routerChannel = Radio.channel('router');
-
 module.exports = Module.extend({
   initialize: function() {
     this.container = this.options.container;

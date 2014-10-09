@@ -1,6 +1,5 @@
 var _ = require('lodash');
 var Backbone = require('backbone');
-var Radio = require('backbone.radio');
 var Model = require('src/common/model');
 
 module.exports = Model.extend({

@@ -46,11 +46,8 @@ module.exports = CompositeView.extend({
       };
     });
 
-    var prev = current - 1;
-    var next = current + 1;
-
-    prev = prev > 0     ? prev : false;
-    next = next < total ? next : false;
+    var prev = current - 1 > 0     ? current - 1 : false;
+    var next = current + 1 < total ? current + 1 : false;
 
     return {
       total   : total,

@@ -1,6 +1,4 @@
-var _ = require('lodash');
 var Route = require('src/common/route');
-var Collection = require('../collection');
 var View = require('./composite-view');
 
 module.exports = Route.extend({
@@ -16,7 +14,7 @@ module.exports = Route.extend({
   },
 
   render: function(params) {
-    var page = params && parseInt(params.page) || 1;
+    var page = params && parseFloat(params.page) || 1;
 
     this.view = new View({
       collection: this.collection,

@@ -1,7 +1,6 @@
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
-var _ = require('lodash');
 
 module.exports = Marionette.Object.extend({
   constructor: function() {
@@ -10,12 +9,15 @@ module.exports = Marionette.Object.extend({
 
   _triggerMethod: function(name, args) {
     if (this.router) {
-      this.router.triggerMethod.apply(this.router, [name + ':route'].concat(args));
+      this.router.triggerMethod.apply(
+        this.router,
+        [name + ':route'].concat(args)
+      );
     }
     this.triggerMethod.apply(this, [name].concat(args));
   },
 
-  enter: function(args, router) {
+  enter: function(args) {
     var self = this;
     this._triggerMethod('before:enter', args);
     this._triggerMethod('before:fetch', args);

@@ -8,7 +8,7 @@ module.exports = Route.extend({
     this.collection = options.collection;
   },
 
-  fetch: function(id) {
+  fetch: function() {
     if (this.collection.isNew()) {
       return this.collection.fetch();
     }
