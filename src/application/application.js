@@ -24,15 +24,24 @@ module.exports = Application.extend({
   },
 
   onBeforeEnterRoute: function() {
-    nprogress.start();
+    var self = this;
+    this.transitioning = true;
+    // Don't show for synchronous route changes
+    setTimeout(function() {
+      if (self.transitioning) {
+        nprogress.start();
+      }
+    }, 0);
   },
 
   onEnterRoute: function() {
+    this.transitioning = false;
     this.$body.scrollTop(0);
     nprogress.done();
   },
 
   onErrorRoute: function() {
+    this.transitioning = false;
     nprogress.done(true);
   }
 });
