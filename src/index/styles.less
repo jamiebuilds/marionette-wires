@@ -20,9 +20,18 @@
         color: white;
         text-shadow:
            1px  1px @brand-danger,
+           1px  0   @brand-danger,
            1px -1px @brand-danger,
+           0   -1px @brand-danger,
+          -1px -1px @brand-danger,
+          -1px  0   @brand-danger,
           -1px  1px @brand-danger,
-          -1px -1px @brand-danger;
+           0    1px @brand-danger;
+
+        &:not(*:root) {
+          text-shadow: none;
+          -webkit-text-stroke: 1px @brand-danger;
+        }
       }
     }
 
