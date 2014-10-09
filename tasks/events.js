@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var minimatch = require('minimatch');
 var path = require('path');
 

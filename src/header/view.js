@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var View = require('src/common/view');
 var template = require('./template.hbs');
@@ -24,7 +24,7 @@ module.exports = View.extend({
   },
 
   serializeWhere: function(props) {
-    return _(this.collection.where(props)).invoke('toJSON');
+    return _.invoke(this.collection.where(props), 'toJSON');
   },
 
   ui: {

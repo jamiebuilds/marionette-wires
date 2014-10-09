@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var _ = require('underscore');
+var _ = require('lodash');
 
 module.exports = function() {
   var Widget = this.Widget;

@@ -1,7 +1,7 @@
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
-var _ = require('underscore');
+var _ = require('lodash');
 var Radio = require('backbone.radio');
 var Route = require('./route');
 

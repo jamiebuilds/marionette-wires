@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var CompositeView = require('src/common/composite-view');
 var Collection = require('src/common/collection');
 var ItemView = require('./item-view');

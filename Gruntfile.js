@@ -9,6 +9,12 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     version: '<%= pkg.version %>',
 
+    env: {
+      dist: {
+        BROWSERIFYSWAP_ENV: 'dist'
+      }
+    },
+
     jshint: {
       javascripts: {
         src: ['src/**/*.js']
@@ -74,10 +80,6 @@ module.exports = function (grunt) {
       src: {
         src: 'src',
         dest: 'node_modules/src'
-      },
-      lib: {
-        src: 'lib',
-        dest: 'node_modules/lib'
       }
     },
 
@@ -170,6 +172,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+    'env:dist',
     'symlink',
     'clean:dist',
     'copy:views',

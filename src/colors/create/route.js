@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var Route = require('src/common/route');
 var Collection = require('../collection');
 var Model = require('../model');

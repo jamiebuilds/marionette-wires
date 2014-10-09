@@ -1,7 +1,7 @@
 var nprogress = require('nprogress');
 var Backbone = require('backbone');
 var FormBehavior = require('src/forms/behavior');
-var _ = require('underscore');
+var _ = require('lodash');
 var View = require('src/common/view');
 var template = require('./template.hbs');
 
