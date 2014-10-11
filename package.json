@@ -4,8 +4,8 @@
   "description": "Starter kit for Marionette.js Applications using Browserify",
   "main": "index.js",
   "scripts": {
-    "start": "grunt",
-    "test": "grunt test",
+    "start": "gulp",
+    "test": "gulp test",
     "integration": "pioneer"
   },
   "repository": {
