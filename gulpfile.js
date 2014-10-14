@@ -8,6 +8,7 @@ var stylish = require('jshint-stylish');
 var path = require('path');
 var merge = require('merge-stream');
 var buffer = require('vinyl-buffer');
+var _ = require('lodash');
 
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -38,7 +39,7 @@ gulp.task('styles', function() {
 var bundler;
 function getBundler() {
   if (!bundler) {
-    bundler = watchify(browserify('./src/main.js', { debug: true }), watchify.args);
+    bundler = watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
 
     bundler.plugin(remapify, [{
       src: '**/*.js',
