@@ -120,6 +120,7 @@ gulp.task('watch', ['build'], function() {
     gulp.start('test');
   });
   gulp.watch('./test/**/*.js', ['test']);
+  gulp.watch(['./src/main.less', './src/**/*.less'], ['styles']);
 });
 
 gulp.task('default', ['watch']);
