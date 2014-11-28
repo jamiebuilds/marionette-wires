@@ -99,7 +99,9 @@
   "browserify": {
     "transform": [
       "6to5ify",
-      "hbsfy",
+      ["hbsfy", {
+        "extensions": ["hbs"]
+      }],
       "browserify-swap",
       "browserify-shim"
     ]
