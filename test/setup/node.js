@@ -10,6 +10,7 @@ if (!global.document || !global.window) {
 
   global.window = document.createWindow();
   global.navigator = global.window.navigator;
+  global.location = global.window.location;
 }
 
 global.$ = global.jQuery = require('jquery');
