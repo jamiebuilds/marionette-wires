@@ -8,7 +8,7 @@ if (!global.document || !global.window) {
     QuerySelector            : false
   });
 
-  global.window = document.createWindow();
+  global.window = document.parentWindow;
   global.navigator = global.window.navigator;
   global.location = global.window.location;
 }

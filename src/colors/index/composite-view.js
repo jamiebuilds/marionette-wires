@@ -1,6 +1,6 @@
 var _ = require('lodash');
-var CompositeView = require('src/common/composite-view');
-var Collection = require('src/common/collection');
+var CompositeView = require('../../common/composite-view');
+var Collection = require('../../common/collection');
 var ItemView = require('./item-view');
 var template = require('./composite-template.hbs');
 

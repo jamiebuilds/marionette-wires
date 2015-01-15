@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var Radio = require('backbone.radio');
 var nprogress = require('nprogress');
-var Application = require('src/common/application');
+var Application = require('../common/application');
 var LayoutView = require('./layout-view');
 
 var routerChannel = Radio.channel('router');

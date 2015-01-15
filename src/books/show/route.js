@@ -1,4 +1,4 @@
-var Route = require('src/common/route');
+var Route = require('../../common/route');
 var LibraryView = require('../library/collection-view');
 var ViewerView  = require('../viewer/view');
 

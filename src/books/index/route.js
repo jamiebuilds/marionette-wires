@@ -1,4 +1,4 @@
-var Route = require('src/common/route');
+var Route = require('../../common/route');
 
 module.exports = Route.extend({
   initialize: function(options) {

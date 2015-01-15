@@ -1,6 +1,6 @@
 var Radio = require('backbone.radio');
-var View = require('src/common/view');
-var Model = require('src/common/model');
+var View = require('../../common/view');
+var Model = require('../../common/model');
 var template = require('./template.hbs');
 
 module.exports = View.extend({

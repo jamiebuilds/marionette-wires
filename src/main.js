@@ -7,37 +7,37 @@ if (window.__agent) {
   window.__agent.start(Backbone, Marionette);
 }
 
-var Application = require('src/application/application');
+var Application = require('./application/application');
 
 var app = new Application();
 
 app.module('modal', {
-  moduleClass: require('src/modal/module'),
+  moduleClass: require('./modal/module'),
   container: app.layout.overlay
 });
 
 app.module('header', {
-  moduleClass: require('src/header/module'),
+  moduleClass: require('./header/module'),
   container: app.layout.header
 });
 
 app.module('flashes', {
-  moduleClass: require('src/flashes/module'),
+  moduleClass: require('./flashes/module'),
   container: app.layout.flashes
 });
 
 app.module('index', {
-  moduleClass: require('src/index/module'),
+  moduleClass: require('./index/module'),
   container: app.layout.content
 });
 
 app.module('colors', {
-  moduleClass: require('src/colors/module'),
+  moduleClass: require('./colors/module'),
   container: app.layout.content
 });
 
 app.module('books', {
-  moduleClass: require('src/books/module'),
+  moduleClass: require('./books/module'),
   container: app.layout.content
 });
 

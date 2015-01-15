@@ -73,15 +73,9 @@ gulp.task('jshint', function() {
     .pipe($.jshint.reporter(stylish));
 });
 
-gulp.task('symlink', function() {
-  return gulp.src('./src')
-    .pipe($.plumber())
-    .pipe($.symlink('./node_modules'));
-});
-
 var reporter = 'spec';
 
-gulp.task('mocha', ['jshint', 'symlink'], function() {
+gulp.task('mocha', ['jshint'], function() {
   return gulp.src([
     './test/setup/node.js',
     './test/setup/helpers.js',
@@ -96,7 +90,7 @@ gulp.task('build', [
   'html',
   'styles',
   'scripts',
-  'test'
+  // 'test'
 ]);
 
 gulp.task('test', [

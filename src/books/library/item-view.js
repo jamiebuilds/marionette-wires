@@ -1,4 +1,4 @@
-var ItemView = require('src/common/item-view');
+var ItemView = require('../../common/item-view');
 var template = require('./item-template.hbs');
 
 module.exports = ItemView.extend({
