@@ -13,21 +13,20 @@ export default class ModalService extends Service {
     return 'modal';
   }
 
-  get requests() {
-    return {
-      'open'    : 'open',
-      'close'   : 'close',
-      'alert'   : 'alert',
-      'confirm' : 'confirm',
-      'prompt'  : 'prompt'
-    };
-  }
-
   initialize(options) {
     this.container = options.container;
+    this.start();
   }
 
   onStart() {
+    this.channel.reply({
+      'open' : this.open,
+      'close' : this.close,
+      'alert' : this.alert,
+      'confirm' : this.confirm,
+      'prompt' : this.prompt
+    }, this);
+
     this.layout = new LayoutView();
     this.container.show(this.layout);
 

@@ -1,5 +1,5 @@
 import Route from '../../common/route';
-import View from './composite-view';
+import LayoutView from './layout-view';
 
 export default class ColorsIndexRoute extends Route {
   initialize(options) {
@@ -16,11 +16,11 @@ export default class ColorsIndexRoute extends Route {
   render(params) {
     var page = params && parseFloat(params.page) || 1;
 
-    this.view = new View({
+    this.layoutView = new LayoutView({
       collection: this.collection,
       page: page
     });
 
-    this.container.show(this.view);
+    this.container.show(this.layoutView);
   }
 }

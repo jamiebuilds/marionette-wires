@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import CompositeView from '../../common/composite-view';
+import LayoutView from '../../common/layout-view';
+import CollectionView from './collection-view';
 import Collection from '../../common/collection';
-import ItemView from './item-view';
-import template from './composite-template.hbs';
+import template from './layout-template.hbs';
 
-export default class ColorsIndexView extends CompositeView {
+export default class ColorsIndexView extends LayoutView {
   get template() {
     return template;
   }
@@ -13,38 +13,36 @@ export default class ColorsIndexView extends CompositeView {
     return 'colors colors--index container';
   }
 
-  initialize(options) {
-    this.state = { start: 0, limit: 20 };
-    this.models = options.collection.models;
-    delete this.collection;
-    this.state.start = (options.page - 1) * this.state.limit;
-  }
-
-  get childView() {
-    return ItemView;
-  }
-
-  get childViewContainer() {
-    return 'div.list-group';
-  }
-
-  get collectionEvents() {
+  regions() {
     return {
-      'change': 'render'
+      list: '.colors__list'
     };
   }
 
+  initialize(options) {
+    this.state = { start: 0, limit: 20 };
+    this.state.start = (options.page - 1) * this.state.limit;
+  }
+
   onBeforeRender() {
-    var filtered = _.chain(this.models)
+    var filtered = _.chain(this.collection.models)
       .drop(this.state.start)
       .take(this.state.limit)
       .value();
 
-    this.collection = new Collection(filtered);
+    this.filteredCollection = new Collection(filtered);
+  }
+
+  onAttach() {
+    this.collectionView = new CollectionView({
+      collection: this.filteredCollection
+    });
+
+    this.list.show(this.collectionView);
   }
 
   templateHelpers() {
-    var total   = Math.floor(this.models.length / this.state.limit) + 1;
+    var total   = Math.floor(this.collection.length / this.state.limit) + 1;
     var current = Math.floor(this.state.start / this.state.limit) + 1;
 
     var pages = _.times(total, function(index) {
