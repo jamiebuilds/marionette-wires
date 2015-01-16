@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'lodash';
 import Radio from 'backbone.radio';
 import nprogress from 'nprogress';
 import Application from '../common/application';
@@ -26,11 +27,11 @@ export default Application.extend({
   onBeforeEnterRoute() {
     this.transitioning = true;
     // Don't show for synchronous route changes
-    setTimeout(() => {
+    _.defer(() => {
       if (this.transitioning) {
         nprogress.start();
       }
-    }, 0);
+    });
   },
 
   onEnterRoute() {
