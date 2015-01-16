@@ -2,11 +2,8 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
 var watchify = require('watchify');
-var remapify = require('remapify');
 var source = require('vinyl-source-stream');
 var stylish = require('jshint-stylish');
-var path = require('path');
-var merge = require('merge-stream');
 var buffer = require('vinyl-buffer');
 var _ = require('lodash');
 

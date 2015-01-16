@@ -51,7 +51,6 @@
     "hbsfy": "^2.2.1",
     "jsdom": "^2.0.0",
     "jshint-stylish": "^1.0.0",
-    "merge-stream": "^0.1.7",
     "minimatch": "^2.0.1",
     "mocha": "^2.1.0",
     "morgan": "^1.5.1",
