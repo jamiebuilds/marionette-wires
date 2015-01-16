@@ -40,12 +40,6 @@ var bundler;
 function getBundler() {
   if (!bundler) {
     bundler = watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
-
-    bundler.plugin(remapify, [{
-      src: '**/*.js',
-      expose: 'src',
-      cwd: path.join(__dirname, 'src')
-    }]);
   }
   return bundler;
 };
