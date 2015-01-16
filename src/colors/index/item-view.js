@@ -1,18 +1,28 @@
-var ItemView = require('../../common/item-view');
-var template = require('./item-template.hbs');
+import ItemView from '../../common/item-view';
+import template from './item-template.hbs';
 
-module.exports = ItemView.extend({
-  tagName: 'a',
-  template: template,
-  className: 'colors__item list-group-item',
+export default class ColorsIndexItemView extends ItemView {
+  get tagName() {
+    return 'a';
+  }
 
-  attributes: function () {
+  get template() {
+    return template;
+  }
+
+  get className() {
+    return 'colors__item list-group-item';
+  }
+
+  attributes() {
     return {
       href: '#colors/' + this.model.get('id')
     };
-  },
-
-  modelEvents: {
-    'all': 'render'
   }
-});
+
+  get modelEvents() {
+    return {
+      'all': 'render'
+    };
+  }
+}

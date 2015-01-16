@@ -1,9 +1,11 @@
-var Model = require('../common/model');
+import Model from '../common/model';
 
-module.exports = Model.extend({
-  urlRoot: '/api/books',
+export default class BooksModel extends Model {
+  get urlRoot() {
+    return '/api/books';
+  }
 
-  isActive: function() {
+  isActive() {
     return this.collection.active === this;
   }
-});
+}

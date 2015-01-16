@@ -1,40 +1,47 @@
-var Radio = require('backbone.radio');
-var View = require('../../common/view');
-var Model = require('../../common/model');
-var template = require('./template.hbs');
+import Radio from 'backbone.radio';
+import View from '../../common/view';
+import Model from '../../common/model';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-  tagName: 'form',
+export default class ModalPromptView extends View {
+  get template() {
+    return template;
+  }
 
-  ui: {
-    'input' : 'input'
-  },
+  get tagName() {
+    return 'form';
+  }
 
-  initialize: function() {
+  ui() {
+    return {
+      'input' : 'input'
+    };
+  }
+
+  initialize() {
     this.model = new Model(this.options);
     Radio.request('modal', 'open', this);
-  },
+  }
 
-  events: {
-    'submit'             : 'submit',
-    'click .btn-default' : 'cancel',
-    'click .close'       : 'cancel'
-  },
+  events() {
+    return {
+      'submit'             : 'submit',
+      'click .btn-default' : 'cancel',
+      'click .close'       : 'cancel'
+    };
+  }
 
-  submit: function(e) {
+  submit(e) {
     e.preventDefault();
-    var self = this;
     var val = this.ui.input.val();
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('submit', val);
-    });
-  },
-
-  cancel: function() {
-    var self = this;
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('cancel');
+    Radio.request('modal', 'close').then(() => {
+      this.trigger('submit', val);
     });
   }
-});
+
+  cancel() {
+    Radio.request('modal', 'close').then(() => {
+      this.trigger('cancel');
+    });
+  }
+}

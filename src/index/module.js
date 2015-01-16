@@ -1,9 +1,8 @@
-var Module = require('../common/module');
-var Router = require('./router');
+import Module from '../common/module';
+import Router from './router';
 
-
-module.exports = Module.extend({
-  initialize: function() {
+export default class IndexModule extends Module {
+  initialize() {
     this.router = new Router(this.options);
   }
-});
+}

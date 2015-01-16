@@ -1,6 +1,8 @@
-var Collection = require('../common/collection');
-var Model = require('./model');
+import Collection from '../common/collection';
+import Model from './model';
 
-module.exports = Collection.extend({
-  model: Model
-});
+export default class FlashesCollection extends Collection {
+  get model() {
+    return Model;
+  }
+}

@@ -1,7 +1,12 @@
-var Collection = require('../common/collection');
-var Model = require('./model');
+import Collection from '../common/collection';
+import Model from './model';
 
-module.exports = Collection.extend({
-  url: '/api/colors',
-  model: Model
-});
+export default class ColorsCollection extends Collection {
+  get url() {
+    return '/api/colors';
+  }
+
+  get model() {
+    return Model;
+  }
+}

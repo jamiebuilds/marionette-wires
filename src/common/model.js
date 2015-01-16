@@ -1,30 +1,28 @@
-var Backbone = require('backbone');
-var Radio = require('backbone.radio');
+import Backbone from 'backbone';
+import Radio from 'backbone.radio';
 
-var flashesChannel = Radio.channel('flashes');
-
-module.exports = Backbone.Model.extend({
-  constructor: function() {
-    Backbone.Model.apply(this, arguments);
+export default class Model extends Backbone.Model {
+  constructor() {
+    super(...arguments);
     this.on('request', this.handleRequest);
     this.on('error', this.handleError);
-  },
+  }
 
-  handleRequest: function() {
-    flashesChannel.command('remove', this.serverError);
+  handleRequest() {
+    Radio.command('flashes', 'remove', this.serverError);
     delete this.serverError;
-  },
+  }
 
-  handleError: function() {
+  handleError() {
     this.serverError = { type: 'danger', title: 'Server Error' };
-    flashesChannel.command('add', this.serverError);
-  },
+    Radio.command('flashes', 'add', this.serverError);
+  }
 
-  cleanup: function() {
+  cleanup() {
     if (this.serverError) {
-      flashesChannel.command('remove', this.serverError);
+      Radio.command('flashes', 'remove', this.serverError);
     }
     delete this.serverError;
     delete this.validationError;
   }
-});
+}

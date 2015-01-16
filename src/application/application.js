@@ -1,17 +1,17 @@
-var $ = require('jquery');
-var Radio = require('backbone.radio');
-var nprogress = require('nprogress');
-var Application = require('../common/application');
-var LayoutView = require('./layout-view');
+import $ from 'jquery';
+import Radio from 'backbone.radio';
+import nprogress from 'nprogress';
+import Application from '../common/application';
+import LayoutView from './layout-view';
 
-var routerChannel = Radio.channel('router');
+let routerChannel = Radio.channel('router');
 
 nprogress.configure({
   showSpinner: false
 });
 
-module.exports = Application.extend({
-  initialize: function() {
+export default Application.extend({
+  initialize() {
     this.$body = $(document.body);
     this.layout = new LayoutView();
     this.layout.render();
@@ -23,24 +23,23 @@ module.exports = Application.extend({
     });
   },
 
-  onBeforeEnterRoute: function() {
-    var self = this;
+  onBeforeEnterRoute() {
     this.transitioning = true;
     // Don't show for synchronous route changes
-    setTimeout(function() {
-      if (self.transitioning) {
+    setTimeout(() => {
+      if (this.transitioning) {
         nprogress.start();
       }
     }, 0);
   },
 
-  onEnterRoute: function() {
+  onEnterRoute() {
     this.transitioning = false;
     this.$body.scrollTop(0);
     nprogress.done();
   },
 
-  onErrorRoute: function() {
+  onErrorRoute() {
     this.transitioning = false;
     nprogress.done(true);
   }

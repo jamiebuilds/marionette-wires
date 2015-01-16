@@ -1,19 +1,19 @@
-var Route = require('../../common/route');
-var View = require('./composite-view');
+import Route from '../../common/route';
+import View from './composite-view';
 
-module.exports = Route.extend({
-  initialize: function(options) {
+export default class ColorsIndexRoute extends Route {
+  initialize(options) {
     this.container = options.container;
     this.collection = options.collection;
-  },
+  }
 
-  fetch: function() {
+  fetch() {
     if (this.collection.isNew()) {
       return this.collection.fetch();
     }
-  },
+  }
 
-  render: function(params) {
+  render(params) {
     var page = params && parseFloat(params.page) || 1;
 
     this.view = new View({
@@ -23,4 +23,4 @@ module.exports = Route.extend({
 
     this.container.show(this.view);
   }
-});
+}

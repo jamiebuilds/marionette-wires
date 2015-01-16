@@ -1,23 +1,25 @@
-var Router = require('../common/router');
-var Radio = require('backbone.radio');
-var IndexRoute = require('./route');
+import Router from '../common/router';
+import Radio from 'backbone.radio';
+import IndexRoute from './route';
 
-module.exports = Router.extend({
-  initialize: function(options) {
+export default class IndexRouter extends Router {
+  initialize(options) {
     this.container = options.container;
-  },
+  }
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     Radio.command('header', 'activate', { path: '' });
-  },
+  }
 
-  routes: {
-    '': 'index'
-  },
+  get routes() {
+    return {
+      '': 'index'
+    };
+  }
 
-  index: function() {
+  index() {
     return new IndexRoute({
       container: this.container
     });
   }
-});
+}

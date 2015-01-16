@@ -1,7 +1,12 @@
-var CollectionView = require('../common/collection-view');
-var ItemView = require('./item-view');
+import CollectionView from '../common/collection-view';
+import ItemView from './item-view';
 
-module.exports = CollectionView.extend({
-  childView: ItemView,
-  className: 'container'
-});
+export default class FlashesView extends CollectionView {
+  get childView() {
+    return ItemView;
+  }
+
+  get className() {
+    return 'container';
+  }
+}

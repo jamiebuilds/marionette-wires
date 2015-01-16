@@ -1,12 +1,19 @@
-var LayoutView = require('../common/layout-view');
-var template = require('./layout-template.hbs');
+import LayoutView from '../common/layout-view';
+import template from './layout-template.hbs';
 
-module.exports = LayoutView.extend({
-  template: template,
-  className: 'container',
-
-  regions: {
-    library : '.books__library',
-    viewer  : '.books__viewer'
+export default class BooksLayout extends LayoutView {
+  get template() {
+    return template;
   }
-});
+
+  get className() {
+    return 'container';
+  }
+
+  regions() {
+    return {
+      library : '.books__library',
+      viewer  : '.books__viewer'
+    };
+  }
+}

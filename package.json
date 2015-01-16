@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/thejameskyle/marionette-wires",
   "devDependencies": {
+    "6to5": "^2.12.5",
+    "6to5ify": "^3.1.2",
     "bluebird": "^2.7.1",
     "body-parser": "^1.10.1",
     "browser-sync": "^1.9.0",
@@ -98,6 +100,7 @@
   },
   "browserify": {
     "transform": [
+      "6to5ify",
       "hbsfy",
       "browserify-swap",
       "browserify-shim"

@@ -1,43 +1,59 @@
-var _ = require('lodash');
-var Backbone = require('backbone');
-var View = require('../common/view');
-var template = require('./template.hbs');
+import _ from 'lodash';
+import Backbone from 'backbone';
+import View from '../common/view';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-  tagName: 'nav',
-  className: 'header navbar navbar-default navbar-fixed-top',
+export default class HeaderView extends View {
+  get template() {
+    return template;
+  }
 
-  attributes: {
-    role: 'navigation'
-  },
+  get tagName() {
+    return 'nav';
+  }
 
-  collectionEvents: {
-    'all': 'render'
-  },
+  get className() {
+    return 'header navbar navbar-default navbar-fixed-top';
+  }
 
-  templateHelpers: function() {
+  get attributes() {
+    return {
+      role: 'navigation'
+    };
+  }
+
+  get collectionEvents() {
+    return {
+      'all': 'render'
+    };
+  }
+
+  templateHelpers() {
     return {
       primaryItems   : this.serializeWhere({ type: 'primary' }),
       secondaryItems : this.serializeWhere({ type: 'secondary' })
     };
-  },
+  }
 
-  serializeWhere: function(props) {
+  serializeWhere(props) {
     return _.invoke(this.collection.where(props), 'toJSON');
-  },
+  }
 
-  ui: {
-    collapse: '#navbar-collapse'
-  },
+  ui() {
+    return {
+      collapse: '#navbar-collapse'
+    };
+  }
 
-  events: {
-    'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
-  },
+  events() {
+    return {
+      'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
+    };
+  }
 
-  onCollapseShow: function() {
+  onCollapseShow() {
     this.listenToOnce(Backbone.history, 'route', function() {
       this.ui.collapse.collapse('hide');
     });
   }
-});
+}

@@ -1,7 +1,12 @@
-var Collection = require('../common/collection');
-var Model = require('./model');
+import Collection from '../common/collection';
+import Model from './model';
 
-module.exports = Collection.extend({
-  url: '/api/books',
-  model: Model
-});
+export default class BooksCollection extends Collection {
+  get url() {
+    return '/api/books';
+  }
+
+  get model() {
+    return Model;
+  }
+}

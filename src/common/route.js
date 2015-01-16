@@ -1,44 +1,42 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
-var $ = require('jquery');
+import Marionette from 'backbone.marionette';
+import Backbone from 'backbone';
+import $ from 'jquery';
 
-module.exports = Marionette.Object.extend({
-  constructor: function() {
-    this.initialize.apply(this, arguments);
-  },
+export default class Route extends Marionette.Object {
+  constructor() {
+    this.initialize(...arguments);
+  }
 
-  _triggerMethod: function(name, args) {
+  _triggerMethod(name, args) {
     if (this.router) {
-      this.router.triggerMethod.apply(
-        this.router,
-        [name + ':route'].concat(args)
-      );
+      this.router.triggerMethod(name + ':route', ...args);
     }
-    this.triggerMethod.apply(this, [name].concat(args));
-  },
+    this.triggerMethod(name, ...args);
+  }
 
-  enter: function(args) {
-    var self = this;
+  enter(args) {
     this._triggerMethod('before:enter', args);
     this._triggerMethod('before:fetch', args);
 
-    return $.when(this.fetch.apply(this, args)).then(function() {
-      self._triggerMethod('fetch', args);
-      self._triggerMethod('before:render', args);
-    }).then(function() {
-      return self.render.apply(self, args);
-    }).then(function() {
-      self._triggerMethod('render', args);
-      self._triggerMethod('enter', args);
-    }).fail(function() {
-      self._triggerMethod('error', args);
-    });
-  },
+    return $.when(this.fetch(...args))
+      .then(() => {
+        this._triggerMethod('fetch', args);
+        this._triggerMethod('before:render', args);
+      })
+      .then(() => this.render(...args))
+      .then(() => {
+        this._triggerMethod('render', args);
+        this._triggerMethod('enter', args);
+      })
+      .fail(() => {
+        this._triggerMethod('error', args);
+      });
+  }
 
-  navigate: function() {
-    Backbone.history.navigate.apply(Backbone.history, arguments);
-  },
+  navigate() {
+    Backbone.history.navigate(...arguments);
+  }
 
-  fetch  : function() {},
-  render : function() {}
-});
+  fetch() {}
+  render() {}
+}

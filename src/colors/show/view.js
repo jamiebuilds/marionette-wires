@@ -1,43 +1,52 @@
-var View = require('../../common/view');
-var nprogress = require('nprogress');
-var Radio = require('backbone.radio');
-var Backbone = require('backbone');
-var template = require('./template.hbs');
+import View from '../../common/view';
+import nprogress from 'nprogress';
+import Radio from 'backbone.radio';
+import Backbone from 'backbone';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-  className: 'colors colors--show container',
+export default class ColorsShowView extends View {
+  get template() {
+    return template;
+  }
 
-  initialize: function (options) {
+  get className() {
+    return 'colors colors--show container';
+  }
+
+  initialize(options) {
     this.model = options.model;
     this.model.cleanup();
-  },
+  }
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       errors: this.model.validationError
     };
-  },
+  }
 
-  events: {
-    'click .colors__toggle' : 'handleToggle',
-    'click .colors__destroy' : 'handleDestroy'
-  },
+  events() {
+    return {
+      'click .colors__toggle' : 'handleToggle',
+      'click .colors__destroy' : 'handleDestroy'
+    };
+  }
 
-  modelEvents: {
-    'all': 'render'
-  },
+  get modelEvents() {
+    return {
+      'all': 'render'
+    };
+  }
 
-  handleToggle: function() {
+  handleToggle() {
     this.model.set('active', !this.model.get('active'));
     this.model.save().fail(this.handleToggleFailure);
-  },
+  }
 
-  handleToggleFailure: function() {
+  handleToggleFailure() {
     this.model.set('active', this.model.previous('active'));
-  },
+  }
 
-  handleDestroy: function () {
+  handleDestroy() {
     var self = this;
     Radio.request('modal', 'confirm', {
       title : 'Confirm Color Destruction',
@@ -48,9 +57,9 @@ module.exports = View.extend({
     }).then(function() {
       self.handleDestroySuccess();
     });
-  },
+  }
 
-  handleDestroySuccess: function() {
+  handleDestroySuccess() {
     Backbone.history.navigate('colors', { trigger: true });
     Radio.command('flashes', 'add', {
       timeout : 5000,
@@ -59,4 +68,4 @@ module.exports = View.extend({
       body    : 'You have deleted ' + this.model.get('name') + '.'
     });
   }
-});
+}

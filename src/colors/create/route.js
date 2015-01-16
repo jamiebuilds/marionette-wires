@@ -1,20 +1,20 @@
-var Route = require('../../common/route');
-var Model = require('../model');
-var View = require('./view');
+import Route from '../../common/route';
+import Model from '../model';
+import View from './view';
 
-module.exports = Route.extend({
-  initialize: function(options) {
+export default class ColorsCreateRoute extends Route {
+  initialize(options) {
     this.container = options.container;
     this.collection = options.collection;
-  },
+  }
 
-  fetch: function() {
+  fetch() {
     if (this.collection.isNew()) {
       return this.collection.fetch();
     }
-  },
+  }
 
-  render: function() {
+  render() {
     this.model = new Model();
     this.view = new View({
       collection: this.collection,
@@ -22,4 +22,4 @@ module.exports = Route.extend({
     });
     this.container.show(this.view);
   }
-});
+}

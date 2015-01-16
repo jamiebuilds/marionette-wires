@@ -1,15 +1,17 @@
-var _ = require('lodash');
-var Backbone = require('backbone');
-var Model = require('../common/model');
+import _ from 'lodash';
+import Backbone from 'backbone';
+import Model from '../common/model';
 
-module.exports = Model.extend({
-  defaults: {
-    timeout: false,
-    dismissible: true,
-    clearOnRoute: true
-  },
+export default class FlashesModel extends Model {
+  get defaults() {
+    return {
+      timeout: false,
+      dismissible: true,
+      clearOnRoute: true
+    };
+  }
 
-  initialize: function() {
+  initialize() {
     if (this.get('timeout') !== false) {
       this._setTimeout();
     }
@@ -19,16 +21,16 @@ module.exports = Model.extend({
     if (this.get('clearOnRoute')) {
       this.listenTo(Backbone.history, 'route', this.destroy);
     }
-  },
+  }
 
-  _setTimeout: function() {
+  _setTimeout() {
     this._timeout = setTimeout(_.bind(this.destroy, this), this.get('timeout'));
-  },
+  }
 
-  _clearTimeout: function() {
+  _clearTimeout() {
     if (this._timeout) {
       clearTimeout(this._timeout);
       delete this._timeout;
     }
   }
-});
+}

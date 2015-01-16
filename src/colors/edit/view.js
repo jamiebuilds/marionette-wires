@@ -1,33 +1,42 @@
-var nprogress = require('nprogress');
-var Backbone = require('backbone');
-var FormBehavior = require('../../forms/behavior');
-var _ = require('lodash');
-var View = require('../../common/view');
-var template = require('./template.hbs');
+import nprogress from 'nprogress';
+import Backbone from 'backbone';
+import FormBehavior from '../../forms/behavior';
+import _ from 'lodash';
+import View from '../../common/view';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-  className: 'colors colors--edit container',
+export default class ColorsEditView extends View {
+  get template() {
+    return template;
+  }
 
-  behaviors: {
-    form: { behaviorClass: FormBehavior }
-  },
+  get className() {
+    return 'colors colors--edit container';
+  }
 
-  templateHelpers: function() {
+  get behaviors() {
+    return {
+      form: { behaviorClass: FormBehavior }
+    };
+  }
+
+  templateHelpers() {
     return {
       errors: this.model.validationError
     };
-  },
+  }
 
-  initialize: function () {
+  initialize() {
     _.bindAll(this, 'handleSaveSuccess');
-  },
+  }
 
-  events: {
-    'submit form': 'handleSubmit'
-  },
+  events() {
+    return {
+      'submit form': 'handleSubmit'
+    };
+  }
 
-  handleSubmit: function () {
+  handleSubmit() {
     var errors = this.model.validate(this.form);
 
     if (!errors) {
@@ -39,9 +48,9 @@ module.exports = View.extend({
       this.model.validationError = errors;
       this.render();
     }
-  },
+  }
 
-  handleSaveSuccess: function () {
+  handleSaveSuccess() {
     Backbone.history.navigate('colors/' + this.model.id, { trigger: true });
   }
-});
+}

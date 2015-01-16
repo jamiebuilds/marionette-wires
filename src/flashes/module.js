@@ -1,47 +1,47 @@
-var Module = require('../common/module');
-var Radio = require('backbone.radio');
-var Collection = require('./collection');
-var CollectionView = require('./collection-view');
+import Module from '../common/module';
+import Radio from 'backbone.radio';
+import Collection from './collection';
+import CollectionView from './collection-view';
 
-module.exports = Module.extend({
-  initialize: function() {
+export default class FlashesModule extends Module {
+  initialize() {
     this.container = this.options.container;
     this.channel = Radio.channel('flashes');
     this.collection = new Collection();
     this.start();
-  },
+  }
 
-  onStart: function() {
+  onStart() {
     this._showFlashesView();
     this._bindChannelCommands();
-  },
+  }
 
-  onStop: function() {
+  onStop() {
     this.channel.stopComplying();
-  },
+  }
 
-  add: function(flash) {
+  add(flash) {
     this.collection.add(flash);
-  },
+  }
 
-  remove: function(flash) {
+  remove(flash) {
     var model = this.collection.findWhere(flash);
     if (model) {
       model.destroy();
     }
-  },
+  }
 
-  _showFlashesView: function() {
+  _showFlashesView() {
     this.view = new CollectionView({
       collection: this.collection
     });
     this.container.show(this.view);
-  },
+  }
 
-  _bindChannelCommands: function() {
+  _bindChannelCommands() {
     this.channel.comply({
       add    : this.add,
       remove : this.remove
     }, this);
   }
-});
+}

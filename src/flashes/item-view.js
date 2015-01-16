@@ -1,22 +1,28 @@
-var ItemView = require('../common/item-view');
-var template = require('./item-template.hbs');
+import ItemView from '../common/item-view';
+import template from './item-template.hbs';
 
-module.exports = ItemView.extend({
-  template: template,
+export default class FlashesItemView extends ItemView {
+  get template() {
+    return template;
+  }
 
-  className: function() {
+  className() {
     return 'flashes__alert alert alert-' + this.model.get('type');
-  },
+  }
 
-  attributes: {
-    role: 'alert'
-  },
+  get attributes() {
+    return {
+      role: 'alert'
+    };
+  }
 
-  events: {
-    'click button.close' : 'dismiss'
-  },
+  events() {
+    return {
+      'click button.close' : 'dismiss'
+    };
+  }
 
-  dismiss: function() {
+  dismiss() {
     this.model.destroy();
   }
-});
+}

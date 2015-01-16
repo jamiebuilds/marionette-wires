@@ -1,15 +1,15 @@
-var Backbone = require('backbone');
+import Backbone from 'backbone';
 
-module.exports = Backbone.Collection.extend({
-  constructor: function() {
-    Backbone.Collection.apply(this, arguments);
+export default class Collection extends Backbone.Collection {
+  constructor() {
+    super(...arguments);
     this._isNew = true;
-    this.once('sync', function() {
+    this.once('sync', () => {
       this._isNew = false;
     });
-  },
+  }
 
-  isNew: function() {
+  isNew() {
     return this._isNew;
   }
-});
+}

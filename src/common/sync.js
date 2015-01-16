@@ -1,3 +1,3 @@
-var Backbone = require('backbone');
+import Backbone from 'backbone';
 
-module.exports = Backbone.sync;
+export default Backbone.sync;

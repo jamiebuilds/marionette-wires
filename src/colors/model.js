@@ -1,13 +1,17 @@
-var Model = require('../common/model');
+import Model from '../common/model';
 
-module.exports = Model.extend({
-  urlRoot: '/api/colors',
+export default class ColorsModel extends Model {
+  get urlRoot() {
+    return '/api/colors';
+  }
 
-  defaults: {
-    active: false
-  },
+  get defaults() {
+    return {
+      active: false
+    };
+  }
 
-  validate: function (attrs) {
+  validate(attrs) {
     var errors = [];
 
     if (attrs.name === '') {
@@ -20,4 +24,4 @@ module.exports = Model.extend({
 
     return errors.length > 0 ? errors : undefined;
   }
-});
+}

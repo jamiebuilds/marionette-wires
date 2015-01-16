@@ -1,9 +1,9 @@
-var Radio = require('backbone.radio');
-var Module = require('../common/module');
-var Router = require('./router');
+import Radio from 'backbone.radio';
+import Module from '../common/module';
+import Router from './router';
 
-module.exports = Module.extend({
-  initialize: function() {
+export default class BooksModule extends Module {
+  initialize() {
     this.router = new Router(this.options);
 
     Radio.command('header', 'add', {
@@ -12,4 +12,4 @@ module.exports = Module.extend({
       type: 'primary'
     });
   }
-});
+}

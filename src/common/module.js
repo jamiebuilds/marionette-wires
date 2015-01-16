@@ -1,15 +1,15 @@
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
+import Marionette from 'backbone.marionette';
+import Backbone from 'backbone';
 
-module.exports = Marionette.Module.extend({
-  constructor: function() {
+export default Marionette.Module.extend({
+  constructor() {
     this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
     Marionette.Module.apply(this, arguments);
   },
 
-  initialize: function() {},
+  initialize() {},
 
-  _onHistoryRoute: function(router) {
+  _onHistoryRoute(router) {
     if (!this.router) {
       return;
     }

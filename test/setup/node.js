@@ -1,3 +1,5 @@
+require('6to5/register');
+
 if (!global.document || !global.window) {
   var jsdom = require('jsdom').jsdom;
 

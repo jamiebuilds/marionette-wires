@@ -1,43 +1,44 @@
-require('./plugins');
-var Backbone = require('backbone');
-var Marionette = require('backbone.marionette');
+import './plugins';
+import Backbone from 'backbone';
 
-// start the marionette inspector
-if (window.__agent) {
-  window.__agent.start(Backbone, Marionette);
-}
+import Application from './application/application';
 
-var Application = require('./application/application');
+import ModalModule from './modal/module';
+import HeaderModule from './header/module';
+import FlashesModule from './flashes/module';
+import IndexModule from './index/module';
+import ColorsModule from './colors/module';
+import BooksModule from './books/module';
 
-var app = new Application();
+let app = new Application();
 
 app.module('modal', {
-  moduleClass: require('./modal/module'),
+  moduleClass: ModalModule,
   container: app.layout.overlay
 });
 
 app.module('header', {
-  moduleClass: require('./header/module'),
+  moduleClass: HeaderModule,
   container: app.layout.header
 });
 
 app.module('flashes', {
-  moduleClass: require('./flashes/module'),
+  moduleClass: FlashesModule,
   container: app.layout.flashes
 });
 
 app.module('index', {
-  moduleClass: require('./index/module'),
+  moduleClass: IndexModule,
   container: app.layout.content
 });
 
 app.module('colors', {
-  moduleClass: require('./colors/module'),
+  moduleClass: ColorsModule,
   container: app.layout.content
 });
 
 app.module('books', {
-  moduleClass: require('./books/module'),
+  moduleClass: BooksModule,
   container: app.layout.content
 });
 

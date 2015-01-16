@@ -1,22 +1,22 @@
-var Module = require('../common/module');
-var Radio = require('backbone.radio');
-var Backbone = require('backbone');
-var $ = require('jquery');
+import Module from '../common/module';
+import Radio from 'backbone.radio';
+import Backbone from 'backbone';
+import $ from 'jquery';
 
-var LayoutView = require('./layout-view');
+import LayoutView from './layout-view';
 
-var AlertView   = require('./alert/view');
-var ConfirmView = require('./confirm/view');
-var PromptView  = require('./prompt/view');
+import AlertView   from './alert/view';
+import ConfirmView from './confirm/view';
+import PromptView  from './prompt/view';
 
-module.exports = Module.extend({
-  initialize: function() {
+export default class ModalModule extends Module {
+  initialize() {
     this.container = this.options.container;
     this.channel = Radio.channel('modal');
     this.start();
-  },
+  }
 
-  onStart: function() {
+  onStart() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
@@ -31,19 +31,19 @@ module.exports = Module.extend({
     this.listenTo(Backbone.history, {
       'route' : this.onRoute
     });
-  },
+  }
 
-  onStop: function() {
+  onStop() {
     this.channel.reset();
-  },
+  }
 
-  onRoute: function() {
+  onRoute() {
     if (this.fragment !== Backbone.history.fragment) {
       this.close();
     }
-  },
+  }
 
-  alert: function(options) {
+  alert(options) {
     var deferred = $.Deferred();
     var view = new AlertView(options);
 
@@ -53,9 +53,9 @@ module.exports = Module.extend({
     });
 
     return deferred;
-  },
+  }
 
-  confirm: function(options) {
+  confirm(options) {
     var deferred = $.Deferred();
     var view = new ConfirmView(options);
 
@@ -65,9 +65,9 @@ module.exports = Module.extend({
     });
 
     return deferred;
-  },
+  }
 
-  prompt: function(options) {
+  prompt(options) {
     var deferred = $.Deferred();
     var view = new PromptView(options);
 
@@ -77,18 +77,18 @@ module.exports = Module.extend({
     });
 
     return deferred;
-  },
+  }
 
-  open: function(view) {
+  open(view) {
     var self = this;
     this.fragment = Backbone.history.fragment;
     return this.close().then(function() {
       self.isOpen = true;
       return self.layout.open(view);
     });
-  },
+  }
 
-  close: function() {
+  close() {
     if (this.isOpen) {
       this.isOpen = false;
       return this.layout.close();
@@ -96,4 +96,4 @@ module.exports = Module.extend({
       return $.Deferred().resolve();
     }
   }
-});
+}

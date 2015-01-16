@@ -1,7 +1,12 @@
-var View = require('../common/view');
-var template = require('./template.hbs');
+import View from '../common/view';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-  className: 'index'
-});
+export default class IndexView extends View {
+  get template() {
+    return template;
+  }
+
+  get className() {
+    return 'index';
+  }
+}

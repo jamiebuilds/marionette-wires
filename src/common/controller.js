@@ -1,3 +1,3 @@
-var Marionette = require('backbone.marionette');
+import Marionette from 'backbone.marionette';
 
-module.exports = Marionette.Controller;
+export default class Controller extends Marionette.Controller {}

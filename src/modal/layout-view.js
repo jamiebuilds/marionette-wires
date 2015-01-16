@@ -1,40 +1,51 @@
-var LayoutView = require('../common/layout-view');
-var $ = require('jquery');
-var template = require('./layout-template.hbs');
+import LayoutView from '../common/layout-view';
+import $ from 'jquery';
+import template from './layout-template.hbs';
 
-module.exports = LayoutView.extend({
-  template: template,
-  className: 'modal fade',
+export default class ModalView extends LayoutView {
+  get template() {
+    return template;
+  }
 
-  attributes: {
-    'tabindex' : -1,
-    'role' : 'dialog'
-  },
+  get className() {
+    return 'modal fade';
+  }
 
-  regions: {
-    content: '.modal-content'
-  },
+  get attributes() {
+    return {
+      'tabindex' : -1,
+      'role' : 'dialog'
+    };
+  }
 
-  initialize: function() {
+  regions() {
+    return {
+      content: '.modal-content'
+    };
+  }
+
+  initialize() {
     this.$el.modal({ show: false, backdrop: 'static' });
-  },
+  }
 
-  triggers: {
-    'show.bs.modal'   : { preventDefault: false, event: 'before:open' },
-    'shown.bs.modal'  : { preventDefault: false, event: 'open' },
-    'hide.bs.modal'   : { preventDefault: false, event: 'before:close' },
-    'hidden.bs.modal' : { preventDefault: false, event: 'close' }
-  },
+  get triggers() {
+    return {
+      'show.bs.modal'   : { preventDefault: false, event: 'before:open' },
+      'shown.bs.modal'  : { preventDefault: false, event: 'open' },
+      'hide.bs.modal'   : { preventDefault: false, event: 'before:close' },
+      'hidden.bs.modal' : { preventDefault: false, event: 'close' }
+    };
+  }
 
-  open: function(view) {
+  open(view) {
     var deferred = $.Deferred();
     this.once('open', deferred.resolve);
     this.content.show(view);
     this.$el.modal('show');
     return deferred;
-  },
+  }
 
-  close: function() {
+  close() {
     var deferred = $.Deferred();
     this.once('close', function() {
       this.content.empty();
@@ -43,4 +54,4 @@ module.exports = LayoutView.extend({
     this.$el.modal('hide');
     return deferred;
   }
-});
+}

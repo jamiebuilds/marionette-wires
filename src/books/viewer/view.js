@@ -1,10 +1,14 @@
-var View = require('../../common/view');
-var template = require('./template.hbs');
+import View from '../../common/view';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
-
-  modelEvents: {
-    'all': 'render'
+export default class BooksViewer extends View {
+  get template() {
+    return template;
   }
-});
+
+  get modelEvents() {
+    return {
+      'all': 'render'
+    };
+  }
+}

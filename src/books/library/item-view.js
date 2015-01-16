@@ -1,14 +1,19 @@
-var ItemView = require('../../common/item-view');
-var template = require('./item-template.hbs');
+import ItemView from '../../common/item-view';
+import template from './item-template.hbs';
 
-module.exports = ItemView.extend({
-  template: template,
-  tagName: 'a',
+export default class BooksLibraryItem extends ItemView {
+  get template() {
+    return template;
+  }
 
-  attributes: function() {
+  get tagName() {
+    return 'a';
+  }
+
+  attributes() {
     return {
       'class' : 'list-group-item ' + (this.model.isActive() ? 'active' : ''),
       'href'  : '#books/' + this.model.get('id')
     };
   }
-});
+}

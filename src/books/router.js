@@ -1,39 +1,41 @@
-var Router = require('../common/router');
-var Radio = require('backbone.radio');
+import Router from '../common/router';
+import Radio from 'backbone.radio';
 
-var LayoutView = require('./layout-view');
-var Collection = require('./collection');
+import LayoutView from './layout-view';
+import Collection from './collection';
 
-var IndexRoute = require('./index/route');
-var ShowRoute = require('./show/route');
+import IndexRoute from './index/route';
+import ShowRoute from './show/route';
 
-module.exports = Router.extend({
-  initialize: function(options) {
+export default class BooksRouter extends Router {
+  initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
-  },
+  }
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
     Radio.command('header', 'activate', { path: 'books' });
-  },
+  }
 
-  routes: {
-    'books'     : 'index',
-    'books/:id' : 'show'
-  },
+  get routes() {
+    return {
+      'books'     : 'index',
+      'books/:id' : 'show'
+    };
+  }
 
-  index: function() {
+  index() {
     return new IndexRoute({
       collection: this.collection
     });
-  },
+  }
 
-  show: function() {
+  show() {
     return new ShowRoute({
       collection : this.collection,
       layout     : this.layout
     });
   }
-});
+}

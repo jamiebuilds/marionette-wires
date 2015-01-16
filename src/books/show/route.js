@@ -1,25 +1,25 @@
-var Route = require('../../common/route');
-var LibraryView = require('../library/collection-view');
-var ViewerView  = require('../viewer/view');
+import Route from '../../common/route';
+import LibraryView from '../library/collection-view';
+import ViewerView from '../viewer/view';
 
-module.exports = Route.extend({
-  initialize: function(options) {
+export default class BooksShowRoute extends Route {
+  initialize(options) {
     this.layout = options.layout;
     this.collection = options.collection;
-  },
+  }
 
-  fetch: function() {
+  fetch() {
     if (this.collection.isNew()) {
       return this.collection.fetch();
     }
-  },
+  }
 
-  onFetch: function(id) {
+  onFetch(id) {
     this.model = this.collection.get(id);
     this.collection.active = this.model;
-  },
+  }
 
-  render: function() {
+  render() {
     this.library = new LibraryView({
       collection: this.collection
     });
@@ -31,4 +31,4 @@ module.exports = Route.extend({
     this.layout.library.show(this.library);
     this.layout.viewer.show(this.viewer);
   }
-});
+}

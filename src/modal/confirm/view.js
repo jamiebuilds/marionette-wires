@@ -1,33 +1,35 @@
-var Radio = require('backbone.radio');
-var View = require('../../common/view');
-var Model = require('../../common/model');
-var template = require('./template.hbs');
+import Radio from 'backbone.radio';
+import View from '../../common/view';
+import Model from '../../common/model';
+import template from './template.hbs';
 
-module.exports = View.extend({
-  template: template,
+export default class ModalConfirmView extends View {
+  get template() {
+    return template;
+  }
 
-  initialize: function() {
+  initialize() {
     this.model = new Model(this.options);
     Radio.request('modal', 'open', this);
-  },
+  }
 
-  events: {
-    'click .btn-primary' : 'confirm',
-    'click .btn-default' : 'cancel',
-    'click .close'       : 'cancel'
-  },
+  events() {
+    return {
+      'click .btn-primary' : 'confirm',
+      'click .btn-default' : 'cancel',
+      'click .close'       : 'cancel'
+    };
+  }
 
-  confirm: function() {
-    var self = this;
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('confirm');
-    });
-  },
-
-  cancel: function() {
-    var self = this;
-    Radio.request('modal', 'close').then(function() {
-      self.trigger('cancel');
+  confirm() {
+    Radio.request('modal', 'close').then(() => {
+      this.trigger('confirm');
     });
   }
-});
+
+  cancel() {
+    Radio.request('modal', 'close').then(() => {
+      this.trigger('cancel');
+    });
+  }
+}

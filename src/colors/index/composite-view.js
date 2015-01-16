@@ -1,41 +1,49 @@
-var _ = require('lodash');
-var CompositeView = require('../../common/composite-view');
-var Collection = require('../../common/collection');
-var ItemView = require('./item-view');
-var template = require('./composite-template.hbs');
+import _ from 'lodash';
+import CompositeView from '../../common/composite-view';
+import Collection from '../../common/collection';
+import ItemView from './item-view';
+import template from './composite-template.hbs';
 
-module.exports = CompositeView.extend({
-  template: template,
-  className: 'colors colors--index container',
+export default class ColorsIndexView extends CompositeView {
+  get template() {
+    return template;
+  }
 
-  initialize: function(options) {
+  get className() {
+    return 'colors colors--index container';
+  }
+
+  initialize(options) {
+    this.state = { start: 0, limit: 20 };
     this.models = options.collection.models;
     delete this.collection;
     this.state.start = (options.page - 1) * this.state.limit;
-  },
+  }
 
-  childView: ItemView,
-  childViewContainer: 'div.list-group',
+  get childView() {
+    return ItemView;
+  }
 
-  collectionEvents: {
-    'change': 'render'
-  },
+  get childViewContainer() {
+    return 'div.list-group';
+  }
 
-  state: {
-    start: 0,
-    limit: 20
-  },
+  get collectionEvents() {
+    return {
+      'change': 'render'
+    };
+  }
 
-  onBeforeRender: function() {
+  onBeforeRender() {
     var filtered = _.chain(this.models)
       .drop(this.state.start)
       .take(this.state.limit)
       .value();
 
     this.collection = new Collection(filtered);
-  },
+  }
 
-  templateHelpers: function() {
+  templateHelpers() {
     var total   = Math.floor(this.models.length / this.state.limit) + 1;
     var current = Math.floor(this.state.start / this.state.limit) + 1;
 
@@ -57,4 +65,4 @@ module.exports = CompositeView.extend({
       next    : next
     };
   }
-});
+}

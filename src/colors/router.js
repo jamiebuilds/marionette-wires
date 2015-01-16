@@ -1,54 +1,56 @@
-var Router = require('../common/router');
-var Radio = require('backbone.radio');
+import Router from '../common/router';
+import Radio from 'backbone.radio';
 
-var Collection  = require('./collection');
-var IndexRoute  = require('./index/route');
-var CreateRoute = require('./create/route');
-var ShowRoute   = require('./show/route');
-var EditRoute   = require('./edit/route');
+import Collection from './collection';
+import IndexRoute from './index/route';
+import CreateRoute from './create/route';
+import ShowRoute from './show/route';
+import EditRoute from './edit/route';
 
-module.exports = Router.extend({
-  initialize: function(options) {
+export default class ColorsRouter extends Router {
+  initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
-  },
+  }
 
-  onBeforeEnter: function() {
+  onBeforeEnter() {
     Radio.command('header', 'activate', { path: 'colors' });
-  },
+  }
 
-  routes: {
-    'colors'          : 'index',
-    'colors/new'      : 'create',
-    'colors/:id'      : 'show',
-    'colors/:id/edit' : 'edit'
-  },
+  get routes() {
+    return {
+      'colors'          : 'index',
+      'colors/new'      : 'create',
+      'colors/:id'      : 'show',
+      'colors/:id/edit' : 'edit'
+    };
+  }
 
-  index: function() {
+  index() {
     return new IndexRoute({
       container  : this.container,
       collection : this.collection
     });
-  },
+  }
 
-  create: function() {
+  create() {
     return new CreateRoute({
       container  : this.container,
       collection : this.collection
     });
-  },
+  }
 
-  show: function() {
+  show() {
     return new ShowRoute({
       container  : this.container,
       collection : this.collection
     });
-  },
+  }
 
-  edit: function() {
+  edit() {
     return new EditRoute({
       container  : this.container,
       collection : this.collection
     });
   }
-});
+}

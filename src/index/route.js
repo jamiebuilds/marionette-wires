@@ -1,13 +1,13 @@
-var Route = require('../common/route');
-var View = require('./view');
+import Route from '../common/route';
+import View from './view';
 
-module.exports = Route.extend({
-  initialize: function(options) {
+export default class IndexRoute extends Route {
+  initialize(options) {
     this.container = options.container;
-  },
+  }
 
-  render: function() {
+  render() {
     this.view = new View();
     this.container.show(this.view);
   }
-});
+}
