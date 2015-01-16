@@ -33,16 +33,12 @@ gulp.task('styles', function() {
     .pipe(reload({ stream: true }));
 });
 
-var bundler;
-function getBundler() {
-  if (!bundler) {
-    bundler = watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
-  }
-  return bundler;
-};
+var bundler = _.memoize(function() {
+  return watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
+});
 
 function bundle() {
-  return getBundler().bundle()
+  return bundler().bundle()
     .on('error', $.util.log)
     .pipe(source('bundle.js'))
     .pipe(buffer())
@@ -81,7 +77,7 @@ gulp.task('build', [
   'html',
   'styles',
   'scripts',
-  // 'test'
+  'test'
 ]);
 
 gulp.task('test', [
@@ -100,7 +96,7 @@ gulp.task('watch', ['build'], function() {
   });
 
   reporter = 'dot';
-  getBundler().on('update', function() {
+  bundler().on('update', function() {
     gulp.start('scripts');
     gulp.start('test');
   });
