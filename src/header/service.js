@@ -1,13 +1,15 @@
-import Radio from 'backbone.radio';
-import Module from '../common/module';
+import Service from '../common/service';
 import Collection from '../common/collection';
 import View from './view';
 
-export default class HeaderModule extends Module {
-  initialize() {
-    this.container = this.options.container;
+export default class HeaderService extends Service {
+  get channelName() {
+    return 'header';
+  }
+
+  initialize(options) {
+    this.container = options.container;
     this.collection = new Collection();
-    this.channel = Radio.channel('header');
     this.start();
   }
 

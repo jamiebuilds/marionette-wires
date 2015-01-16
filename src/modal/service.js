@@ -1,5 +1,4 @@
-import Module from '../common/module';
-import Radio from 'backbone.radio';
+import Service from '../common/service';
 import Backbone from 'backbone';
 import $ from 'jquery';
 
@@ -9,24 +8,28 @@ import AlertView   from './alert/view';
 import ConfirmView from './confirm/view';
 import PromptView  from './prompt/view';
 
-export default class ModalModule extends Module {
-  initialize() {
-    this.container = this.options.container;
-    this.channel = Radio.channel('modal');
-    this.start();
+export default class ModalService extends Service {
+  get channelName() {
+    return 'modal';
+  }
+
+  get requests() {
+    return {
+      'open'    : 'open',
+      'close'   : 'close',
+      'alert'   : 'alert',
+      'confirm' : 'confirm',
+      'prompt'  : 'prompt'
+    };
+  }
+
+  initialize(options) {
+    this.container = options.container;
   }
 
   onStart() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
-
-    this.channel.reply({
-      'open'    : this.open,
-      'close'   : this.close,
-      'alert'   : this.alert,
-      'confirm' : this.confirm,
-      'prompt'  : this.prompt
-    }, this);
 
     this.listenTo(Backbone.history, {
       'route' : this.onRoute
@@ -34,6 +37,8 @@ export default class ModalModule extends Module {
   }
 
   onStop() {
+    delete this.layout;
+    this.container.reset();
     this.channel.reset();
   }
 

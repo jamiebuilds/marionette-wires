@@ -3,42 +3,37 @@ import Backbone from 'backbone';
 
 import Application from './application/application';
 
-import ModalModule from './modal/module';
-import HeaderModule from './header/module';
-import FlashesModule from './flashes/module';
-import IndexModule from './index/module';
-import ColorsModule from './colors/module';
-import BooksModule from './books/module';
+import ModalService from './modal/service';
+import HeaderService from './header/service';
+import FlashesService from './flashes/service';
+
+import IndexRouter from './index/router';
+import ColorsRouter from './colors/router';
+import BooksRouter from './books/router';
 
 let app = new Application();
 
-app.module('modal', {
-  moduleClass: ModalModule,
+app.modal = new ModalService({
   container: app.layout.overlay
 });
 
-app.module('header', {
-  moduleClass: HeaderModule,
+app.header = new HeaderService({
   container: app.layout.header
 });
 
-app.module('flashes', {
-  moduleClass: FlashesModule,
+app.flashes = new FlashesService({
   container: app.layout.flashes
 });
 
-app.module('index', {
-  moduleClass: IndexModule,
+app.index = new IndexRouter({
   container: app.layout.content
 });
 
-app.module('colors', {
-  moduleClass: ColorsModule,
+app.colors = new ColorsRouter({
   container: app.layout.content
 });
 
-app.module('books', {
-  moduleClass: BooksModule,
+app.books = new BooksRouter({
   container: app.layout.content
 });
 

@@ -1,4 +1,4 @@
-describe('header/module', function() {
+describe('header/service', function() {
   beforeEach(function() {
     this.collection = { collection: true };
     this.view = { view: true };
@@ -8,26 +8,26 @@ describe('header/module', function() {
 
     this.container = { show: stub() };
 
-    this.Module = proxyquire('../../src/header/module.js', {
+    this.Service = proxyquire('../../src/header/service.js', {
       './view' : this.View,
       '../common/collection': this.Collection
     });
 
-    this.module = new this.Module('header', {}, { container: this.container });
+    this.service = new this.Service({ container: this.container });
   });
 
   describe('#initialize', function() {
     beforeEach(function() {
-      this.module.initialize({ container: this.container });
+      this.service.initialize({ container: this.container });
     });
 
     it('should attach container', function() {
-      expect(this.module).to.have.ownProperty('container', this.container);
+      expect(this.service).to.have.ownProperty('container', this.container);
     });
 
     it('should create a collection', function() {
       expect(this.Collection).to.have.been.calledWithNew;
-      expect(this.module).to.have.ownProperty('collection', this.collection);
+      expect(this.service).to.have.ownProperty('collection', this.collection);
     });
 
     it('should create a View', function() {
@@ -43,8 +43,8 @@ describe('header/module', function() {
 
   describe('#onAdd', function() {
     beforeEach(function() {
-      this.module.collection = { add: stub() };
-      this.module.onAdd({
+      this.service.collection = { add: stub() };
+      this.service.onAdd({
         name: 'Foo',
         path: 'foo',
         type: 'primary'
@@ -52,7 +52,7 @@ describe('header/module', function() {
     });
 
     it('should add the nav item to the collection', function() {
-      expect(this.module.collection.add).to.have.been.calledWith({
+      expect(this.service.collection.add).to.have.been.calledWith({
         name: 'Foo',
         path: 'foo',
         type: 'primary'

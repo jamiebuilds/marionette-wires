@@ -11,6 +11,12 @@ export default class BooksRouter extends Router {
   initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
+
+    Radio.command('header', 'add', {
+      name: 'Books',
+      path: 'books',
+      type: 'primary'
+    });
   }
 
   onBeforeEnter() {

@@ -11,6 +11,12 @@ export default class ColorsRouter extends Router {
   initialize(options) {
     this.container = options.container;
     this.collection = new Collection();
+
+    Radio.command('header', 'add', {
+      name: 'Colors',
+      path: 'colors',
+      type: 'primary'
+    });
   }
 
   onBeforeEnter() {

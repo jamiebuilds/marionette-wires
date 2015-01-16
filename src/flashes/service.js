@@ -1,12 +1,14 @@
-import Module from '../common/module';
-import Radio from 'backbone.radio';
+import Service from '../common/service';
 import Collection from './collection';
 import CollectionView from './collection-view';
 
-export default class FlashesModule extends Module {
-  initialize() {
-    this.container = this.options.container;
-    this.channel = Radio.channel('flashes');
+export default class FlashesService extends Service {
+  get channelName() {
+    return 'flashes';
+  }
+
+  initialize(options) {
+    this.container = options.container;
     this.collection = new Collection();
     this.start();
   }
