@@ -30,7 +30,7 @@ export default class ColorsCreateView extends View {
     _.bindAll(this, 'handleSaveSuccess');
   }
 
-  get events() {
+  events() {
     return {
       'submit form': 'handleSubmit'
     };
