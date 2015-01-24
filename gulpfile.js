@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
+var del = require('del');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var stylish = require('jshint-stylish');
@@ -12,10 +13,10 @@ var reload = browserSync.reload;
 
 var api = require('./api/api');
 
-gulp.task('clean', function() {
-  return gulp.src('app/tmp', {read: false})
-    .pipe($.plumber())
-    .pipe($.clean());
+gulp.task('clean', function(cb) {
+  del([
+    'app/tmp'
+  ], cb);
 });
 
 gulp.task('html', function() {
