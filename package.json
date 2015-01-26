@@ -4,7 +4,8 @@
   "description": "Starter kit for Marionette.js Applications using Browserify",
   "main": "index.js",
   "scripts": {
-    "start": "gulp",
+    "start": "gulp build && node server",
+    "watch": "gulp watch",
     "test": "gulp test",
     "integration": "pioneer"
   },
@@ -62,7 +63,8 @@
     "sinon-chai": "^2.6.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.2.1"
+    "watchify": "^2.2.1",
+    "yargs": "^1.3.3"
   },
   "dependencies": {
     "animate.css": "^3.1.1",
