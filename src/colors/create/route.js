@@ -2,20 +2,21 @@ import Route from '../../common/route';
 import Model from '../model';
 import View from './view';
 
+import storage from '../storage';
+
 export default class ColorsCreateRoute extends Route {
   initialize(options) {
     this.container = options.container;
-    this.collection = options.collection;
   }
 
   fetch() {
-    if (this.collection.isNew()) {
-      return this.collection.fetch();
-    }
+    this.model = new Model();
+    return storage.findAll().then(collection => {
+      this.collection = collection;
+    });
   }
 
   render() {
-    this.model = new Model();
     this.view = new View({
       collection: this.collection,
       model: this.model

@@ -1,9 +1,10 @@
 import nprogress from 'nprogress';
 import Backbone from 'backbone';
 import FormBehavior from '../../forms/behavior';
-import _ from 'lodash';
 import View from '../../common/view';
 import template from './template.hbs';
+
+import storage from '../storage';
 
 export default class ColorsEditView extends View {
   get template() {
@@ -26,10 +27,6 @@ export default class ColorsEditView extends View {
     };
   }
 
-  initialize() {
-    _.bindAll(this, 'handleSaveSuccess');
-  }
-
   events() {
     return {
       'submit form': 'handleSubmit'
@@ -39,18 +36,15 @@ export default class ColorsEditView extends View {
   handleSubmit() {
     var errors = this.model.validate(this.form);
 
-    if (!errors) {
-      nprogress.start();
-      this.model
-        .save(this.form)
-        .done(this.handleSaveSuccess);
-    } else {
+    if (errors) {
       this.model.validationError = errors;
       this.render();
+    } else {
+      nprogress.start();
+      this.model.set(this.form);
+      storage.save(this.model).then(() => {
+        Backbone.history.navigate('colors/' + this.model.id, { trigger: true });
+      });
     }
-  }
-
-  handleSaveSuccess() {
-    Backbone.history.navigate('colors/' + this.model.id, { trigger: true });
   }
 }

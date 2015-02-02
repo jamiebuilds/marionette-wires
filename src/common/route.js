@@ -1,6 +1,5 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
-import $ from 'jquery';
 
 export default class Route extends Marionette.Object {
   constructor() {
@@ -18,7 +17,7 @@ export default class Route extends Marionette.Object {
     this._triggerMethod('before:enter', args);
     this._triggerMethod('before:fetch', args);
 
-    return $.when(this.fetch(...args))
+    return Promise.resolve(this.fetch(...args))
       .then(() => {
         this._triggerMethod('fetch', args);
         this._triggerMethod('before:render', args);
@@ -28,7 +27,7 @@ export default class Route extends Marionette.Object {
         this._triggerMethod('render', args);
         this._triggerMethod('enter', args);
       })
-      .fail(() => {
+      .catch(() => {
         this._triggerMethod('error', args);
       });
   }

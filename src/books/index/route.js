@@ -1,14 +1,12 @@
 import Route from '../../common/route';
 
-export default class BooksIndexRoute extends Route {
-  initialize(options) {
-    this.collection = options.collection;
-  }
+import storage from '../storage';
 
+export default class BooksIndexRoute extends Route {
   fetch() {
-    if (this.collection.isNew()) {
-      return this.collection.fetch();
-    }
+    return storage.findAll().then(collection => {
+      this.collection = collection;
+    });
   }
 
   onEnter() {

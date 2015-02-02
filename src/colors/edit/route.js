@@ -1,6 +1,7 @@
 import Route from '../../common/route';
-import Model from '../model';
 import View from './view';
+
+import storage from '../storage';
 
 export default class ColorsEditRoute extends Route {
   initialize(options) {
@@ -9,12 +10,9 @@ export default class ColorsEditRoute extends Route {
   }
 
   fetch(id) {
-    if (this.collection.isNew()) {
-      this.model = new Model({ id: id });
-      return this.model.fetch();
-    } else {
-      this.model = this.collection.get(id);
-    }
+    return storage.find(id).then(model => {
+      this.model = model;
+    });
   }
 
   render() {
