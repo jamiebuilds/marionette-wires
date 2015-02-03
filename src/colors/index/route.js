@@ -1,16 +1,17 @@
 import Route from '../../common/route';
 import LayoutView from './layout-view';
 
+import storage from '../storage';
+
 export default class ColorsIndexRoute extends Route {
   initialize(options) {
     this.container = options.container;
-    this.collection = options.collection;
   }
 
   fetch() {
-    if (this.collection.isNew()) {
-      return this.collection.fetch();
-    }
+    return storage.findAll().then(collection => {
+      this.collection = collection;
+    });
   }
 
   render(params) {

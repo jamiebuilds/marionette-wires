@@ -2,16 +2,17 @@ import Route from '../../common/route';
 import LibraryView from '../library/collection-view';
 import ViewerView from '../viewer/view';
 
+import storage from '../storage';
+
 export default class BooksShowRoute extends Route {
   initialize(options) {
     this.layout = options.layout;
-    this.collection = options.collection;
   }
 
   fetch() {
-    if (this.collection.isNew()) {
-      return this.collection.fetch();
-    }
+    return storage.findAll().then(collection => {
+      this.collection = collection;
+    });
   }
 
   onFetch(id) {

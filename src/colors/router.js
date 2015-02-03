@@ -1,7 +1,6 @@
 import Router from '../common/router';
 import Radio from 'backbone.radio';
 
-import Collection from './collection';
 import IndexRoute from './index/route';
 import CreateRoute from './create/route';
 import ShowRoute from './show/route';
@@ -10,7 +9,6 @@ import EditRoute from './edit/route';
 export default class ColorsRouter extends Router {
   initialize(options) {
     this.container = options.container;
-    this.collection = new Collection();
 
     Radio.command('header', 'add', {
       name: 'Colors',
@@ -34,29 +32,25 @@ export default class ColorsRouter extends Router {
 
   index() {
     return new IndexRoute({
-      container  : this.container,
-      collection : this.collection
+      container: this.container
     });
   }
 
   create() {
     return new CreateRoute({
-      container  : this.container,
-      collection : this.collection
+      container: this.container
     });
   }
 
   show() {
     return new ShowRoute({
-      container  : this.container,
-      collection : this.collection
+      container: this.container
     });
   }
 
   edit() {
     return new EditRoute({
-      container  : this.container,
-      collection : this.collection
+      container: this.container
     });
   }
 }

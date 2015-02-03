@@ -2,7 +2,6 @@ import Router from '../common/router';
 import Radio from 'backbone.radio';
 
 import LayoutView from './layout-view';
-import Collection from './collection';
 
 import IndexRoute from './index/route';
 import ShowRoute from './show/route';
@@ -10,7 +9,6 @@ import ShowRoute from './show/route';
 export default class BooksRouter extends Router {
   initialize(options) {
     this.container = options.container;
-    this.collection = new Collection();
 
     Radio.command('header', 'add', {
       name: 'Books',
@@ -33,15 +31,12 @@ export default class BooksRouter extends Router {
   }
 
   index() {
-    return new IndexRoute({
-      collection: this.collection
-    });
+    return new IndexRoute();
   }
 
   show() {
     return new ShowRoute({
-      collection : this.collection,
-      layout     : this.layout
+      layout: this.layout
     });
   }
 }
