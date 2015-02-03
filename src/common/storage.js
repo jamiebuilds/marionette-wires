@@ -1,13 +1,13 @@
 import Marionette from 'backbone.marionette';
 
-export default class Store extends Marionette.Object {
+export default Marionette.Object.extend({
   constructor() {
     this.records = new this.collection();
     this.listenToOnce(this.records, 'sync', () => {
       this._hasSynced = true;
     });
-    super(...arguments);
-  }
+    Marionette.Object(this, arguments);
+  },
 
   _ensureModel(model) {
     if (model instanceof this.model) {
@@ -17,12 +17,12 @@ export default class Store extends Marionette.Object {
     } else {
       return new this.model({ id: model });
     }
-  }
+  },
 
   insert(model) {
     this.records.add(model);
     return Promise.resolve(model);
-  }
+  },
 
   save(model) {
     var record = this.records.get(model);
@@ -33,7 +33,7 @@ export default class Store extends Marionette.Object {
       }
       return model;
     });
-  }
+  },
 
   find(model) {
     var record = this.records.get(model);
@@ -45,7 +45,7 @@ export default class Store extends Marionette.Object {
         return this.insert(model);
       });
     }
-  }
+  },
 
   findAll(force) {
     if (this._hasSynced && !force) {
@@ -56,4 +56,4 @@ export default class Store extends Marionette.Object {
       });
     }
   }
-}
+});

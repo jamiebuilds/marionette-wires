@@ -4,25 +4,18 @@ import CollectionView from './collection-view';
 import Collection from '../../common/collection';
 import template from './layout-template.hbs';
 
-export default class ColorsIndexView extends LayoutView {
-  get template() {
-    return template;
-  }
+export default LayoutView.extend({
+  template: template,
+  className: 'colors colors--index container',
 
-  get className() {
-    return 'colors colors--index container';
-  }
-
-  regions() {
-    return {
-      list: '.colors__list'
-    };
-  }
+  regions: {
+    list: '.colors__list'
+  },
 
   initialize(options) {
     this.state = { start: 0, limit: 20 };
     this.state.start = (options.page - 1) * this.state.limit;
-  }
+  },
 
   onBeforeRender() {
     var filtered = _.chain(this.collection.models)
@@ -31,7 +24,7 @@ export default class ColorsIndexView extends LayoutView {
       .value();
 
     this.filteredCollection = new Collection(filtered);
-  }
+  },
 
   onAttach() {
     this.collectionView = new CollectionView({
@@ -39,7 +32,7 @@ export default class ColorsIndexView extends LayoutView {
     });
 
     this.list.show(this.collectionView);
-  }
+  },
 
   templateHelpers() {
     var total   = Math.floor(this.collection.length / this.state.limit) + 1;
@@ -63,4 +56,4 @@ export default class ColorsIndexView extends LayoutView {
       next    : next
     };
   }
-}
+});

@@ -1,17 +1,17 @@
 import Backbone from 'backbone';
 import _ from 'lodash';
 
-export default class Collection extends Backbone.Collection {
+export default Backbone.Collection.extend({
   constructor() {
     this.cid = _.uniqueId('c');
-    super(...arguments);
+    Backbone.Collection.apply(this, arguments);
     this._isNew = true;
     this.once('sync', () => {
       this._isNew = false;
     });
-  }
+  },
 
   isNew() {
     return this._isNew;
   }
-}
+});

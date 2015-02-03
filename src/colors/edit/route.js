@@ -1,19 +1,18 @@
 import Route from '../../common/route';
 import View from './view';
-
 import storage from '../storage';
 
-export default class ColorsEditRoute extends Route {
+export default Route.extend({
   initialize(options) {
     this.container = options.container;
     this.collection = options.collection;
-  }
+  },
 
   fetch(id) {
     return storage.find(id).then(model => {
       this.model = model;
     });
-  }
+  },
 
   render() {
     this.view = new View({
@@ -21,4 +20,4 @@ export default class ColorsEditRoute extends Route {
     });
     this.container.show(this.view);
   }
-}
+});

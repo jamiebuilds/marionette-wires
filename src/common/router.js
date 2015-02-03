@@ -4,17 +4,17 @@ import $ from 'jquery';
 import Radio from 'backbone.radio';
 import Route from './route';
 
-export default class Router extends Marionette.AppRouter {
+export default Marionette.AppRouter.extend({
   constructor() {
     this.channel = Radio.channel('router');
     this.on('all', this._onRouterEvent);
     this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
     super(...arguments);
-  }
+  },
 
   _onRouterEvent(name, ...args) {
     this.channel.trigger(name, this, ...args);
-  }
+  },
 
   _onHistoryRoute(router) {
     if (this === router) {
@@ -22,7 +22,7 @@ export default class Router extends Marionette.AppRouter {
     } else {
       this.active = false;
     }
-  }
+  },
 
   execute(callback, args) {
     if (!this.active) {
@@ -37,7 +37,7 @@ export default class Router extends Marionette.AppRouter {
       }
       this.triggerMethod('route', ...args);
     });
-  }
+  },
 
   _execute(callback, args) {
     var route = callback.apply(this, args);
@@ -46,9 +46,7 @@ export default class Router extends Marionette.AppRouter {
       route.router = this;
       return route.enter(args);
     }
-  }
+  },
 
-  get triggerMethod() {
-    return Marionette.triggerMethod;
-  }
-}
+  triggerMethod: Marionette.triggerMethod
+});

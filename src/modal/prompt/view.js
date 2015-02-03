@@ -3,33 +3,24 @@ import View from '../../common/view';
 import Model from '../../common/model';
 import template from './template.hbs';
 
-export default class ModalPromptView extends View {
-  get template() {
-    return template;
-  }
+export default View.extend({
+  template: template,
+  tagName: 'form',
 
-  get tagName() {
-    return 'form';
-  }
-
-  ui() {
-    return {
-      'input' : 'input'
-    };
-  }
+  ui: {
+    'input' : 'input'
+  },
 
   initialize() {
     this.model = new Model(this.options);
     Radio.request('modal', 'open', this);
-  }
+  },
 
-  events() {
-    return {
-      'submit'             : 'submit',
-      'click .btn-default' : 'cancel',
-      'click .close'       : 'cancel'
-    };
-  }
+  events: {
+    'submit'             : 'submit',
+    'click .btn-default' : 'cancel',
+    'click .close'       : 'cancel'
+  },
 
   submit(e) {
     e.preventDefault();
@@ -37,11 +28,11 @@ export default class ModalPromptView extends View {
     Radio.request('modal', 'close').then(() => {
       this.trigger('submit', val);
     });
-  }
+  },
 
   cancel() {
     Radio.request('modal', 'close').then(() => {
       this.trigger('cancel');
     });
   }
-}
+});

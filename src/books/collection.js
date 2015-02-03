@@ -1,12 +1,7 @@
 import Collection from '../common/collection';
 import Model from './model';
 
-export default class BooksCollection extends Collection {
-  get url() {
-    return '/api/books';
-  }
-
-  get model() {
-    return Model;
-  }
-}
+export default Collection.extend({
+  url: '/api/books',
+  model: Model
+});

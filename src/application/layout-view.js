@@ -1,21 +1,14 @@
 import LayoutView from '../common/layout-view';
 import template from './layout-template.hbs';
 
-export default class AppLayout extends LayoutView {
-  get el() {
-    return '.application';
-  }
+export default LayoutView.extend({
+  el: '.application',
+  template: template,
 
-  get template() {
-    return template;
+  regions: {
+    header  : '.application__header',
+    flashes : '.application__flashes',
+    content : '.application__content',
+    overlay : '.application__overlay'
   }
-
-  regions() {
-    return {
-      header  : '.application__header',
-      flashes : '.application__flashes',
-      content : '.application__content',
-      overlay : '.application__overlay'
-    };
-  }
-}
+});

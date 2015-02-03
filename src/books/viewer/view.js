@@ -1,14 +1,9 @@
 import View from '../../common/view';
 import template from './template.hbs';
 
-export default class BooksViewer extends View {
-  get template() {
-    return template;
+export default View.extend({
+  template: template,
+  modelEvents: {
+    'all': 'render'
   }
-
-  get modelEvents() {
-    return {
-      'all': 'render'
-    };
-  }
-}
+});

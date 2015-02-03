@@ -1,12 +1,10 @@
 import Router from '../common/router';
 import Radio from 'backbone.radio';
-
 import LayoutView from './layout-view';
-
 import IndexRoute from './index/route';
 import ShowRoute from './show/route';
 
-export default class BooksRouter extends Router {
+export default Router.extend({
   initialize(options) {
     this.container = options.container;
 
@@ -15,28 +13,26 @@ export default class BooksRouter extends Router {
       path: 'books',
       type: 'primary'
     });
-  }
+  },
 
   onBeforeEnter() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
     Radio.command('header', 'activate', { path: 'books' });
-  }
+  },
 
-  get routes() {
-    return {
-      'books'     : 'index',
-      'books/:id' : 'show'
-    };
-  }
+  routes: {
+    'books'     : 'index',
+    'books/:id' : 'show'
+  },
 
   index() {
     return new IndexRoute();
-  }
+  },
 
   show() {
     return new ShowRoute({
       layout: this.layout
     });
   }
-}
+});

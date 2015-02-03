@@ -4,19 +4,14 @@ import Radio from 'backbone.radio';
 import Backbone from 'backbone';
 import template from './template.hbs';
 
-export default class ColorsShowView extends View {
-  get template() {
-    return template;
-  }
-
-  get className() {
-    return 'colors colors--show container';
-  }
+export default View.extend({
+  template: template,
+  className: 'colors colors--show container',
 
   initialize(options) {
     this.model = options.model;
     this.model.cleanup();
-  }
+  },
 
   templateHelpers() {
     return {
@@ -24,27 +19,23 @@ export default class ColorsShowView extends View {
     };
   }
 
-  events() {
-    return {
-      'click .colors__toggle' : 'handleToggle',
-      'click .colors__destroy' : 'handleDestroy'
-    };
-  }
+  events: {
+    'click .colors__toggle' : 'handleToggle',
+    'click .colors__destroy' : 'handleDestroy'
+  },
 
-  get modelEvents() {
-    return {
-      'all': 'render'
-    };
-  }
+  modelEvents: {
+    'all': 'render'
+  },
 
   handleToggle() {
     this.model.set('active', !this.model.get('active'));
     this.model.save().fail(this.handleToggleFailure);
-  }
+  },
 
   handleToggleFailure() {
     this.model.set('active', this.model.previous('active'));
-  }
+  },
 
   handleDestroy() {
     var self = this;
@@ -57,7 +48,7 @@ export default class ColorsShowView extends View {
     }).then(function() {
       self.handleDestroySuccess();
     });
-  }
+  },
 
   handleDestroySuccess() {
     Backbone.history.navigate('colors', { trigger: true });
@@ -68,4 +59,4 @@ export default class ColorsShowView extends View {
       body    : 'You have deleted ' + this.model.get('name') + '.'
     });
   }
-}
+});

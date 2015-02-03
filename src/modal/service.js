@@ -8,15 +8,13 @@ import AlertView   from './alert/view';
 import ConfirmView from './confirm/view';
 import PromptView  from './prompt/view';
 
-export default class ModalService extends Service {
-  get channelName() {
-    return 'modal';
-  }
+export default Service.extend({
+  channelName: 'modal',
 
   initialize(options) {
     this.container = options.container;
     this.start();
-  }
+  },
 
   onStart() {
     this.channel.reply({
@@ -33,19 +31,19 @@ export default class ModalService extends Service {
     this.listenTo(Backbone.history, {
       'route' : this.onRoute
     });
-  }
+  },
 
   onStop() {
     delete this.layout;
     this.container.reset();
     this.channel.reset();
-  }
+  },
 
   onRoute() {
     if (this.fragment !== Backbone.history.fragment) {
       this.close();
     }
-  }
+  },
 
   alert(options) {
     var deferred = $.Deferred();
@@ -57,7 +55,7 @@ export default class ModalService extends Service {
     });
 
     return deferred;
-  }
+  },
 
   confirm(options) {
     var deferred = $.Deferred();
@@ -69,7 +67,7 @@ export default class ModalService extends Service {
     });
 
     return deferred;
-  }
+  },
 
   prompt(options) {
     var deferred = $.Deferred();
@@ -81,7 +79,7 @@ export default class ModalService extends Service {
     });
 
     return deferred;
-  }
+  },
 
   open(view) {
     var self = this;
@@ -90,7 +88,7 @@ export default class ModalService extends Service {
       self.isOpen = true;
       return self.layout.open(view);
     });
-  }
+  },
 
   close() {
     if (this.isOpen) {
@@ -100,4 +98,4 @@ export default class ModalService extends Service {
       return $.Deferred().resolve();
     }
   }
-}
+});

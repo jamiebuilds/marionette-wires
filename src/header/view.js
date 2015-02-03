@@ -3,57 +3,41 @@ import Backbone from 'backbone';
 import View from '../common/view';
 import template from './template.hbs';
 
-export default class HeaderView extends View {
-  get template() {
-    return template;
-  }
+export default View.extend({
+  template: template,
+  tagName: 'nav',
+  className: 'header navbar navbar-default navbar-fixed-top',
 
-  get tagName() {
-    return 'nav';
-  }
+  attributes: {
+    role: 'navigation'
+  },
 
-  get className() {
-    return 'header navbar navbar-default navbar-fixed-top';
-  }
-
-  get attributes() {
-    return {
-      role: 'navigation'
-    };
-  }
-
-  get collectionEvents() {
-    return {
-      'all': 'render'
-    };
-  }
+  collectionEvents: {
+    'all': 'render'
+  },
 
   templateHelpers() {
     return {
       primaryItems   : this.serializeWhere({ type: 'primary' }),
       secondaryItems : this.serializeWhere({ type: 'secondary' })
     };
-  }
+  },
 
   serializeWhere(props) {
     return _.invoke(this.collection.where(props), 'toJSON');
-  }
+  },
 
   ui() {
-    return {
-      collapse: '#navbar-collapse'
-    };
-  }
+    collapse: '#navbar-collapse'
+  },
 
   events() {
-    return {
-      'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
-    };
-  }
+    'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
+  },
 
   onCollapseShow() {
     this.listenToOnce(Backbone.history, 'route', function() {
       this.ui.collapse.collapse('hide');
     });
   }
-}
+});

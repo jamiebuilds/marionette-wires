@@ -1,17 +1,17 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 
-export default class Route extends Marionette.Object {
+export default Marionette.Object.extend({
   constructor() {
     this.initialize(...arguments);
-  }
+  },
 
   _triggerMethod(name, args) {
     if (this.router) {
       this.router.triggerMethod(name + ':route', ...args);
     }
     this.triggerMethod(name, ...args);
-  }
+  },
 
   enter(args) {
     this._triggerMethod('before:enter', args);
@@ -30,12 +30,12 @@ export default class Route extends Marionette.Object {
       .catch(() => {
         this._triggerMethod('error', args);
       });
-  }
+  },
 
   navigate() {
     Backbone.history.navigate(...arguments);
-  }
+  },
 
-  fetch() {}
+  fetch() {},
   render() {}
-}
+})

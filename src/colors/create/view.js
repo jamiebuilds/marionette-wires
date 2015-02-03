@@ -3,35 +3,25 @@ import View from '../../common/view';
 import FormBehavior from '../../forms/behavior';
 import Backbone from 'backbone';
 import template from './template.hbs';
-
 import storage from '../storage';
 
-export default class ColorsCreateView extends View {
-  get template() {
-    return template;
-  }
+export default View.extend({
+  template: template,
+  className: 'colors colors--create container',
 
-  get className() {
-    return 'colors colors--create container';
-  }
-
-  get behaviors() {
-    return {
-      form: { behaviorClass: FormBehavior }
-    };
-  }
+  behaviors: {
+    form: { behaviorClass: FormBehavior }
+  },
 
   templateHelpers() {
     return {
       errors: this.errors
     };
-  }
+  },
 
-  events() {
-    return {
-      'submit form': 'handleSubmit'
-    };
-  }
+  events: {
+    'submit form': 'handleSubmit'
+  },
 
   handleSubmit() {
     var errors = this.model.validate(this.form);
@@ -47,4 +37,4 @@ export default class ColorsCreateView extends View {
       });
     }
   }
-}
+});

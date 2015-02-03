@@ -1,15 +1,11 @@
 import Model from '../common/model';
 
-export default class ColorsModel extends Model {
-  get urlRoot() {
-    return '/api/colors';
-  }
+export default Model.extend({
+  urlRoot: '/api/colors',
 
-  get defaults() {
-    return {
-      active: false
-    };
-  }
+  defaults: {
+    active: false
+  },
 
   validate(attrs) {
     var errors = [];
@@ -24,4 +20,4 @@ export default class ColorsModel extends Model {
 
     return errors.length > 0 ? errors : undefined;
   }
-}
+});
