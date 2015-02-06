@@ -17,7 +17,7 @@ export default View.extend({
     return {
       errors: this.model.validationError
     };
-  }
+  },
 
   events: {
     'click .colors__toggle' : 'handleToggle',

@@ -1,5 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
+import {Promise} from 'es6-promise';
 
 export default Marionette.Object.extend({
   constructor() {
@@ -38,4 +39,4 @@ export default Marionette.Object.extend({
 
   fetch() {},
   render() {}
-})
+});

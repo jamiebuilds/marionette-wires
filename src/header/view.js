@@ -27,11 +27,11 @@ export default View.extend({
     return _.invoke(this.collection.where(props), 'toJSON');
   },
 
-  ui() {
+  ui: {
     collapse: '#navbar-collapse'
   },
 
-  events() {
+  events: {
     'show.bs.collapse #navbar-collapse' : 'onCollapseShow'
   },
 

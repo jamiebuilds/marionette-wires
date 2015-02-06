@@ -9,7 +9,7 @@ export default Marionette.AppRouter.extend({
     this.channel = Radio.channel('router');
     this.on('all', this._onRouterEvent);
     this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
-    super(...arguments);
+    Marionette.AppRouter.apply(this, arguments);
   },
 
   _onRouterEvent(name, ...args) {

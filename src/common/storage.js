@@ -1,4 +1,5 @@
 import Marionette from 'backbone.marionette';
+import {Promise} from 'es6-promise';
 
 export default Marionette.Object.extend({
   constructor() {
@@ -6,7 +7,7 @@ export default Marionette.Object.extend({
     this.listenToOnce(this.records, 'sync', () => {
       this._hasSynced = true;
     });
-    Marionette.Object(this, arguments);
+    Marionette.Object.apply(this, arguments);
   },
 
   _ensureModel(model) {

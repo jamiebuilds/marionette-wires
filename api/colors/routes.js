@@ -2,6 +2,8 @@ var Backbone = require('backbone');
 var fixture = require('./fixture');
 var collection = new Backbone.Collection(fixture);
 
+var id = collection.length;
+
 module.exports = function(api) {
   api.route('/api/colors')
     .get(function(req, res) {
@@ -9,8 +11,9 @@ module.exports = function(api) {
     })
     .post(function(req, res) {
       var model = new Backbone.Model(req.body);
+      model.set('id', ++id);
       collection.add(model);
-      res.json(collection);
+      res.json(model);
     });
 
   api.route('/api/colors/:id')
