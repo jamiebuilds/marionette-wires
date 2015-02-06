@@ -1,4 +1,4 @@
-import Storage from '../common/storage';
+import Storage from 'backbone.storage';
 import Model from './model';
 import Collection from './collection';
 
