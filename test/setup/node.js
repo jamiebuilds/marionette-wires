@@ -1,6 +1,7 @@
-require('6to5/register');
-
+// First run
 if (!global.document || !global.window) {
+  require('6to5/register');
+
   var jsdom = require('jsdom').jsdom;
 
   global.document = jsdom('<html><head><script></script></head><body></body></html>', null, {
