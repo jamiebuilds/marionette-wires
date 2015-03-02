@@ -1,6 +1,6 @@
 // First run
 if (!global.document || !global.window) {
-  require('6to5/register');
+  require('babel/register');
 
   var jsdom = require('jsdom').jsdom;
 
