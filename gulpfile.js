@@ -103,6 +103,7 @@ gulp.task('watch', ['build'], function() {
   });
   gulp.watch('./test/**/*.js', ['test']);
   gulp.watch(['./src/main.less', './src/**/*.less'], ['styles']);
+  gulp.watch(['./src/*.html'], ['html']);
 });
 
 gulp.task('default', ['watch']);
