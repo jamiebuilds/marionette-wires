@@ -38,7 +38,7 @@ var bundler = _.memoize(function(watch) {
   var options = {debug: true};
 
   if (watch) {
-    _.extend({ debug: true }, watchify.args);
+    _.extend(options, watchify.args);
   }
 
   var b = browserify('./src/main.js', options);
