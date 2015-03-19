@@ -34,24 +34,37 @@ gulp.task('styles', function() {
     .pipe(reload({ stream: true }));
 });
 
-var bundler = _.memoize(function() {
-  return watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
+var bundler = _.memoize(function(watch) {
+  var options = {debug: true};
+
+  if (watch) {
+    _.extend(options, watchify.args);
+  }
+
+  var b = browserify('./src/main.js', options);
+
+  if (watch) {
+    b = watchify(b);
+  }
+
+  return b;
 });
 
-function bundle() {
-  return bundler().bundle()
+function bundle(cb, watch) {
+  return bundler(watch).bundle()
     .on('error', $.util.log)
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('./dist'))
+    .on('end', cb)
     .pipe(reload({ stream: true }));
 }
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function(cb) {
   process.env.BROWSERIFYSWAP_ENV = 'dist';
-  return bundle();
+  bundle(cb);
 });
 
 gulp.task('jshint', function() {
@@ -86,7 +99,7 @@ gulp.task('test', [
   'mocha'
 ]);
 
-gulp.task('watch', ['build'], function() {
+gulp.task('watch', ['build'], function(cb) {
   browserSync({
     server: {
       baseDir: 'dist',
@@ -97,7 +110,7 @@ gulp.task('watch', ['build'], function() {
   });
 
   reporter = 'dot';
-  bundler().on('update', function() {
+  bundler(cb, true).on('update', function() {
     gulp.start('scripts');
     gulp.start('test');
   });
