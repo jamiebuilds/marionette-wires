@@ -110,7 +110,7 @@ gulp.task('watch', ['build'], function(cb) {
   });
 
   reporter = 'dot';
-  bundler(cb, true).on('update', function() {
+  bundler(true).on('update', function() {
     gulp.start('scripts');
     gulp.start('test');
   });
