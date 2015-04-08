@@ -64,7 +64,7 @@ function bundle(cb, watch) {
 
 gulp.task('scripts', function(cb) {
   process.env.BROWSERIFYSWAP_ENV = 'dist';
-  bundle(cb);
+  bundle(cb, true);
 });
 
 gulp.task('jshint', function() {
