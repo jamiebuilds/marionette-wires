@@ -50,9 +50,16 @@ var bundler = _.memoize(function(watch) {
   return b;
 });
 
+var handleErrors = function() {
+  var args = Array.prototype.slice.call(arguments);
+  delete args[0].stream;
+  $.util.log.apply(null, args);
+  this.emit('end');
+};
+
 function bundle(cb, watch) {
   return bundler(watch).bundle()
-    .on('error', $.util.log)
+    .on('error', handleErrors)
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
