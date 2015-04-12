@@ -8,7 +8,7 @@ An opinionated starter application built with Marionette.js.
 [Clone](http://git-scm.com/docs/git-clone) or [download](https://github.com/thejameskyle/marionette-wires/archive/master.zip) this repo.
 
 ```sh
-git clone git@github.com:thejameskyle/marionette-wires.git && cd marionette-wires
+git clone https://github.com/thejameskyle/marionette-wires.git && cd marionette-wires
 ```
 
 Make sure [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.org/) are
