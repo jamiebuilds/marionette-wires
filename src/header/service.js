@@ -1,5 +1,5 @@
 import Service from 'backbone.service';
-import Collection from '../common/collection';
+import {Collection} from 'backbone';
 import View from './view';
 
 export default new Service({

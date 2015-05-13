@@ -1,4 +1,4 @@
-import LayoutView from '../common/layout-view';
+import {LayoutView} from 'backbone.marionette';
 import $ from 'jquery';
 import template from './layout-template.hbs';
 

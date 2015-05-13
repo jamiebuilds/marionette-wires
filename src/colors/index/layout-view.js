@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import LayoutView from '../../common/layout-view';
+import {LayoutView} from 'backbone.marionette';
 import CollectionView from './collection-view';
-import Collection from '../../common/collection';
+import {Collection} from 'backbone';
 import template from './layout-template.hbs';
 
 export default LayoutView.extend({

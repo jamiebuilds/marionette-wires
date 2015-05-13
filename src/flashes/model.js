@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import Backbone from 'backbone';
-import Model from '../common/model';
+import {Model, history} from 'backbone';
 
 export default Model.extend({
   defaults: {
@@ -17,7 +16,7 @@ export default Model.extend({
     this.on('destroy', this._clearTimeout);
 
     if (this.get('clearOnRoute')) {
-      this.listenTo(Backbone.history, 'route', this.destroy);
+      this.listenTo(history, 'route', this.destroy);
     }
   },
 

@@ -1,5 +1,5 @@
 import Syphon from 'backbone.syphon';
-import Behavior from '../common/behavior';
+import {Behavior} from 'backbone.marionette';
 
 export default Behavior.extend({
   events: {

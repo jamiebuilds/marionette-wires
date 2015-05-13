@@ -1,8 +1,8 @@
-import View from '../../common/view';
-import Model from '../../common/model';
+import {ItemView} from 'backbone.marionette';
+import {Model} from 'backbone';
 import template from './template.hbs';
 
-export default View.extend({
+export default ItemView.extend({
   template: template,
   tagName: 'form',
 

@@ -10,7 +10,7 @@ describe('header/service', function() {
 
     this.service = proxyquire('../../src/header/service.js', {
       './view' : this.View,
-      '../common/collection': this.Collection
+      'backbone': { Collection: this.Collection }
     });
 
     this.service.container = this.container;

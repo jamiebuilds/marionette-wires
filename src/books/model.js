@@ -1,4 +1,4 @@
-import Model from '../common/model';
+import {Model} from 'backbone';
 
 export default Model.extend({
   urlRoot: '/api/books',

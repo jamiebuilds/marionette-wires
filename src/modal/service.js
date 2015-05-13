@@ -1,5 +1,5 @@
 import Service from 'backbone.service';
-import Backbone from 'backbone';
+import {history} from 'backbone';
 import $ from 'jquery';
 
 import LayoutView from './layout-view';
@@ -17,13 +17,13 @@ export default new Service({
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
-    this.listenTo(Backbone.history, {
+    this.listenTo(history, {
       'route' : this.onRoute
     });
   },
 
   onRoute() {
-    if (this.fragment !== Backbone.history.fragment) {
+    if (this.fragment !== history.fragment) {
       this.close();
     }
   },
@@ -69,7 +69,7 @@ export default new Service({
 
   open(view) {
     var self = this;
-    this.fragment = Backbone.history.fragment;
+    this.fragment = history.fragment;
     return this.close().then(function() {
       self.isOpen = true;
       return self.layout.open(view);

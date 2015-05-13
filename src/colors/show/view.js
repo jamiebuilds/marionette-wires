@@ -1,11 +1,11 @@
-import View from '../../common/view';
+import {ItemView} from 'backbone.marionette';
 import nprogress from 'nprogress';
 import ModalService from '../../modal/service';
 import FlashesService from '../../flashes/service';
-import Backbone from 'backbone';
+import {history} from 'backbone';
 import template from './template.hbs';
 
-export default View.extend({
+export default ItemView.extend({
   template: template,
   className: 'colors colors--show container',
 
@@ -51,7 +51,7 @@ export default View.extend({
   },
 
   handleDestroySuccess() {
-    Backbone.history.navigate('colors', { trigger: true });
+    history.navigate('colors', { trigger: true });
     FlashesService.request('add', {
       timeout : 5000,
       type    : 'info',
