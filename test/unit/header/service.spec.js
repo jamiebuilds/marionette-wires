@@ -8,21 +8,19 @@ describe('header/service', function() {
 
     this.container = { show: stub() };
 
-    this.Service = proxyquire('../../src/header/service.js', {
+    this.service = proxyquire('../../src/header/service.js', {
       './view' : this.View,
       '../common/collection': this.Collection
     });
 
-    this.service = new this.Service({ container: this.container });
+    this.service.container = this.container;
   });
 
-  describe('#initialize', function() {
+  describe('#start', function() {
     beforeEach(function() {
-      this.service.initialize({ container: this.container });
-    });
-
-    it('should attach container', function() {
-      expect(this.service).to.have.ownProperty('container', this.container);
+      this.service.start({
+        container: this.container
+      });
     });
 
     it('should create a collection', function() {
@@ -41,10 +39,10 @@ describe('header/service', function() {
     });
   });
 
-  describe('#onAdd', function() {
+  describe('#add', function() {
     beforeEach(function() {
       this.service.collection = { add: stub() };
-      this.service.onAdd({
+      this.service.add({
         name: 'Foo',
         path: 'foo',
         type: 'primary'

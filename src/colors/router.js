@@ -1,5 +1,5 @@
 import Router from '../common/router';
-import Radio from 'backbone.radio';
+import HeaderService from '../header/service';
 
 import IndexRoute from './index/route';
 import CreateRoute from './create/route';
@@ -10,7 +10,7 @@ export default Router.extend({
   initialize(options) {
     this.container = options.container;
 
-    Radio.command('header', 'add', {
+    HeaderService.command('add', {
       name: 'Colors',
       path: 'colors',
       type: 'primary'
@@ -18,7 +18,9 @@ export default Router.extend({
   },
 
   onBeforeEnter() {
-    Radio.command('header', 'activate', { path: 'colors' });
+    HeaderService.command('activate', {
+      path: 'colors'
+    });
   },
 
   routes: {

@@ -1,4 +1,4 @@
-import Service from '../common/service';
+import Service from 'backbone.service';
 import Backbone from 'backbone';
 import $ from 'jquery';
 
@@ -8,23 +8,12 @@ import AlertView   from './alert/view';
 import ConfirmView from './confirm/view';
 import PromptView  from './prompt/view';
 
-export default Service.extend({
-  channelName: 'modal',
-
+export default new Service({
   initialize(options) {
     this.container = options.container;
-    this.start();
   },
 
-  onStart() {
-    this.channel.reply({
-      'open' : this.open,
-      'close' : this.close,
-      'alert' : this.alert,
-      'confirm' : this.confirm,
-      'prompt' : this.prompt
-    }, this);
-
+  start() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
 
@@ -33,19 +22,14 @@ export default Service.extend({
     });
   },
 
-  onStop() {
-    delete this.layout;
-    this.container.reset();
-    this.channel.reset();
-  },
-
   onRoute() {
     if (this.fragment !== Backbone.history.fragment) {
       this.close();
     }
   },
 
-  alert(options) {
+  alert(options = {}) {
+    options.service = this;
     var deferred = $.Deferred();
     var view = new AlertView(options);
 
@@ -57,7 +41,8 @@ export default Service.extend({
     return deferred;
   },
 
-  confirm(options) {
+  confirm(options = {}) {
+    options.service = this;
     var deferred = $.Deferred();
     var view = new ConfirmView(options);
 
@@ -69,7 +54,8 @@ export default Service.extend({
     return deferred;
   },
 
-  prompt(options) {
+  prompt(options = {}) {
+    options.service = this;
     var deferred = $.Deferred();
     var view = new PromptView(options);
 

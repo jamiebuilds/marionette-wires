@@ -1,23 +1,18 @@
-import Service from '../common/service';
+import Service from 'backbone.service';
 import Collection from './collection';
 import CollectionView from './collection-view';
 
-export default Service.extend({
-  channelName: 'flashes',
-
+export default new Service({
   initialize(options) {
     this.container = options.container;
+  },
+
+  start() {
     this.collection = new Collection();
-    this.start();
-  },
-
-  onStart() {
-    this._showFlashesView();
-    this._bindChannelCommands();
-  },
-
-  onStop() {
-    this.channel.stopComplying();
+    this.view = new CollectionView({
+      collection: this.collection
+    });
+    this.container.show(this.view);
   },
 
   add(flash) {
@@ -29,19 +24,5 @@ export default Service.extend({
     if (model) {
       model.destroy();
     }
-  },
-
-  _showFlashesView() {
-    this.view = new CollectionView({
-      collection: this.collection
-    });
-    this.container.show(this.view);
-  },
-
-  _bindChannelCommands() {
-    this.channel.comply({
-      add    : this.add,
-      remove : this.remove
-    }, this);
   }
 });

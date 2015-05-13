@@ -1,6 +1,7 @@
 import View from '../../common/view';
 import nprogress from 'nprogress';
-import Radio from 'backbone.radio';
+import ModalService from '../../modal/service';
+import FlashesService from '../../flashes/service';
 import Backbone from 'backbone';
 import template from './template.hbs';
 
@@ -10,7 +11,6 @@ export default View.extend({
 
   initialize(options) {
     this.model = options.model;
-    this.model.cleanup();
   },
 
   templateHelpers() {
@@ -30,7 +30,7 @@ export default View.extend({
 
   handleToggle() {
     this.model.set('active', !this.model.get('active'));
-    this.model.save().fail(this.handleToggleFailure);
+    this.model.save().fail(() => this.handleToggleFailure());
   },
 
   handleToggleFailure() {
@@ -39,7 +39,7 @@ export default View.extend({
 
   handleDestroy() {
     var self = this;
-    Radio.request('modal', 'confirm', {
+    ModalService.request('confirm', {
       title : 'Confirm Color Destruction',
       text  : 'Are you sure you want to destroy ' + this.model.get('name') + '?'
     }).then(function() {
@@ -52,7 +52,7 @@ export default View.extend({
 
   handleDestroySuccess() {
     Backbone.history.navigate('colors', { trigger: true });
-    Radio.command('flashes', 'add', {
+    FlashesService.request('add', {
       timeout : 5000,
       type    : 'info',
       title   : 'It\'s gone!',

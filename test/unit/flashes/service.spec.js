@@ -8,37 +8,27 @@ describe('flashes/service', function() {
 
     this.container = { show: stub() };
 
-    this.Service = proxyquire('../../src/flashes/service.js', {
+    this.service = proxyquire('../../src/flashes/service.js', {
       './collection'      : this.Collection,
       './collection-view' : this.CollectionView
     });
 
-    this.service = new this.Service({ container: this.container });
+    this.service.initialize({
+      container: this.container
+    });
+    this.service.start();
   });
 
   describe('#initialize', function() {
-    beforeEach(function() {
-      stub(this.service, 'start');
-      this.service.initialize({ container: this.container });
-    });
-
     it('should attach container', function() {
       expect(this.service).to.have.ownProperty('container', this.container);
     });
+  });
 
+  describe('#start', function() {
     it('should create a collection', function() {
       expect(this.Collection).to.have.been.calledWithNew;
       expect(this.service).to.have.property('collection', this.collection);
-    });
-
-    it('should call "start"', function() {
-      expect(this.service.start).to.have.been.called;
-    });
-  });
-
-  describe('#onStart', function() {
-    beforeEach(function() {
-      this.service.onStart();
     });
 
     it('should create a CollectionView', function() {
@@ -49,18 +39,6 @@ describe('flashes/service', function() {
 
     it('should show the CollectionView', function() {
       expect(this.container.show).to.have.been.calledWith(this.collectionView);
-    });
-  });
-
-  describe('#onStop', function() {
-    beforeEach(function() {
-      this.flashesChannel = Backbone.Radio.channel('flashes');
-      stub(this.flashesChannel, 'stopComplying');
-      this.service.onStop();
-    });
-
-    it('should clear the commands on the channel', function() {
-      expect(this.flashesChannel.stopComplying).to.have.been.called;
     });
   });
 

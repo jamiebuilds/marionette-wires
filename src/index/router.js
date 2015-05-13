@@ -1,5 +1,5 @@
 import Router from '../common/router';
-import Radio from 'backbone.radio';
+import HeaderService from '../header/service';
 import IndexRoute from './route';
 
 export default Router.extend({
@@ -8,7 +8,9 @@ export default Router.extend({
   },
 
   onBeforeEnter() {
-    Radio.command('header', 'activate', { path: '' });
+    HeaderService.command('activate', {
+      path: ''
+    });
   },
 
   routes: {

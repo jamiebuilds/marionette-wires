@@ -4,7 +4,6 @@ describe('colors/show/view', function() {
 
     this.model = new Backbone.Model();
     this.model.url = 'foo';
-    this.model.cleanup = stub();
 
     this.View = proxyquire('../../src/colors/show/view.js', {
       './template.hbs' : this.template
@@ -20,10 +19,6 @@ describe('colors/show/view', function() {
 
     it('should attach the model', function() {
       expect(this.itemView).to.have.ownProperty('model', this.model);
-    });
-
-    it('should cleanup the model', function() {
-      expect(this.model.cleanup).to.have.been.called;
     });
   });
 
