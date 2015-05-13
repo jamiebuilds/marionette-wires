@@ -1,6 +1,5 @@
 import Service from 'backbone.service';
 import {history} from 'backbone';
-import $ from 'jquery';
 
 import LayoutView from './layout-view';
 
@@ -30,41 +29,35 @@ export default new Service({
 
   alert(options = {}) {
     options.service = this;
-    var deferred = $.Deferred();
     var view = new AlertView(options);
 
-    view.on({
-      'confirm' : deferred.resolve,
-      'cancel'  : deferred.resolve
+    return new Promise(resolve => {
+      view.on('confirm cancel', resolve);
     });
-
-    return deferred;
   },
 
   confirm(options = {}) {
     options.service = this;
-    var deferred = $.Deferred();
     var view = new ConfirmView(options);
 
-    view.on({
-      'confirm' : deferred.resolve,
-      'cancel'  : deferred.reject
+    return new Promise((resolve, reject) => {
+      view.on({
+        'confirm' : resolve,
+        'cancel'  : reject
+      });
     });
-
-    return deferred;
   },
 
   prompt(options = {}) {
     options.service = this;
-    var deferred = $.Deferred();
     var view = new PromptView(options);
 
-    view.on({
-      'submit' : deferred.resolve,
-      'cancel' : deferred.reject
+    return new Promise((resolve, reject) => {
+      view.on({
+        'submit' : resolve,
+        'cancel' : reject
+      });
     });
-
-    return deferred;
   },
 
   open(view) {
@@ -81,7 +74,7 @@ export default new Service({
       this.isOpen = false;
       return this.layout.close();
     } else {
-      return $.Deferred().resolve();
+      return Promise.resolve();
     }
   }
 });

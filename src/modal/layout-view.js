@@ -1,5 +1,4 @@
 import {LayoutView} from 'backbone.marionette';
-import $ from 'jquery';
 import template from './layout-template.hbs';
 
 export default LayoutView.extend({
@@ -27,20 +26,20 @@ export default LayoutView.extend({
   },
 
   open(view) {
-    var deferred = $.Deferred();
-    this.once('open', deferred.resolve);
-    this.content.show(view);
-    this.$el.modal('show');
-    return deferred;
+    return new Promise(resolve => {
+      this.once('open', resolve);
+      this.content.show(view);
+      this.$el.modal('show');
+    });
   },
 
   close() {
-    var deferred = $.Deferred();
-    this.once('close', function() {
-      this.content.empty();
-      deferred.resolve();
+    return new Promise(resolve => {
+      this.once('close', () => {
+        this.content.empty();
+        resolve();
+      });
+      this.$el.modal('hide');
     });
-    this.$el.modal('hide');
-    return deferred;
   }
 });
