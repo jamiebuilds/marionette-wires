@@ -1,4 +1,4 @@
-import Router from '../common/router';
+import {Router} from 'backbone-routing';
 import HeaderService from '../header/service';
 import IndexRoute from './route';
 

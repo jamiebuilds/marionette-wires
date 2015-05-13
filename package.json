@@ -70,6 +70,7 @@
     "animate.css": "^3.1.1",
     "backbone": "^1.1.2",
     "backbone-query-parameters": "git://github.com/jhudson8/backbone-query-parameters",
+    "backbone-routing": "^0.1.0",
     "backbone.marionette": "^2.3.1",
     "backbone.radio": "^0.6.0",
     "backbone.service": "^0.2.1",

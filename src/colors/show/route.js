@@ -1,4 +1,4 @@
-import Route from '../../common/route';
+import {Route} from 'backbone-routing';
 import View from './view';
 import storage from '../storage';
 
