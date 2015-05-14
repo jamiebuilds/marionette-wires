@@ -22,10 +22,8 @@ var proxyquire = require('proxyquire').noCallThru();
 var sinon = require('sinon');
 var chai = require('chai');
 var sinonChai = require('sinon-chai');
-var chaiJquery = require('chai-jquery');
 
 chai.use(sinonChai);
-chai.use(chaiJquery);
 
 global.sinon = sinon;
 global.expect = chai.expect;
