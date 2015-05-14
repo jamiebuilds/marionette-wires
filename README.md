@@ -1,7 +1,7 @@
 Marionette Wires
 ================
 
-An opinionated starter application built with Marionette.js.
+An opinionated example application built with Marionette.js.
 
 ## Quick start
 
