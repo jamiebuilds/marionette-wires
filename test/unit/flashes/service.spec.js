@@ -13,13 +13,13 @@ describe('flashes/service', function() {
       './collection-view' : this.CollectionView
     });
 
-    this.service.initialize({
+    this.service.setup({
       container: this.container
     });
     this.service.start();
   });
 
-  describe('#initialize', function() {
+  describe('#setup', function() {
     it('should attach container', function() {
       expect(this.service).to.have.ownProperty('container', this.container);
     });

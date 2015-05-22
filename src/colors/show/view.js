@@ -38,15 +38,18 @@ export default ItemView.extend({
   },
 
   handleDestroy() {
-    var self = this;
     ModalService.request('confirm', {
       title : 'Confirm Color Destruction',
       text  : 'Are you sure you want to destroy ' + this.model.get('name') + '?'
-    }).then(function() {
+    }).then((confirmed) => {
+      if (!confirmed) {
+        return;
+      }
+
       nprogress.start();
-      return self.model.destroy({ wait: true });
-    }).then(function() {
-      self.handleDestroySuccess();
+
+      return this.model.destroy({ wait: true })
+        .then(() => this.handleDestroySuccess());
     });
   },
 

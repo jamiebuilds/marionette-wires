@@ -13,7 +13,9 @@ describe('header/service', function() {
       'backbone': { Collection: this.Collection }
     });
 
-    this.service.container = this.container;
+    this.service.setup({
+      container: this.container
+    });
   });
 
   describe('#start', function() {

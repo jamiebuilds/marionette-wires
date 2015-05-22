@@ -14,15 +14,15 @@ import BooksRouter from './books/router';
 
 let app = new Application();
 
-ModalService.initialize({
+ModalService.setup({
   container: app.layout.overlay
 });
 
-HeaderService.initialize({
+HeaderService.setup({
   container: app.layout.header
 });
 
-FlashesService.initialize({
+FlashesService.setup({
   container: app.layout.flashes
 });
 

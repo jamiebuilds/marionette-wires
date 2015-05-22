@@ -14,31 +14,28 @@ export default LayoutView.extend({
     content: '.modal-content'
   },
 
-  initialize() {
-    this.$el.modal({ show: false, backdrop: 'static' });
-  },
-
   triggers: {
-    'show.bs.modal'   : { preventDefault: false, event: 'before:open' },
-    'shown.bs.modal'  : { preventDefault: false, event: 'open' },
-    'hide.bs.modal'   : { preventDefault: false, event: 'before:close' },
-    'hidden.bs.modal' : { preventDefault: false, event: 'close' }
+    'shown.bs.modal'  : 'modal:show',
+    'hidden.bs.modal' : 'modal:hide',
   },
 
-  open(view) {
+  initialize() {
+    this.$el.modal({
+      show: false,
+      backdrop: 'static'
+    });
+  },
+
+  animateIn() {
     return new Promise(resolve => {
-      this.once('open', resolve);
-      this.content.show(view);
+      this.once('modal:show', resolve);
       this.$el.modal('show');
     });
   },
 
-  close() {
+  animateOut() {
     return new Promise(resolve => {
-      this.once('close', () => {
-        this.content.empty();
-        resolve();
-      });
+      this.once('modal:hide', resolve);
       this.$el.modal('hide');
     });
   }

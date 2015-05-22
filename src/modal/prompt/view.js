@@ -7,32 +7,25 @@ export default ItemView.extend({
   tagName: 'form',
 
   ui: {
-    'input' : 'input'
+    input: 'input'
   },
 
   initialize(options) {
-    this.service = options.service;
     this.model = new Model(options);
-    this.service.open(this);
+  },
+
+  triggers: {
+    'click .btn-default' : 'cancel',
+    'click .close'       : 'cancel'
   },
 
   events: {
-    'submit'             : 'submit',
-    'click .btn-default' : 'cancel',
-    'click .close'       : 'cancel'
+    'submit' : 'submit'
   },
 
   submit(e) {
     e.preventDefault();
     var val = this.ui.input.val();
-    this.service.close().then(() => {
-      this.trigger('submit', val);
-    });
-  },
-
-  cancel() {
-    this.service.close().then(() => {
-      this.trigger('cancel');
-    });
+    this.trigger('submit', val);
   }
 });

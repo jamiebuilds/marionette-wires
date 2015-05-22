@@ -2,8 +2,8 @@ import Service from 'backbone.service';
 import {Collection} from 'backbone';
 import View from './view';
 
-export default new Service({
-  initialize(options) {
+const HeaderService = Service.extend({
+  setup(options) {
     this.container = options.container;
   },
 
@@ -11,6 +11,12 @@ export default new Service({
     this.collection = new Collection();
     this.view = new View({ collection: this.collection });
     this.container.show(this.view);
+  },
+
+  requests: {
+    add: 'add',
+    remove: 'remove',
+    activate: 'activate',
   },
 
   add(model) {
@@ -30,3 +36,5 @@ export default new Service({
     }
   }
 });
+
+export default new HeaderService();

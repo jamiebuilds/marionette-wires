@@ -2,8 +2,8 @@ import Service from 'backbone.service';
 import Collection from './collection';
 import CollectionView from './collection-view';
 
-export default new Service({
-  initialize(options) {
+const FlashesService = Service.extend({
+  setup(options) {
     this.container = options.container;
   },
 
@@ -13,6 +13,11 @@ export default new Service({
       collection: this.collection
     });
     this.container.show(this.view);
+  },
+
+  requests: {
+    add: 'add',
+    remove: 'remove',
   },
 
   add(flash) {
@@ -26,3 +31,5 @@ export default new Service({
     }
   }
 });
+
+export default new FlashesService();

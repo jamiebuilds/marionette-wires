@@ -8,7 +8,7 @@ export default Router.extend({
   initialize(options) {
     this.container = options.container;
 
-    HeaderService.command('add', {
+    HeaderService.request('add', {
       name: 'Books',
       path: 'books',
       type: 'primary'
@@ -18,7 +18,7 @@ export default Router.extend({
   onBeforeEnter() {
     this.layout = new LayoutView();
     this.container.show(this.layout);
-    HeaderService.command('activate', {
+    HeaderService.request('activate', {
       path: 'books'
     });
   },

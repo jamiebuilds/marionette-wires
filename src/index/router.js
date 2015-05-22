@@ -8,7 +8,7 @@ export default Router.extend({
   },
 
   onBeforeEnter() {
-    HeaderService.command('activate', {
+    HeaderService.request('activate', {
       path: ''
     });
   },

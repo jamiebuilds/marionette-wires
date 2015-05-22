@@ -10,7 +10,7 @@ export default Router.extend({
   initialize(options) {
     this.container = options.container;
 
-    HeaderService.command('add', {
+    HeaderService.request('add', {
       name: 'Colors',
       path: 'colors',
       type: 'primary'
@@ -18,7 +18,7 @@ export default Router.extend({
   },
 
   onBeforeEnter() {
-    HeaderService.command('activate', {
+    HeaderService.request('activate', {
       path: 'colors'
     });
   },
