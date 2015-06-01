@@ -4,7 +4,7 @@ import ViewerView from '../viewer/view';
 import storage from '../storage';
 
 export default Route.extend({
-  initialize(options) {
+  initialize(options = {}) {
     this.layout = options.layout;
   },
 

@@ -3,7 +3,7 @@ import HeaderService from '../header/service';
 import IndexRoute from './route';
 
 export default Router.extend({
-  initialize(options) {
+  initialize(options = {}) {
     this.container = options.container;
   },
 

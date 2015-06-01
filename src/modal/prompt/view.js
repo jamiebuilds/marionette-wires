@@ -10,7 +10,7 @@ export default ItemView.extend({
     input: 'input'
   },
 
-  initialize(options) {
+  initialize(options = {}) {
     this.model = new Model(options);
   },
 
@@ -20,7 +20,7 @@ export default ItemView.extend({
   },
 
   events: {
-    'submit' : 'submit'
+    submit: 'submit'
   },
 
   submit(e) {

@@ -8,11 +8,11 @@ export default ItemView.extend({
 
   attributes() {
     return {
-      href: '#colors/' + this.model.get('id')
+      href: `#colors/${this.model.get('id')}`
     };
   },
 
   modelEvents: {
-    'all': 'render'
+    all: 'render'
   }
 });

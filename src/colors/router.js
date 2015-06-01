@@ -7,7 +7,7 @@ import ShowRoute from './show/route';
 import EditRoute from './edit/route';
 
 export default Router.extend({
-  initialize(options) {
+  initialize(options = {}) {
     this.container = options.container;
 
     HeaderService.request('add', {

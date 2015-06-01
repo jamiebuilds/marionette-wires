@@ -3,7 +3,7 @@ import {Collection} from 'backbone';
 import View from './view';
 
 const HeaderService = Service.extend({
-  setup(options) {
+  setup(options = {}) {
     this.container = options.container;
   },
 

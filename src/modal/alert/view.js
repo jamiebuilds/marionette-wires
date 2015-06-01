@@ -5,7 +5,7 @@ import template from './template.hbs';
 export default ItemView.extend({
   template: template,
 
-  initialize(options) {
+  initialize(options = {}) {
     this.model = new Model(options);
   },
 

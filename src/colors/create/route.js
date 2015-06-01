@@ -4,7 +4,7 @@ import View from './view';
 import storage from '../storage';
 
 export default Route.extend({
-  initialize(options) {
+  initialize(options = {}) {
     this.container = options.container;
   },
 

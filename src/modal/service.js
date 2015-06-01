@@ -11,7 +11,7 @@ const WiresModalService = ModalService.extend({
   ConfirmView : ConfirmView,
   PromptView  : PromptView,
 
-  setup(options) {
+  setup(options = {}) {
     this.container = options.container;
   },
 

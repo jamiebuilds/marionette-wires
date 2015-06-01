@@ -21,7 +21,7 @@ export default Model.extend({
   },
 
   _setTimeout() {
-    this._timeout = setTimeout(_.bind(this.destroy, this), this.get('timeout'));
+    this._timeout = setTimeout(() => this.destroy(), this.get('timeout'));
   },
 
   _clearTimeout() {

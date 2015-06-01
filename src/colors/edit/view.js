@@ -24,7 +24,7 @@ export default ItemView.extend({
   },
 
   handleSubmit() {
-    var errors = this.model.validate(this.form);
+    let errors = this.model.validate(this.form);
 
     if (errors) {
       this.model.validationError = errors;

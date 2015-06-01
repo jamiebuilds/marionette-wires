@@ -7,8 +7,8 @@ export default Model.extend({
     active: false
   },
 
-  validate(attrs) {
-    var errors = [];
+  validate(attrs = {}) {
+    let errors = [];
 
     if (attrs.name === '') {
       errors.push('Missing "name" field');

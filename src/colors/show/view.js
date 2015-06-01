@@ -9,7 +9,7 @@ export default ItemView.extend({
   template: template,
   className: 'colors colors--show container',
 
-  initialize(options) {
+  initialize(options = {}) {
     this.model = options.model;
   },
 
@@ -25,7 +25,7 @@ export default ItemView.extend({
   },
 
   modelEvents: {
-    'all': 'render'
+    all: 'render'
   },
 
   handleToggle() {
@@ -40,8 +40,8 @@ export default ItemView.extend({
   handleDestroy() {
     ModalService.request('confirm', {
       title : 'Confirm Color Destruction',
-      text  : 'Are you sure you want to destroy ' + this.model.get('name') + '?'
-    }).then((confirmed) => {
+      text  : `Are you sure you want to destroy ${this.model.get('name')}?`
+    }).then(confirmed => {
       if (!confirmed) {
         return;
       }
@@ -58,8 +58,8 @@ export default ItemView.extend({
     FlashesService.request('add', {
       timeout : 5000,
       type    : 'info',
-      title   : 'It\'s gone!',
-      body    : 'You have deleted ' + this.model.get('name') + '.'
+      title   : `It's gone!`,
+      body    : `You have deleted ${this.model.get('name')}.`
     });
   }
 });

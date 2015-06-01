@@ -13,7 +13,7 @@ export default ItemView.extend({
   },
 
   collectionEvents: {
-    'all': 'render'
+    all: 'render'
   },
 
   templateHelpers() {
@@ -36,7 +36,7 @@ export default ItemView.extend({
   },
 
   onCollapseShow() {
-    this.listenToOnce(history, 'route', function() {
+    this.listenToOnce(history, 'route', () => {
       this.ui.collapse.collapse('hide');
     });
   }

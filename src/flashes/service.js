@@ -3,7 +3,7 @@ import Collection from './collection';
 import CollectionView from './collection-view';
 
 const FlashesService = Service.extend({
-  setup(options) {
+  setup(options = {}) {
     this.container = options.container;
   },
 

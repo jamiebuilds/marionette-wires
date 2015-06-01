@@ -11,7 +11,7 @@ export default Route.extend({
 
   onEnter() {
     var id = this.collection.first().get('id');
-    history.navigate('books/' + id, {
+    history.navigate(`books/${id}`, {
       trigger: true,
       replace: true
     });
