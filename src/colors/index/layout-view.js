@@ -45,8 +45,8 @@ export default LayoutView.extend({
       };
     });
 
-    var prev = current - 1 > 0     ? current - 1 : false;
-    var next = current + 1 < total ? current + 1 : false;
+    var prev = current - 1 > 0 ? current - 1 : false;
+    var next = current < total ? current + 1 : false;
 
     return {
       total   : total,
