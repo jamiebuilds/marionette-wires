@@ -51,8 +51,7 @@ describe('flashes/model', function() {
 
     describe('when "clearOnRoute" is false', function() {
       beforeEach(function() {
-        this.routerChannel = Backbone.Radio.channel('router');
-        this.model.attributes.clearOnRoute = false;
+        this.model.set('clearOnRoute', false);
         this.model.initialize();
       });
 
