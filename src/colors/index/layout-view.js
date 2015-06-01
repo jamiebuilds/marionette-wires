@@ -35,8 +35,8 @@ export default LayoutView.extend({
   },
 
   templateHelpers() {
-    var total   = Math.floor(this.collection.length / this.state.limit) + 1;
-    var current = Math.floor(this.state.start / this.state.limit) + 1;
+    var total   = Math.ceil(this.collection.length / this.state.limit);
+    var current = Math.ceil(this.state.start / this.state.limit) + 1;
 
     var pages = _.times(total, function(index) {
       return {
