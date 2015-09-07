@@ -68,7 +68,7 @@
   "dependencies": {
     "animate.css": "^3.1.1",
     "backbone": "1.1.2",
-    "backbone-query-parameters": "git://github.com/jhudson8/backbone-query-parameters",
+    "backbone-query-parameters": "jhudson8/backbone-query-parameters",
     "backbone-routing": "^0.1.0",
     "backbone-service-modals": "^0.1.0",
     "backbone.marionette": "^2.3.1",
