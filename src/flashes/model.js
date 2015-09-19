@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {Model, history} from 'backbone';
 
 export default Model.extend({
