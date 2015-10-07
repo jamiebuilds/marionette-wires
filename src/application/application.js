@@ -5,8 +5,6 @@ import nprogress from 'nprogress';
 import {Application} from 'backbone.marionette';
 import LayoutView from './layout-view';
 
-let routerChannel = Radio.channel('router');
-
 nprogress.configure({
   showSpinner: false
 });
@@ -16,12 +14,6 @@ export default Application.extend({
     this.$body = $(document.body);
     this.layout = new LayoutView();
     this.layout.render();
-
-    this.listenTo(routerChannel, {
-      'before:enter:route' : this.onBeforeEnterRoute,
-      'enter:route'        : this.onEnterRoute,
-      'error:route'        : this.onErrorRoute
-    });
   },
 
   onBeforeEnterRoute() {
