@@ -5,7 +5,6 @@ import storage from '../storage';
 export default Route.extend({
   initialize(options = {}) {
     this.container = options.container;
-    this.collection = options.collection;
   },
 
   fetch(id) {
