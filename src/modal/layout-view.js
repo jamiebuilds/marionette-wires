@@ -19,7 +19,7 @@ export default LayoutView.extend({
     'hidden.bs.modal' : 'modal:hide',
   },
 
-  initialize() {
+  onShow() {
     this.$el.modal({
       show: false,
       backdrop: 'static'
