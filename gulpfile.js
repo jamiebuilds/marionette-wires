@@ -8,13 +8,13 @@ var stylish = require('jshint-stylish');
 var buffer = require('vinyl-buffer');
 var _ = require('lodash');
 
-var browserSync = require('browser-sync');
+var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 
 var api = require('./api/api');
 
 gulp.task('clean', function(cb) {
-  del([
+  return del([
     'app/tmp'
   ], cb);
 });
@@ -70,7 +70,6 @@ function bundle(cb, watch) {
 }
 
 gulp.task('scripts', function(cb) {
-  process.env.BROWSERIFYSWAP_ENV = 'dist';
   bundle(cb, true);
 });
 
@@ -106,8 +105,8 @@ gulp.task('test', [
   'mocha'
 ]);
 
-gulp.task('watch', ['build'], function(cb) {
-  browserSync({
+gulp.task('watch', ['build'], function() {
+  browserSync.init({
     server: {
       baseDir: 'dist',
       middleware: function(req, res, next) {

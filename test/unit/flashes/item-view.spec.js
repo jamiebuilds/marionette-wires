@@ -3,7 +3,7 @@ describe('flashes/item-view', function() {
     this.model = { get: stub(), destroy: stub() };
     this.ItemView = proxyquire('../../src/flashes/item-view.js', {
       './item-template.hbs' : stub(),
-    });
+    }).default;
 
     this.itemView = new this.ItemView({ model: this.model });
   });

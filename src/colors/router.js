@@ -9,6 +9,7 @@ import EditRoute from './edit/route';
 export default Router.extend({
   initialize(options = {}) {
     this.container = options.container;
+    this.listenTo(this, 'before:enter', this.onBeforeEnter);
 
     HeaderService.request('add', {
       name: 'Colors',

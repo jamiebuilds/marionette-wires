@@ -7,7 +7,7 @@ describe('colors/show/view', function() {
 
     this.View = proxyquire('../../src/colors/show/view.js', {
       './template.hbs' : this.template
-    });
+    }).default;
 
     this.itemView = new this.View({ model: this.model });
   });
