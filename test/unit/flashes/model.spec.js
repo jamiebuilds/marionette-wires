@@ -1,6 +1,6 @@
 describe('flashes/model', function() {
   beforeEach(function() {
-    this.Model = proxyquire('../../src/flashes/model.js', {});
+    this.Model = proxyquire('../../src/flashes/model.js', {}).default;
     this.model = new this.Model();
   });
 

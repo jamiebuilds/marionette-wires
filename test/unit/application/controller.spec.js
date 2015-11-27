@@ -5,7 +5,8 @@ describe('application/application', function() {
 
     this.Controller = proxyquire('../../src/application/application.js', {
       './layout-view': this.LayoutView,
-    });
+      'jquery': global.$
+    }).default;
 
     this.module = new this.Controller();
   });
@@ -17,7 +18,7 @@ describe('application/application', function() {
 
     it('should create a layout', function() {
       expect(this.LayoutView).to.have.been.calledWithNew;
-      expect(this.module).to.have.property('layout', this.layout);
+      expect(this.module).to.have.property('layout');
     });
   });
 });

@@ -11,7 +11,7 @@ describe('header/service', function() {
     this.service = proxyquire('../../src/header/service.js', {
       './view' : this.View,
       'backbone': { Collection: this.Collection }
-    });
+    }).default;
 
     this.service.setup({
       container: this.container

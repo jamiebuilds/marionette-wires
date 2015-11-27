@@ -1,6 +1,6 @@
 describe('colors/model', function() {
   beforeEach(function() {
-    this.Model = proxyquire('../../src/colors/model.js', {});
+    this.Model = proxyquire('../../src/colors/model.js', {}).default;
     this.model = new this.Model();
   });
 

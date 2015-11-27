@@ -6,17 +6,15 @@ import storage from '../storage';
 export default Route.extend({
   initialize(options = {}) {
     this.layout = options.layout;
+    this.listenTo(this, 'fetch', this.onFetch);
   },
 
-  fetch() {
+  fetch(id) {
     return storage.findAll().then(collection => {
       this.collection = collection;
+      this.model = this.collection.get(id);
+      this.collection.active = this.model;
     });
-  },
-
-  onFetch(id) {
-    this.model = this.collection.get(id);
-    this.collection.active = this.model;
   },
 
   render() {

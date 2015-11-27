@@ -11,7 +11,7 @@ describe('flashes/service', function() {
     this.service = proxyquire('../../src/flashes/service.js', {
       './collection'      : this.Collection,
       './collection-view' : this.CollectionView
-    });
+    }).default;
 
     this.service.setup({
       container: this.container
